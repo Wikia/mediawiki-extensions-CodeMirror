@@ -32,6 +32,7 @@
 				"mediawiki.user",
 				"user.options",
 				"jquery.ui",
+				"oojs-ui-core",
 				"oojs-ui.styles.icons-editing-styling"
 			],
 			"scripts": [

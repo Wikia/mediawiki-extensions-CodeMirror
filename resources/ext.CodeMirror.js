@@ -97,7 +97,9 @@
 			var $codeMirror,
 				selectionStart = $textbox1.prop( 'selectionStart' ),
 				selectionEnd = $textbox1.prop( 'selectionEnd' ),
-				scrollTop = $textbox1.scrollTop();
+				scrollTop = $textbox1.scrollTop(),
+				restingViewportMargin = Infinity,
+				activeViewportMargin = 10;
 
 			// If CodeMirror is already loaded or wikEd gadget is enabled, abort. See T178348.
 			// FIXME: Would be good to replace the wikEd check with something more generic.
@@ -125,7 +127,9 @@
 				},
 				inputStyle: 'contenteditable',
 				spellcheck: true,
-				viewportMargin: Infinity
+				// initially be sparse on resource for first render
+				// after initial update cycle, render all lines
+				viewportMargin: activeViewportMargin
 			} );
 			$codeMirror = $( codeMirror.getWrapperElement() );
 
@@ -145,6 +149,15 @@
 
 			codeMirror.doc.setSelection( codeMirror.doc.posFromIndex( selectionEnd ), codeMirror.doc.posFromIndex( selectionStart ) );
 			codeMirror.scrollTo( null, scrollTop );
+
+			// We don't want to have to render too many lines when we are making changes
+			codeMirror.on( 'beforeChange', function ( cmInstance /* , change*/ ) {
+				cmInstance.setOption( 'viewportMargin', activeViewportMargin );
+			} );
+			// But after a second of rest, draw everything, so that browser search will work.
+			codeMirror.on( 'update', OO.ui.debounce( function ( cmInstance ) {
+				cmInstance.setOption( 'viewportMargin', restingViewportMargin );
+			}, 1000 ) );
 
 			// HACK: <textarea> font size varies by browser (chrome/FF/IE)
 			$codeMirror.css( {
