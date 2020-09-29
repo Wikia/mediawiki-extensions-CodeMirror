@@ -151,7 +151,7 @@
 				};
 			}
 
-			codeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
+			codeMirror = window.WikiEditorCodeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
 			$codeMirror = $( codeMirror.getWrapperElement() );
 
 			// Allow textSelection() functions to work with CodeMirror editing field.
