@@ -118,7 +118,9 @@
 			CodeMirror.keyMap.pcDefault[ 'Alt-Left' ] = false;
 			CodeMirror.keyMap.pcDefault[ 'Alt-Right' ] = false;
 
-			codeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], {
+			// Fandom change - expose the CodeMirror instance globally to allow extensions to change default behavior
+			// https://github.com/codemirror/CodeMirror/issues/6346
+			codeMirror = window.WikiEditorCodeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], {
 				mwConfig: config,
 				// styleActiveLine: true, // disabled since Bug: T162204, maybe should be optional
 				lineWrapping: true,
