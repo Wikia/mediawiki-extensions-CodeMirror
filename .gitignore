@@ -6,5 +6,5 @@
 /vendor/
 /composer.lock
 .eslintcache
-.gitignore
+.idea
 
