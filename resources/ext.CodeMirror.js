@@ -124,7 +124,8 @@
 					End: 'goLineRight'
 				},
 				inputStyle: 'contenteditable',
-				spellcheck: true,
+				// Lets disable spellcheck due to Chrome performance issue around that in v96
+				spellcheck: false,
 				viewportMargin: Infinity
 			} );
 			$codeMirror = $( codeMirror.getWrapperElement() );
