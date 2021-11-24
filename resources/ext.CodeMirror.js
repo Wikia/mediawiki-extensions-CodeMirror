@@ -135,7 +135,8 @@
 					End: 'goLineRight'
 				},
 				inputStyle: enableContentEditable ? 'contenteditable' : 'textarea',
-				spellcheck: enableContentEditable,
+				// CATS-2136 temporarily disable spellcheck due to a performance issue in Chrome v96
+				spellcheck: false,
 				viewportMargin: Infinity
 			} );
 			$codeMirror = $( codeMirror.getWrapperElement() );
