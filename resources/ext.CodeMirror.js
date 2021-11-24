@@ -135,7 +135,7 @@
 					End: 'goLineRight'
 				},
 				inputStyle: enableContentEditable ? 'contenteditable' : 'textarea',
-				spellcheck: enableContentEditable,
+				spellcheck: false,
 				viewportMargin: Infinity
 			} );
 			$codeMirror = $( codeMirror.getWrapperElement() );
