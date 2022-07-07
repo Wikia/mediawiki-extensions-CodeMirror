@@ -3504,12 +3504,16 @@
     cm.curOp.scrollTop = (cm.curOp.scrollTop == null ? cm.doc.scrollTop : cm.curOp.scrollTop) + top;
   }
 
-  // Make sure that at the end of the operation the current cursor is
-  // shown.
+  /**
+   * @param cm
+   * 
+   * CATS-2851 - I'm disabling this method because it seems to be the cause of chaotic scrolling,
+   * as for some reason it does not seem to correctly calculate where to scroll to.
+   */
   function ensureCursorVisible(cm) {
-    resolveScrollToPos(cm);
-    var cur = cm.getCursor();
-    cm.curOp.scrollToPos = {from: cur, to: cur, margin: cm.options.cursorScrollMargin};
+    // resolveScrollToPos(cm);
+    // var cur = cm.getCursor();
+    // cm.curOp.scrollToPos = {from: cur, to: cur, margin: cm.options.cursorScrollMargin};
   }
 
   function scrollToCoords(cm, x, y) {
