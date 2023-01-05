@@ -1,8 +1,14 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
+namespace MediaWiki\Extension\CodeMirror;
 
-class CodeMirrorHooks {
+use Config;
+use MediaWiki\MediaWikiServices;
+use OutputPage;
+use Skin;
+use User;
+
+class Hooks {
 
 	/**
 	 * Checks if CodeMirror for textarea wikitext editor should be loaded on this page or not.
@@ -16,14 +22,14 @@ class CodeMirrorHooks {
 		if ( in_array( 'ext.codeEditor', $out->getModules() ) ) {
 			return false;
 		}
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
 		// Disable CodeMirror when the WikiEditor toolbar is not enabled in preferences
-		if ( !$out->getUser()->getOption( 'usebetatoolbar' ) ) {
+		if ( !$userOptionsLookup->getOption( $out->getUser(), 'usebetatoolbar' ) ) {
 			return false;
 		}
-		$context = $out->getContext();
-		return in_array( Action::getActionName( $context ), [ 'edit', 'submit' ] ) &&
+		return in_array( $out->getActionName(), [ 'edit', 'submit' ] ) &&
 			// CodeMirror on textarea wikitext editors doesn't support RTL (T170001)
-			!$context->getTitle()->getPageLanguage()->isRTL();
+			!$out->getTitle()->getPageLanguage()->isRTL();
 	}
 
 	/**
@@ -38,7 +44,8 @@ class CodeMirrorHooks {
 		if ( self::isCodeMirrorOnPage( $out ) ) {
 			$out->addModules( 'ext.CodeMirror' );
 
-			if ( $out->getUser()->getOption( 'usecodemirror' ) ) {
+			$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+			if ( $userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
 				// These modules are predelivered for performance when needed
 				// keep these modules in sync with ext.CodeMirror.js
 				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
@@ -57,13 +64,6 @@ class CodeMirrorHooks {
 		/** @var Config $config */
 		$config = MediaWikiServices::getInstance()->getMainConfig();
 
-		$vars['wgCodeMirrorEnableBracketMatching'] = $config->get( 'CodeMirrorEnableBracketMatching' )
-			// Allows tests to override the configuration.
-			|| RequestContext::getMain()->getRequest()
-				->getCookie( '-codemirror-bracket-matching-test', 'mw' );
-
-		$vars['wgCodeMirrorAccessibilityColors'] = $config->get( 'CodeMirrorAccessibilityColors' );
-
 		$vars['wgCodeMirrorLineNumberingNamespaces'] = $config->get( 'CodeMirrorLineNumberingNamespaces' );
 	}
 
@@ -80,6 +80,13 @@ class CodeMirrorHooks {
 		// by default by adding '$wgDefaultUserOptions['usecodemirror'] = 1;' into LocalSettings.php
 		$defaultPreferences['usecodemirror'] = [
 			'type' => 'api',
+		];
+
+		$defaultPreferences['usecodemirror-colorblind'] = [
+			'type' => 'toggle',
+			'label-message' => 'codemirror-prefs-colorblind',
+			'help-message' => 'codemirror-prefs-colorblind-help',
+			'section' => 'editing/accessibility',
 		];
 	}
 

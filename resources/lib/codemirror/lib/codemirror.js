@@ -3506,7 +3506,7 @@
 
   /**
    * @param cm
-   * 
+   *
    * CATS-2851 - I'm disabling this method because it seems to be the cause of chaotic scrolling,
    * as for some reason it does not seem to correctly calculate where to scroll to.
    */

@@ -95,12 +95,10 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 					}
 				};
 
-				if ( mw.config.get( 'wgCodeMirrorEnableBracketMatching' ) ) {
-					cmOptions.matchBrackets = {
-						highlightNonMatching: false,
-						maxHighlightLineLength: 10000
-					};
-				}
+				cmOptions.matchBrackets = {
+					highlightNonMatching: false,
+					maxHighlightLineLength: 10000
+				};
 
 				if ( ve.ui.CodeMirrorAction.static.isLineNumbering() ) {
 					$.extend( cmOptions, {
@@ -121,8 +119,8 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 				// so revert any editfont user preference
 				surfaceView.$element.removeClass( 'mw-editfont-sans-serif mw-editfont-serif' ).addClass( 'mw-editfont-monospace' );
 
-				if ( mw.config.get( 'wgCodeMirrorAccessibilityColors' ) ) {
-					surfaceView.$element.addClass( 'cm-mw-accessible-colors' );
+				if ( mw.user.options.get( 'usecodemirror-colorblind' ) ) {
+					surfaceView.$element.addClass( 'cm-mw-colorblind-colors' );
 				}
 
 				var profile = $.client.profile();
@@ -260,8 +258,8 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 	// correctly when expanding from less than the viewport height.  (T185184)
 	if ( mirror.display.sizer.style.minHeight !== this.lastHeight ) {
 		mirror.refresh();
+		this.lastHeight = mirror.display.sizer.style.minHeight;
 	}
-	this.lastHeight = mirror.display.sizer.style.minHeight;
 };
 
 /**

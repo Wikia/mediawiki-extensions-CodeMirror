@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 ( function ( CodeMirror ) {
 	'use strict';
 
@@ -28,7 +27,7 @@
 				u: true, font: true, big: true, small: true, sub: true, sup: true,
 				h1: true, h2: true, h3: true, h4: true, h5: true, h6: true, cite: true,
 				code: true, em: true, s: true, strike: true, strong: true, tt: true,
-				var: true, div: true, center: true, blockquote: true, ol: true, ul: true,
+				var: true, div: true, center: true, blockquote: true, q: true, ol: true, ul: true,
 				dl: true, table: true, caption: true, pre: true, ruby: true, rb: true,
 				rp: true, rt: true, rtc: true, p: true, span: true, abbr: true, dfn: true,
 				kbd: true, samp: true, data: true, time: true, mark: true, br: true,
@@ -88,14 +87,15 @@
 			return style;
 		}
 
-		function eatBlock( style, terminator ) {
+		function eatBlock( style, terminator, consumeLast ) {
 			return function ( stream, state ) {
-				while ( !stream.eol() ) {
-					if ( stream.match( terminator ) ) {
-						state.tokenize = state.stack.pop();
-						break;
+				if ( stream.skipTo( terminator ) ) {
+					if ( consumeLast !== false ) {
+						stream.match( terminator );
 					}
-					stream.next();
+					state.tokenize = state.stack.pop();
+				} else {
+					stream.skipToEnd();
 				}
 				return makeLocalStyle( style, state );
 			};
@@ -125,6 +125,10 @@
 					if ( stream.eol() ) {
 						stream.backUp( count );
 						state.tokenize = eatEnd( 'mw-section-header' );
+					} else if ( stream.match( /^<!--(?!.*?-->.*?=)/, false ) ) {
+						// T171074: handle trailing comments
+						stream.backUp( count );
+						state.tokenize = eatBlock( 'mw-section-header', '<!--', false );
 					}
 					return null; // style is null
 				}
@@ -299,7 +303,7 @@
 				state.tokenize = state.stack.pop();
 				return makeLocalStyle( 'mw-extlink-bracket', state, 'nLink' );
 			}
-			if ( stream.match( /^[^'\]{&~]+/ ) ) {
+			if ( stream.match( /^[^'\]{&~<]+/ ) ) {
 				return makeStyle( 'mw-extlink-text', state );
 			}
 			return eatWikiText( 'mw-extlink-text', '' )( stream, state );
@@ -380,7 +384,7 @@
 				if ( linkIsItalic ) {
 					tmpstyle += ' em';
 				}
-				if ( stream.match( /^[^'\]{&~]+/ ) ) {
+				if ( stream.match( /^[^'\]{&~<]+/ ) ) {
 					return makeStyle( tmpstyle, state );
 				}
 				return eatWikiText( tmpstyle, '' )( stream, state );
@@ -394,17 +398,7 @@
 					chars--;
 					name = name + stream.next();
 				}
-				if ( stream.eol() ) {
-					// @todo error message
-					state.tokenize = state.stack.pop();
-					return makeLocalStyle( ( isHtmlTag ? 'mw-htmltag-name' : 'mw-exttag-name' ), state );
-				}
 				stream.eatSpace();
-				if ( stream.eol() ) {
-					// @todo error message
-					state.tokenize = state.stack.pop();
-					return makeLocalStyle( ( isHtmlTag ? 'mw-htmltag-name' : 'mw-exttag-name' ), state );
-				}
 
 				if ( isHtmlTag ) {
 					if ( isCloseTag && !( name in voidHtmlTags ) ) {
@@ -425,7 +419,7 @@
 
 		function eatHtmlTagAttribute( name ) {
 			return function ( stream, state ) {
-				if ( stream.match( /^(?:"[^"]*"|'[^']*'|[^>/<{&~])+/ ) ) {
+				if ( stream.match( /^(?:"[^<">]*"|'[^<'>]*'|[^>/<{&~])+/ ) ) {
 					return makeLocalStyle( 'mw-htmltag-attribute', state );
 				}
 				if ( stream.eat( '>' ) ) {
@@ -445,7 +439,7 @@
 
 		function eatExtTagAttribute( name ) {
 			return function ( stream, state ) {
-				if ( stream.match( /^(?:"[^"]*"|'[^']*'|[^>/<{&~])+/ ) ) {
+				if ( stream.match( /^(?:"[^">]*"|'[^'>]*'|[^>/<{&~])+/ ) ) {
 					return makeLocalStyle( 'mw-exttag-attribute mw-ext-' + name, state );
 				}
 				if ( stream.eat( '>' ) ) {
@@ -612,12 +606,12 @@
 				// @todo error message
 			} else if ( stream.match( /^[^\s\u00a0{[\]<>~).,']*/ ) ) {
 				if ( stream.peek() === '~' ) {
-					if ( !stream.match( /^~{3,}/, false ) ) {
+					if ( !stream.match( /^~~~+/, false ) ) {
 						stream.match( /^~*/ );
 						return makeLocalStyle( 'mw-free-extlink', state );
 					}
 				} else if ( stream.peek() === '{' ) {
-					if ( !stream.match( /^\{\{/, false ) ) {
+					if ( !stream.match( '{{', false ) ) {
 						stream.next();
 						return makeLocalStyle( 'mw-free-extlink', state );
 					}
@@ -654,12 +648,12 @@
 					ch = stream.next();
 					switch ( ch ) {
 						case '-':
-							if ( stream.match( /^----*/ ) ) {
+							if ( stream.match( /^---+/ ) ) {
 								return 'mw-hr';
 							}
 							break;
 						case '=':
-							tmp = stream.match( /^(={0,5})(.+?(=\1\s*))$/ );
+							tmp = stream.match( /^(={0,5})(.+?(=\1\s*)(<!--(?!.*-->.*\S).*?)?)$/ );
 							if ( tmp ) { // Title
 								stream.backUp( tmp[ 2 ].length );
 								state.stack.push( state.tokenize );
@@ -669,19 +663,17 @@
 							break;
 						case '*':
 						case '#':
-							if ( stream.match( /^[*#]*:*/ ) ) {
-								return 'mw-list';
-							}
-							break;
+							// Just consume all nested list and indention syntax when there is more
+							stream.match( /^[*#]*:*/ );
+							return 'mw-list';
 						case ':':
 							if ( stream.match( /^:*{\|/, false ) ) { // Highlight indented tables :{|, bug T108454
 								state.stack.push( state.tokenize );
 								state.tokenize = eatStartTable;
 							}
-							if ( stream.match( /^:*[*#]*/ ) ) {
-								return 'mw-indenting';
-							}
-							break;
+							// Just consume all nested list and indention syntax when there is more
+							stream.match( /^:*[*#]*/ );
+							return 'mw-indenting';
 						case ' ':
 							if ( stream.match( /^[\s\u00a0]*:*{\|/, false ) ) { // Leading spaces is the correct syntax for a table, bug T108454
 								stream.eatSpace();
@@ -852,7 +844,7 @@
 						}
 						break;
 				}
-				stream.match( /^[^\s\u00a0_>}[\]<{'|&:~]+/ );
+				stream.match( /^[^\s\u00a0_>}[\]<{'|&:~=]+/ );
 				return makeStyle( style, state );
 			};
 		}
@@ -871,9 +863,9 @@
 			// firstmultiletterword has medium priority
 			// firstspace has low priority
 			var end = stream.pos,
-				str = stream.string.substr( 0, end - 3 ),
-				x1 = str.substr( -1, 1 ),
-				x2 = str.substr( -2, 1 );
+				str = stream.string.slice( 0, end - 3 ),
+				x1 = str.slice( -1, -1 + 1 ),
+				x2 = str.slice( -2, -2 + 1 );
 
 			// firstsingleletterword olways is undefined here
 			if ( x1 === ' ' ) {

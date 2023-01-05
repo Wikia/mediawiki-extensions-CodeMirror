@@ -1,5 +1,5 @@
 ( function () {
-	var codeMirror, $textbox1;
+	var codeMirror, $textbox1, realtimePreviewHandler;
 
 	// Exit if WikiEditor is disabled
 	if ( !mw.loader.getState( 'ext.wikiEditor' ) ) {
@@ -103,6 +103,63 @@
 	];
 
 	/**
+	 * Set the size of the CodeMirror element,
+	 * and react to changes coming from WikiEditor (including Realtime Preview if its enabled).
+	 */
+	function setupSizing() {
+		var $codeMirror = $( codeMirror.getWrapperElement() );
+
+		// Only add jQuery UI's resizing corner if realtime preview is not enabled,
+		// because that feature provides height resizing (even when preview isn't used).
+		if ( mw.loader.getState( 'ext.wikiEditor.realtimepreview' ) === 'ready' ) {
+			codeMirror.setSize( '100%', $textbox1.parent().height() );
+		} else {
+			// RL module jquery.ui
+			$codeMirror.resizable( {
+				handles: 'se',
+				resize: function () {
+					// Keep at 100% parent width, don't modify height here
+					codeMirror.setSize( '100%', null );
+				}
+			} );
+			// Match the height of the textarea.
+			codeMirror.setSize( null, $textbox1.height() );
+		}
+		var $resizableHandle = $codeMirror.find( '.ui-resizable-handle' );
+		mw.hook( 'ext.WikiEditor.realtimepreview.enable' ).add( function ( realtimePreview ) {
+			// CodeMirror may have been turned on and then off again before realtimepreview is enabled, in which case it will be null.
+			if ( !codeMirror ) {
+				return;
+			}
+			// Get rid of the corner resize handle, because realtimepreview provides its own.
+			$resizableHandle.hide();
+			// Add listener for CodeMirror changes.
+			realtimePreviewHandler = realtimePreview.getEventHandler().bind( realtimePreview );
+			codeMirror.on( 'change', realtimePreviewHandler );
+			// Fix the width and height of the CodeMirror area.
+			codeMirror.setSize( '100%', realtimePreview.twoPaneLayout.$element.height() );
+		} );
+		mw.hook( 'ext.WikiEditor.realtimepreview.resize' ).add( function ( resizingBar ) {
+			// CodeMirror may have been turned off after realtimepreview was opened, in which case it will be null.
+			if ( !codeMirror ) {
+				return;
+			}
+			// Keep in sync with the height of the pane.
+			codeMirror.setSize( '100%', resizingBar.getResizedPane().height() );
+		} );
+		mw.hook( 'ext.WikiEditor.realtimepreview.disable' ).add( function () {
+			// Re-show the corner resize handle.
+			$resizableHandle.show();
+			// CodeMirror may have been turned off after realtimepreview was opened, in which case it will be null.
+			if ( !codeMirror ) {
+				return;
+			}
+			codeMirror.refresh(); // T305333
+			codeMirror.off( 'change', realtimePreviewHandler );
+		} );
+	}
+
+	/**
 	 * Replaces the default textarea with CodeMirror
 	 */
 	function enableCodeMirror() {
@@ -112,7 +169,8 @@
 			var $codeMirror, cmOptions,
 				selectionStart = $textbox1.prop( 'selectionStart' ),
 				selectionEnd = $textbox1.prop( 'selectionEnd' ),
-				scrollTop = $textbox1.scrollTop();
+				scrollTop = $textbox1.scrollTop(),
+				hasFocus = $textbox1.is( ':focus' );
 
 			// If CodeMirror is already loaded or wikEd gadget is enabled, abort. See T178348.
 			// FIXME: Would be good to replace the wikEd check with something more generic.
@@ -144,15 +202,20 @@
 				viewportMargin: Infinity
 			};
 
-			if ( mw.config.get( 'wgCodeMirrorEnableBracketMatching' ) ) {
-				cmOptions.matchBrackets = {
-					highlightNonMatching: false,
-					maxHighlightLineLength: 10000
-				};
-			}
+			cmOptions.matchBrackets = {
+				highlightNonMatching: false,
+				maxHighlightLineLength: 10000
+			};
 
 			codeMirror = window.WikiEditorCodeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
 			$codeMirror = $( codeMirror.getWrapperElement() );
+
+			codeMirror.on( 'focus', function () {
+				$textbox1.triggerHandler( 'focus' );
+			} );
+			codeMirror.on( 'blur', function () {
+				$textbox1.triggerHandler( 'blur' );
+			} );
 
 			// Allow textSelection() functions to work with CodeMirror editing field.
 			$codeMirror.textSelection( 'register', cmTextSelection );
@@ -160,14 +223,11 @@
 			// CodeMirror. We unregister this when switching to normal textarea mode.
 			$textbox1.textSelection( 'register', cmTextSelection );
 
-			// RL module jquery.ui
-			$codeMirror.resizable( {
-				handles: 'se',
-				resize: function ( event, ui ) {
-					ui.size.width = ui.originalSize.width;
-				}
-			} );
+			setupSizing( $textbox1, codeMirror );
 
+			if ( hasFocus ) {
+				codeMirror.focus();
+			}
 			codeMirror.doc.setSelection( codeMirror.doc.posFromIndex( selectionEnd ), codeMirror.doc.posFromIndex( selectionStart ) );
 			codeMirror.scrollTo( null, scrollTop );
 
@@ -189,12 +249,12 @@
 				// T194102: UniversalLanguageSelector integration is buggy, disabling it completely
 				.addClass( 'noime' );
 
-			// set the height of the textarea
-			codeMirror.setSize( null, $textbox1.height() );
-
-			if ( mw.config.get( 'wgCodeMirrorAccessibilityColors' ) ) {
-				$codeMirror.addClass( 'cm-mw-accessible-colors' );
+			if ( mw.user.options.get( 'usecodemirror-colorblind' ) ) {
+				$codeMirror.addClass( 'cm-mw-colorblind-colors' );
 			}
+
+			// T305333: Reload CodeMirror to fix a cursor caret issue.
+			codeMirror.refresh();
 
 			mw.hook( 'ext.CodeMirror.switch' ).fire( true, $codeMirror );
 		} );

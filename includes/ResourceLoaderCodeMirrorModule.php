@@ -20,16 +20,21 @@
  * @file
  */
 
+namespace MediaWiki\Extension\CodeMirror;
+
+use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\ResourceLoader as RL;
+use MediaWiki\ResourceLoader\ResourceLoader;
 
 /**
  * ResourceLoader module for ext.CodeMirror
  */
-class ResourceLoaderCodeMirrorModule extends ResourceLoaderFileModule {
+class ResourceLoaderCodeMirrorModule extends RL\FileModule {
 	/**
 	 * @inheritDoc
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( RL\Context $context ) {
 		return ResourceLoader::makeConfigSetScript(
 				[ 'extCodeMirrorConfig' => $this->getFrontendConfiguraton() ]
 			)

@@ -1,4 +1,5 @@
-/* eslint-env node, es6 */
+'use strict';
+
 module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
@@ -12,7 +13,6 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'**/*.{js,json}',
-				'!resources/addon/edit/**',
 				'!resources/lib/**',
 				'!{vendor,node_modules}/**'
 			]

@@ -12,19 +12,9 @@
 	"type": "editor",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.35.0"
+		"MediaWiki": ">= 1.38.0"
 	},
 	"config": {
-		"CodeMirrorEnableBracketMatching": {
-			"value": false,
-			"description": "Temporary feature flag for the matchbrackets addon.",
-			"public": true
-		},
-		"CodeMirrorAccessibilityColors": {
-			"value": false,
-			"description": "Temporary feature flag for accessibility colors.",
-			"public": true
-		},
 		"CodeMirrorLineNumberingNamespaces": {
 			"value": null,
 			"description": "List of namespace IDs where line numbering should be enabled, or `null` to enable for all namespaces. Set to [] to disable everywhere. Defaults to `null` for all namespaces.",
@@ -36,9 +26,8 @@
 			"i18n"
 		]
 	},
-	"AutoloadClasses": {
-		"CodeMirrorHooks": "includes/CodeMirrorHooks.php",
-		"ResourceLoaderCodeMirrorModule": "includes/ResourceLoaderCodeMirrorModule.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\CodeMirror\\": "includes/"
 	},
 	"ResourceModules": {
 		"ext.CodeMirror": {
@@ -62,7 +51,7 @@
 			]
 		},
 		"ext.CodeMirror.data": {
-			"class": "ResourceLoaderCodeMirrorModule"
+			"class": "MediaWiki\\Extension\\CodeMirror\\ResourceLoaderCodeMirrorModule"
 		},
 		"ext.CodeMirror.lib": {
 			"scripts": [
@@ -84,8 +73,8 @@
 		"ext.CodeMirror.mode.mediawiki": {
 			"scripts": "mode/mediawiki/mediawiki.js",
 			"styles": [
-				"mode/mediawiki/mediawiki.css",
-				"mode/mediawiki/accessible-colors.css"
+				"mode/mediawiki/mediawiki.less",
+				"mode/mediawiki/colorblind-colors.less"
 			],
 			"dependencies": [
 				"ext.CodeMirror.lib"
@@ -181,9 +170,9 @@
 		]
 	},
 	"Hooks": {
-		"BeforePageDisplay": "CodeMirrorHooks::onBeforePageDisplay",
-		"GetPreferences": "CodeMirrorHooks::onGetPreferences",
-		"ResourceLoaderGetConfigVars": "CodeMirrorHooks::onResourceLoaderGetConfigVars"
+		"BeforePageDisplay": "MediaWiki\\Extension\\CodeMirror\\Hooks::onBeforePageDisplay",
+		"GetPreferences": "MediaWiki\\Extension\\CodeMirror\\Hooks::onGetPreferences",
+		"ResourceLoaderGetConfigVars": "MediaWiki\\Extension\\CodeMirror\\Hooks::onResourceLoaderGetConfigVars"
 	},
 	"attributes": {
 		"CodeMirror": {
