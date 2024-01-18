@@ -4,14 +4,14 @@ namespace MediaWiki\Extension\CodeMirror;
 
 use ExtensionRegistry;
 use InvalidArgumentException;
-use MediaWiki\Config\Config;
+use Config;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
 use MediaWiki\Hook\BeforePageDisplayHook;
-use MediaWiki\Output\OutputPage;
+use OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderGetConfigVarsHook;
-use MediaWiki\User\Options\UserOptionsLookup;
-use MediaWiki\User\User;
+use MediaWiki\User\UserOptionsLookup;
+use User;
 use Skin;
 
 class Hooks implements
