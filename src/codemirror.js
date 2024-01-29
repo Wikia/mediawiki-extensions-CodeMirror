@@ -121,8 +121,8 @@ export default class CodeMirror {
 	 * @stable
 	 */
 	setCodeMirrorPreference( prefValue ) {
-		// Skip for unnamed users
-		if ( !mw.user.isNamed() ) {
+		// Skip for anon users
+		if ( mw.user.isAnon() ) {
 			return;
 		}
 		new mw.Api().saveOption( 'usecodemirror', prefValue ? 1 : 0 );

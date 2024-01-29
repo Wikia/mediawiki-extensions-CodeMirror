@@ -1,8 +1,7 @@
 import CodeMirror from './codemirror';
 import { EditorSelection } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
-import { searchKeymap } from '@codemirror/search';
+import { history } from '@codemirror/commands';
 import { bracketMatching } from '@codemirror/language';
 
 /**
@@ -60,12 +59,7 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 					this.editRecoveryHandler();
 				}
 			} ),
-			EditorView.lineWrapping,
-			keymap.of( [
-				...defaultKeymap,
-				...searchKeymap,
-				...historyKeymap
-			] )
+			EditorView.lineWrapping
 		];
 
 		mw.hook( 'editRecovery.loadEnd' ).add( ( data ) => {
@@ -76,6 +70,7 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 
 		// Sync scroll position, selections, and focus state.
 		this.view.scrollDOM.scrollTop = scrollTop;
+		this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
 		this.view.dispatch( {
 			selection: EditorSelection.create( [
 				EditorSelection.range( selectionStart, selectionEnd )
