@@ -11,7 +11,8 @@
 ve.ui.CodeMirrorTool = function VeUiCodeMirrorTool() {
 	// Parent constructor
 	ve.ui.CodeMirrorTool.super.apply( this, arguments );
-	this.extCodeMirror = this.toolbar.surface.mirror;
+
+	this.extCodeMirror = window.VisualEditorCodeMirror;
 
 	// Events
 	this.toolbar.connect( this, { surfaceChange: 'onSurfaceChange' } );
@@ -37,15 +38,13 @@ ve.ui.CodeMirrorTool.static.deactivateOnSelect = false;
 ve.ui.CodeMirrorTool.prototype.onSelect = function () {
 	// Parent method
 	ve.ui.CodeMirrorTool.super.prototype.onSelect.apply( this, arguments );
-
-	if ( !this.extCodeMirror ) {
-		this.extCodeMirror = this.toolbar.surface.mirror;
-	}
-
-	var useCodeMirror = !!( this.extCodeMirror && this.extCodeMirror.view );
+	console.log('aha tak', this.toolbar.surface.mirror);
+	console.log('lolo', window);
+	var useCodeMirror = !!this.toolbar.surface.mirror;
 	this.setActive( useCodeMirror );
 
-	this.extCodeMirror.setCodeMirrorPreference( useCodeMirror );
+	new mw.Api().saveOption( 'usecodemirror', useCodeMirror ? 1 : 0 );
+	mw.user.options.set( 'usecodemirror', useCodeMirror ? 1 : 0 );
 
 	this.extCodeMirror.logUsage( {
 		editor: 'wikitext-2017',

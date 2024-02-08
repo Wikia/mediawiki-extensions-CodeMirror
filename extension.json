@@ -162,6 +162,35 @@
 				"codemirror-toggle-label"
 			]
 		},
+		"ext.CodeMirror.v6.visualEditor.init": {
+			"packageFiles": [
+				"ext.CodeMirror.v6.visualEditor.init.js",
+				{
+					"name": "ext.CodeMirror.data.js",
+					"callback": "MediaWiki\\Extension\\CodeMirror\\DataScript::makeScript"
+				}
+			]
+		},
+		"ext.CodeMirror.v6.visualEditor": {
+			"dependencies": [
+				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwmeta",
+				"web2017-polyfills",
+				"mediawiki.api",
+				"user.options"
+			],
+			"scripts": [
+				"dist/ve.ui.CodeMirrorAction.js"
+			],
+			"styles": [
+				"modules/ve-cm/ve.ui.CodeMirror.v6.less",
+				"mode/mediawiki/mediawiki.less",
+				"mode/mediawiki/colorblind-colors.less"
+			],
+			"messages": [
+				"codemirror-toggle-label"
+			]
+		},
 		"ext.CodeMirror.v6.WikiEditor.init": {
 			"packageFiles": [
 				"ext.CodeMirror.v6.WikiEditor.init.js",
@@ -234,11 +263,6 @@
 				"pre": "mw-tag-pre",
 				"nowiki": "mw-tag-nowiki"
 			}
-		},
-		"VisualEditor": {
-			"PluginModules": [
-				"ext.CodeMirror.visualEditor"
-			]
 		},
 		"EventLogging": {
 			"Schemas": {

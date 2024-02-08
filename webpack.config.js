@@ -25,7 +25,10 @@ module.exports = ( env, argv ) => ( {
 	// working directory.
 	context: __dirname,
 
-	entry: './src/codemirror.wikieditor.mediawiki.js',
+	entry: {
+		'codemirror.wikieditor.mediawiki': './src/codemirror.wikieditor.mediawiki.js',
+		've.ui.CodeMirrorAction': './src/modules/ve-cm/ve.ui.CodeMirrorAction.js'
+	},
 
 	module: {
 		rules: [ {

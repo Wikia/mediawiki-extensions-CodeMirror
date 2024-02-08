@@ -44,7 +44,7 @@ class Hooks implements
 	 * @param ExtensionRegistry|null $extensionRegistry Overridden in tests.
 	 * @return bool
 	 */
-	public function shouldLoadCodeMirror( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
+	public function shouldLoadCodeMirrorForWikiEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
 		$extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		// Disable CodeMirror when CodeEditor is active on this page
 		// Depends on ext.codeEditor being added by \MediaWiki\EditPage\EditPage::showEditForm:initial
@@ -61,6 +61,19 @@ class Hooks implements
 			!$this->conflictingGadgetsEnabled( $extensionRegistry, $out->getUser() ) &&
 			// CodeMirror 5 on textarea wikitext editors doesn't support RTL (T170001)
 			( !$isRTL || $this->shouldUseV6( $out ) );
+	}
+
+	/**
+	 * Checks if CodeMirror for VisualEditor should be loaded on this page or not.
+	 *
+	 * @param OutputPage $out
+	 * @param ExtensionRegistry|null $extensionRegistry Overridden in tests.
+	 * @return bool
+	 */
+	public function shouldLoadCodeMirrorForVisualEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
+		$isVisualEditorPage = $out->getRequest()->getVal( 'veaction' ) === 'editsource';
+		$isRTL = $out->getTitle()->getPageLanguage()->isRTL();
+		return $isVisualEditorPage && ( !$isRTL || $this->shouldUseV6( $out ) );
 	}
 
 	/**
@@ -98,19 +111,25 @@ class Hooks implements
 	 * @return void This hook must not abort, it must return no value
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		if ( !$this->shouldLoadCodeMirror( $out ) ) {
-			return;
-		}
-
-		if ( $this->shouldUseV6( $out ) ) {
-			$out->addModules( 'ext.CodeMirror.v6.WikiEditor.init' );
-		} else {
-			$out->addModules( 'ext.CodeMirror.WikiEditor' );
+		if ( $this->shouldLoadCodeMirrorForWikiEditor( $out ) ) {
+			if ( $this->shouldUseV6( $out ) ) {
+				$out->addModules( 'ext.CodeMirror.v6.WikiEditor.init' );
+			} else {
+				$out->addModules( 'ext.CodeMirror.WikiEditor' );
+			}
 
 			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
-				// These modules are predelivered for performance when needed
-				// keep these modules in sync with ext.CodeMirror.js
 				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
+			}
+		}
+
+		if ( $this->shouldLoadCodeMirrorForVisualEditor( $out ) ) {
+			if ( $this->shouldUseV6( $out ) ) {
+				$out->addModules( 'ext.CodeMirror.v6.visualEditor.init' );
+			} else {
+				if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
+					$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
+				}
 			}
 		}
 	}
