@@ -1,6 +1,7 @@
 import CodeMirror from './codemirror';
 import { EditorSelection } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
+import { standardKeymap } from '@codemirror/commands';
 import { history } from '@codemirror/commands';
 import { bracketMatching } from '@codemirror/language';
 
@@ -44,6 +45,7 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 		const extensions = [
 			...this.defaultExtensions,
 			this.langExtension,
+			standardKeymap,
 			bracketMatching(),
 			history(),
 			// See also the default attributes at contentAttributesExtension() in the parent class.
@@ -52,7 +54,17 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 			} ),
 			EditorView.domEventHandlers( {
 				blur: () => this.$textarea.triggerHandler( 'blur' ),
-				focus: () => this.$textarea.triggerHandler( 'focus' )
+				focus: () => this.$textarea.triggerHandler( 'focus' ),
+				handleKeyDown(view, event) {
+					if (event.key === "Tab") {
+						event.preventDefault();
+						const $nextInput = $('#wpSummary');
+						if ($nextInput.length) {
+							$nextInput.focus();
+						}
+					}
+					return false;
+				}
 			} ),
 			EditorView.updateListener.of( ( update ) => {
 				if ( update.docChanged && typeof this.editRecoveryHandler === 'function' ) {
