@@ -45,7 +45,7 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 		const extensions = [
 			...this.defaultExtensions,
 			this.langExtension,
-			standardKeymap,
+			standardKeymap(),
 			bracketMatching(),
 			history(),
 			// See also the default attributes at contentAttributesExtension() in the parent class.
