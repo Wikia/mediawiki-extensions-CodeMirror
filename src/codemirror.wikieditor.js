@@ -1,8 +1,7 @@
 import CodeMirror from './codemirror';
-import { EditorSelection } from '@codemirror/state';
-import { EditorView, keymap } from '@codemirror/view';
-import { standardKeymap } from '@codemirror/commands';
-import { history } from '@codemirror/commands';
+import { EditorState, EditorSelection } from '@codemirror/state';
+import { drawSelection, EditorView, keymap } from '@codemirror/view';
+import { history, standardKeymap } from '@codemirror/commands';
 import { bracketMatching } from '@codemirror/language';
 
 /**
@@ -45,7 +44,9 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 		const extensions = [
 			...this.defaultExtensions,
 			this.langExtension,
-			standardKeymap(),
+			drawSelection(),
+			keymap.of(standardKeymap),
+			EditorState.allowMultipleSelections.of( true ),
 			bracketMatching(),
 			history(),
 			// See also the default attributes at contentAttributesExtension() in the parent class.
@@ -55,7 +56,7 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 			EditorView.domEventHandlers( {
 				blur: () => this.$textarea.triggerHandler( 'blur' ),
 				focus: () => this.$textarea.triggerHandler( 'focus' ),
-				handleKeyDown(view, event) {
+				keydown(event, view) {
 					if (event.key === "Tab") {
 						event.preventDefault();
 						const $nextInput = $('#wpSummary');
