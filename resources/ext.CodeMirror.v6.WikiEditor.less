@@ -9,15 +9,16 @@
 	font-weight: bold;
 }
 
-.cm-line {
+.cm-scroller .cm-content {
+	padding: 0;
+}
+
+.cm-content .cm-line {
 	line-height: 21px;
-	padding: 0 !important;
+	white-space-collapse: preserve;
+	padding: 0;
 }
 
-.cm-content {
-	padding: 0 !important;
-}
-
-.cm-gutterElement {
-	padding: 1px 3px 0 5px !important;
+.cm-gutters .cm-lineNumbers .cm-gutterElement {
+	padding: 0.5px 3px 0 9px;
 }
