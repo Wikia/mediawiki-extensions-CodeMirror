@@ -3,13 +3,13 @@
 namespace MediaWiki\Extension\CodeMirror;
 
 use Config;
-use MediaWiki\EditPage\EditPage;
+use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
 use MediaWiki\Hook\EditPage__showEditForm_initialHook;
 use MediaWiki\Hook\EditPage__showReadOnlyForm_initialHook;
-use OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\User\UserOptionsLookup;
+use OutputPage;
 use User;
 
 /**
