@@ -1,18 +1,22 @@
 import CodeMirror from './codemirror';
-import { EditorSelection } from '@codemirror/state';
-import { EditorView, keymap } from '@codemirror/view';
-import { standardKeymap } from '@codemirror/commands';
-import { history } from '@codemirror/commands';
-import { bracketMatching } from '@codemirror/language';
+import { EditorSelection, Extension } from '@codemirror/state';
+import { EditorView } from '@codemirror/view';
+import { LanguageSupport } from '@codemirror/language';
 
 /**
  * @class CodeMirrorWikiEditor
+ * @property {LanguageSupport|Extension} langExtension
+ * @property {boolean} useCodeMirror
  */
 export default class CodeMirrorWikiEditor extends CodeMirror {
+	/**
+	 * @constructor
+	 * @param {jQuery} $textarea
+	 * @param {LanguageSupport|Extension} langExtension
+	 */
 	constructor( $textarea, langExtension ) {
 		super( $textarea );
 		this.langExtension = langExtension;
-		this.editRecoveryHandler = null;
 		this.useCodeMirror = mw.user.options.get( 'usecodemirror' ) > 0;
 	}
 
@@ -20,7 +24,8 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 	 * @inheritDoc
 	 */
 	setCodeMirrorPreference( prefValue ) {
-		this.useCodeMirror = prefValue; // Save state for function updateToolbarButton()
+		// Save state for function updateToolbarButton()
+		this.useCodeMirror = prefValue;
 		super.setCodeMirrorPreference( prefValue );
 	}
 
@@ -45,17 +50,10 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 		const extensions = [
 			...this.defaultExtensions,
 			this.langExtension,
-			standardKeymap,
-			bracketMatching(),
-			history(),
-			// See also the default attributes at contentAttributesExtension() in the parent class.
-			EditorView.contentAttributes.of( {
-				spellcheck: 'true'
-			} ),
 			EditorView.domEventHandlers( {
 				blur: () => this.$textarea.triggerHandler( 'blur' ),
 				focus: () => this.$textarea.triggerHandler( 'focus' ),
-				handleKeyDown(view, event) {
+				keydown(event, view) {
 					if (event.key === "Tab") {
 						event.preventDefault();
 						const $nextInput = $('#wpSummary');
@@ -66,29 +64,24 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 					return false;
 				}
 			} ),
-			EditorView.updateListener.of( ( update ) => {
-				if ( update.docChanged && typeof this.editRecoveryHandler === 'function' ) {
-					this.editRecoveryHandler();
-				}
-			} ),
 			EditorView.lineWrapping
 		];
-
-		mw.hook( 'editRecovery.loadEnd' ).add( ( data ) => {
-			this.editRecoveryHandler = data.fieldChangeHandler;
-		} );
 
 		this.initialize( extensions );
 
 		// Sync scroll position, selections, and focus state.
-		this.view.scrollDOM.scrollTop = scrollTop;
-		this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
-		this.view.dispatch( {
-			selection: EditorSelection.create( [
-				EditorSelection.range( selectionStart, selectionEnd )
-			] ),
-			scrollIntoView: true
+		requestAnimationFrame( () => {
+			this.view.scrollDOM.scrollTop = scrollTop;
 		} );
+		if ( selectionStart !== 0 || selectionEnd !== 0 ) {
+			const range = EditorSelection.range( selectionStart, selectionEnd ),
+				scrollEffect = EditorView.scrollIntoView( range );
+			scrollEffect.value.isSnapshot = true;
+			this.view.dispatch( {
+				selection: EditorSelection.create( [ range ] ),
+				effects: scrollEffect
+			} );
+		}
 		if ( hasFocus ) {
 			this.view.focus();
 		}
@@ -131,8 +124,12 @@ export default class CodeMirrorWikiEditor extends CodeMirror {
 		);
 
 		const $codeMirrorButton = toolbar.$toolbar.find( '.tool[rel=CodeMirror]' );
-		$codeMirrorButton
-			.attr( 'id', 'mw-editbutton-codemirror' );
+		$codeMirrorButton.attr( 'id', 'mw-editbutton-codemirror' );
+
+		// Hide non-applicable buttons until WikiEditor better supports a read-only mode (T188817).
+		if ( this.readOnly ) {
+			this.$textarea.data( 'wikiEditor-context' ).$ui.addClass( 'ext-codemirror-readonly' );
+		}
 
 		if ( this.useCodeMirror ) {
 			this.enableCodeMirror();

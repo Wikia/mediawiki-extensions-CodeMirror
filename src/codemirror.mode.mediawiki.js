@@ -8,6 +8,8 @@ import {
 } from '@codemirror/language';
 import { mwModeConfig as modeConfig } from './codemirror.mode.mediawiki.config';
 import { Tag } from '@lezer/highlight';
+import templateFoldingExtension from './codemirror.templateFolding';
+import bidiIsolationExtension from './codemirror.bidiIsolation';
 
 /**
  * Adapted from the original CodeMirror 5 stream parser by Pavel Astakhov
@@ -21,7 +23,7 @@ class CodeMirrorModeMediaWiki {
 	constructor( config ) {
 		this.config = config;
 		// eslint-disable-next-line security/detect-non-literal-regexp
-		this.urlProtocols = new RegExp( `^(?:${ this.config.urlProtocols })`, 'i' );
+		this.urlProtocols = new RegExp( `^(?:${ this.config.urlProtocols })(?=[^\\s\u00a0{[\\]<>~).,'])`, 'i' );
 		this.isBold = false;
 		this.wasBold = false;
 		this.isItalic = false;
@@ -33,9 +35,51 @@ class CodeMirrorModeMediaWiki {
 		this.tokens = [];
 		this.oldTokens = [];
 		this.tokenTable = modeConfig.tokenTable;
+		this.registerGroundTokens();
 
 		// Dynamically register any tags that aren't already in CodeMirrorModeMediaWikiConfig
 		Object.keys( this.config.tags ).forEach( ( tag ) => modeConfig.addTag( tag ) );
+	}
+
+	/**
+	 * Register the ground tokens. These aren't referenced directly in the StreamParser, nor do
+	 * they have a parent Tag, so we don't need them as constants like we do for other tokens.
+	 * See this.makeLocalStyle() for how these tokens are used.
+	 */
+	registerGroundTokens() {
+		[
+			'mw-ext-ground',
+			'mw-ext-link-ground',
+			'mw-ext2-ground',
+			'mw-ext2-link-ground',
+			'mw-ext3-ground',
+			'mw-ext3-link-ground',
+			'mw-link-ground',
+			'mw-template-ext-ground',
+			'mw-template-ext-link-ground',
+			'mw-template-ext2-ground',
+			'mw-template-ext2-link-ground',
+			'mw-template-ext3-ground',
+			'mw-template-ext3-link-ground',
+			'mw-template-ground',
+			'mw-template-link-ground',
+			'mw-template2-ext-ground',
+			'mw-template2-ext-link-ground',
+			'mw-template2-ext2-ground',
+			'mw-template2-ext2-link-ground',
+			'mw-template2-ext3-ground',
+			'mw-template2-ext3-link-ground',
+			'mw-template2-ground',
+			'mw-template2-link-ground',
+			'mw-template3-ext-ground',
+			'mw-template3-ext-link-ground',
+			'mw-template3-ext2-ground',
+			'mw-template3-ext2-link-ground',
+			'mw-template3-ext3-ground',
+			'mw-template3-ext3-link-ground',
+			'mw-template3-ground',
+			'mw-template3-link-ground'
+		].forEach( ( ground ) => modeConfig.addToken( ground ) );
 	}
 
 	eatHtmlEntity( stream, style ) {
@@ -67,44 +111,6 @@ class CodeMirrorModeMediaWiki {
 
 	makeLocalStyle( style, state, endGround ) {
 		let ground = '';
-		/**
-		 * List out token names in a comment for search purposes.
-		 *
-		 * Tokens used here include:
-		 * - mw-ext-ground
-		 * - mw-ext-link-ground
-		 * - mw-ext2-ground
-		 * - mw-ext2-link-ground
-		 * - mw-ext3-ground
-		 * - mw-ext3-link-ground
-		 * - mw-link-ground
-		 * - mw-template-ext-ground
-		 * - mw-template-ext-link-ground
-		 * - mw-template-ext2-ground
-		 * - mw-template-ext2-link-ground
-		 * - mw-template-ext3-ground
-		 * - mw-template-ext3-link-ground
-		 * - mw-template-link-ground
-		 * - mw-template2-ext-ground
-		 * - mw-template2-ext-link-ground
-		 * - mw-template2-ext2-ground
-		 * - mw-template2-ext2-link-ground
-		 * - mw-template2-ext3-ground
-		 * - mw-template2-ext3-link-ground
-		 * - mw-template2-ground
-		 * - mw-template2-link-ground
-		 * - mw-template3-ext-ground
-		 * - mw-template3-ext-link-ground
-		 * - mw-template3-ext2-ground
-		 * - mw-template3-ext2-link-ground
-		 * - mw-template3-ext3-ground
-		 * - mw-template3-ext3-link-ground
-		 * - mw-template3-ground
-		 * - mw-template3-link-ground
-		 *
-		 * NOTE: these should be defined in CodeMirrorModeMediaWikiConfig.tokenTable()
-		 *   and CodeMirrorModeMediaWikiConfig.highlightStyle()
-		 */
 		switch ( state.nTemplate ) {
 			case 0:
 				break;
@@ -513,7 +519,7 @@ class CodeMirrorModeMediaWiki {
 			}
 			// eat &
 			stream.next();
-			return this.eatHtmlEntity( stream );
+			return this.eatHtmlEntity( stream, '' );
 		};
 	}
 
@@ -629,14 +635,6 @@ class CodeMirrorModeMediaWiki {
 		return this.eatWikiText( modeConfig.tags.tableDefinition )( stream, state );
 	}
 
-	inTableCaption( stream, state ) {
-		if ( stream.sol() && stream.match( /^[\s\u00a0]*[|!]/, false ) ) {
-			state.tokenize = this.inTable.bind( this );
-			return this.inTable( stream, state );
-		}
-		return this.eatWikiText( modeConfig.tags.tableCaption )( stream, state );
-	}
-
 	inTable( stream, state ) {
 		if ( stream.sol() ) {
 			stream.eatSpace();
@@ -648,7 +646,7 @@ class CodeMirrorModeMediaWiki {
 				}
 				if ( stream.eat( '+' ) ) {
 					stream.eatSpace();
-					state.tokenize = this.inTableCaption.bind( this );
+					state.tokenize = this.eatTableRow( true, false, true );
 					return this.makeLocalStyle( modeConfig.tags.tableDelimiter, state );
 				}
 				if ( stream.eat( '}' ) ) {
@@ -668,7 +666,14 @@ class CodeMirrorModeMediaWiki {
 		return this.eatWikiText( '' )( stream, state );
 	}
 
-	eatTableRow( isStart, isHead ) {
+	// isStart actually means whether there may be attributes */
+	eatTableRow( isStart, isHead, isCaption ) {
+		let tag = '';
+		if ( isCaption ) {
+			tag = modeConfig.tags.tableCaption;
+		} else if ( isHead ) {
+			tag = modeConfig.tags.strong;
+		}
 		return ( stream, state ) => {
 			if ( stream.sol() ) {
 				if ( stream.match( /^[\s\u00a0]*[|!]/, false ) ) {
@@ -677,22 +682,19 @@ class CodeMirrorModeMediaWiki {
 				}
 			} else {
 				if ( stream.match( /^[^'|{[<&~!]+/ ) ) {
-					return this.makeStyle( ( isHead ? modeConfig.tags.strong : '' ), state );
+					return this.makeStyle( tag, state );
 				}
-				if (
-					stream.match( '||' ) ||
-					( isHead && stream.match( '!!' ) ) ||
-					( isStart && stream.eat( '|' ) )
-				) {
+				if ( stream.match( '||' ) || ( isHead && stream.match( '!!' ) ) ) {
 					this.isBold = false;
 					this.isItalic = false;
-					if ( isStart ) {
-						state.tokenize = this.eatTableRow( false, isHead );
-					}
+					state.tokenize = this.eatTableRow( true, isHead, isCaption );
+					return this.makeLocalStyle( modeConfig.tags.tableDelimiter, state );
+				}
+				if ( isStart && stream.eat( '|' ) ) {
+					state.tokenize = this.eatTableRow( false, isHead, isCaption );
 					return this.makeLocalStyle( modeConfig.tags.tableDelimiter, state );
 				}
 			}
-			const tag = isHead ? modeConfig.tags.strong : '';
 			return this.eatWikiText( tag )( stream, state );
 		};
 	}
@@ -782,8 +784,9 @@ class CodeMirrorModeMediaWiki {
 						break;
 					case '*':
 					case '#':
+					case ';':
 						// Just consume all nested list and indention syntax when there is more
-						stream.match( /^[*#]*:*/ );
+						stream.match( /^[*#;:]*/ );
 						return modeConfig.tags.list;
 					case ':':
 						// Highlight indented tables :{|, bug T108454
@@ -792,7 +795,7 @@ class CodeMirrorModeMediaWiki {
 							state.tokenize = this.eatStartTable.bind( this );
 						}
 						// Just consume all nested list and indention syntax when there is more
-						stream.match( /^:*[*#]*/ );
+						stream.match( /^[*#;:]*/ );
 						return modeConfig.tags.indenting;
 					case ' ':
 						// Leading spaces is valid syntax for tables, bug T108454
@@ -1201,7 +1204,7 @@ class CodeMirrorModeMediaWiki {
 			/**
 			 * Extra tokens to use in this parser.
 			 *
-			 * @see CodeMirrorModeMediaWikiConfig.tokenTable
+			 * @see CodeMirrorModeMediaWikiConfig.defaultTokenTable
 			 * @return {Object<Tag>}
 			 */
 			tokenTable: this.tokenTable
@@ -1210,26 +1213,47 @@ class CodeMirrorModeMediaWiki {
 }
 
 /**
+ * @typedef {Object} mediaWikiLangConfig
+ * @property {boolean} [bidiIsolation=false] Enable bidi isolation around HTML tags.
+ *   This should generally always be enabled on RTL pages, but it comes with a performance cost.
+ */
+
+/**
  * Gets a LanguageSupport instance for the MediaWiki mode.
  *
  * @example
+ * import CodeMirror from './codemirror';
  * import { mediaWikiLang } from './codemirror.mode.mediawiki';
  * const cm = new CodeMirror( textarea );
  * cm.initialize( [ ...cm.defaultExtensions, mediaWikiLang() ] );
  *
- * @param {Object|null} [config] Used only by unit tests.
+ * @param {mediaWikiLangConfig} [config] Configuration options for the MediaWiki mode.
+ * @param {Object|null} [mwConfig] Ignore; used only by unit tests.
  * @return {LanguageSupport}
  */
-export const mediaWikiLang = ( config = null ) => {
-	const mode = new CodeMirrorModeMediaWiki(
-		config || mw.config.get( 'extCodeMirrorConfig' )
-	);
+export default ( config = { bidiIsolation: false }, mwConfig = null ) => {
+	mwConfig = mwConfig || mw.config.get( 'extCodeMirrorConfig' );
+	const mode = new CodeMirrorModeMediaWiki( mwConfig );
 	const parser = mode.mediawiki;
 	const lang = StreamLanguage.define( parser );
-	const highlighter = syntaxHighlighting(
+	const langExtension = [ syntaxHighlighting(
 		HighlightStyle.define(
 			modeConfig.getTagStyles( parser )
 		)
-	);
-	return new LanguageSupport( lang, highlighter );
+	) ];
+
+	// Add template folding if in supported namespace.
+	const templateFoldingNs = mwConfig.templateFoldingNamespaces;
+	// Set to [] to disable everywhere, or null to enable everywhere.
+	if ( !templateFoldingNs || templateFoldingNs.includes( mw.config.get( 'wgNamespaceNumber' ) ) ) {
+		langExtension.push( templateFoldingExtension );
+	}
+
+	// Bundle the bidi isolation extension, as it's coded specifically for MediaWiki.
+	// This is behind a config option for performance reasons (we only use it on RTL pages).
+	if ( config.bidiIsolation ) {
+		langExtension.push( bidiIsolationExtension );
+	}
+
+	return new LanguageSupport( lang, langExtension );
 };

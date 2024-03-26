@@ -16,11 +16,6 @@
 		"MediaWiki": ">= 1.39.0"
 	},
 	"config": {
-		"CodeMirrorLineNumberingNamespaces": {
-			"value": null,
-			"description": "List of namespace IDs where line numbering should be enabled, or `null` to enable for all namespaces. Set to [] to disable everywhere. Defaults to `null` for all namespaces.",
-			"public": true
-		},
 		"CodeMirrorV6": {
 			"value": false,
 			"description": "Temporary feature flag for the CodeMirror 6 upgrade."
@@ -30,6 +25,16 @@
 				"wikEd"
 			],
 			"description": "An array of gadget names that, if enabled, will prevent CodeMirror from loading on action=edit and action=submit.",
+			"public": true
+		},
+		"CodeMirrorTemplateFoldingNamespaces": {
+			"value": null,
+			"description": "List of namespace IDs where template folding should be enabled, or `null` to enable for all namespaces. Set to [] to disable everywhere.",
+			"public": true
+		},
+		"CodeMirrorLineNumberingNamespaces": {
+			"value": null,
+			"description": "List of namespace IDs where line numbering should be enabled, or `null` to enable for all namespaces. Set to [] to disable everywhere.",
 			"public": true
 		}
 	},
@@ -62,7 +67,6 @@
 				"jquery.textSelection",
 				"mediawiki.user",
 				"user.options",
-				"jquery.ui",
 				"oojs-ui.styles.icons-editing-styling"
 			],
 			"packageFiles": [
@@ -191,32 +195,70 @@
 				"codemirror-toggle-label"
 			]
 		},
-		"ext.CodeMirror.v6.WikiEditor.init": {
+		"ext.CodeMirror.v6.WikiEditor": {
+			"dependencies": [
+				"ext.wikiEditor",
+				"web2017-polyfills",
+				"mediawiki.api",
+				"mediawiki.user",
+				"user.options",
+				"ext.CodeMirror.v6.messages"
+			],
 			"packageFiles": [
-				"ext.CodeMirror.v6.WikiEditor.init.js",
+				"dist/main.js",
 				{
 					"name": "ext.CodeMirror.data.js",
 					"callback": "MediaWiki\\Extension\\CodeMirror\\DataScript::makeScript"
 				}
-			]
-		},
-		"ext.CodeMirror.v6.WikiEditor": {
-			"dependencies": [
-				"web2017-polyfills",
-				"mediawiki.api",
-				"mediawiki.user",
-				"user.options"
-			],
-			"packageFiles": [
-				"dist/main.js"
 			],
 			"styles": [
-				"ext.CodeMirror.v6.WikiEditor.less",
+				"ext.CodeMirror.v6.less",
 				"mode/mediawiki/mediawiki.less",
 				"mode/mediawiki/colorblind-colors.less"
 			],
 			"messages": [
 				"codemirror-toggle-label"
+			]
+		},
+		"ext.CodeMirror.v6.messages": {
+			"messages": [
+				"codemirror-find",
+				"codemirror-next",
+				"codemirror-previous",
+				"codemirror-all",
+				"codemirror-match-case",
+				"codemirror-regexp",
+				"codemirror-by-word",
+				"codemirror-replace",
+				"codemirror-replace-placeholder",
+				"codemirror-replace-all",
+				"codemirror-control-character",
+				"codemirror-special-char-null",
+				"codemirror-special-char-bell",
+				"codemirror-special-char-backspace",
+				"codemirror-special-char-newline",
+				"codemirror-special-char-vertical-tab",
+				"codemirror-special-char-carriage-return",
+				"codemirror-special-char-escape",
+				"codemirror-special-char-nbsp",
+				"codemirror-special-char-zero-width-space",
+				"codemirror-special-char-zero-width-non-joiner",
+				"codemirror-special-char-zero-width-joiner",
+				"codemirror-special-char-left-to-right-mark",
+				"codemirror-special-char-right-to-left-mark",
+				"codemirror-special-char-line-separator",
+				"codemirror-special-char-left-to-right-override",
+				"codemirror-special-char-right-to-left-override",
+				"codemirror-special-char-narrow-nbsp",
+				"codemirror-special-char-left-to-right-isolate",
+				"codemirror-special-char-right-to-left-isolate",
+				"codemirror-special-char-pop-directional-isolate",
+				"codemirror-special-char-paragraph-separator",
+				"codemirror-special-char-zero-width-no-break-space",
+				"codemirror-special-char-object-replacement",
+				"codemirror-fold-template",
+				"codemirror-unfold",
+				"codemirror-folded-code"
 			]
 		}
 	},
@@ -241,9 +283,9 @@
 		]
 	},
 	"Hooks": {
-		"BeforePageDisplay": "main",
-		"GetPreferences": "main",
-		"ResourceLoaderGetConfigVars": "main"
+		"EditPage::showEditForm:initial": "main",
+		"EditPage::showReadOnlyForm:initial": "main",
+		"GetPreferences": "main"
 	},
 	"HookHandlers": {
 		"main": {
@@ -256,6 +298,9 @@
 	},
 	"attributes": {
 		"CodeMirror": {
+			"ContentModels": [
+				"wikitext"
+			],
 			"PluginModules": [
 				"ext.CodeMirror.addons"
 			],
