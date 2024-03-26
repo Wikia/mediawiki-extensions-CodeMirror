@@ -1,4 +1,4 @@
-import { mediaWikiLang } from '../../codemirror.mode.mediawiki';
+import mediaWikiLang from '../../codemirror.mode.mediawiki';
 import CodeMirrorVisualEditor from '../../codemirror.visualeditor';
 
 ve.ui.CodeMirrorAction = function VeUiCodeMirrorAction() {
