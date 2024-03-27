@@ -2,14 +2,16 @@
 
 namespace MediaWiki\Extension\CodeMirror;
 
+use ExtensionRegistry;
+use InvalidArgumentException;
 use Config;
 use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
 use MediaWiki\Hook\EditPage__showEditForm_initialHook;
 use MediaWiki\Hook\EditPage__showReadOnlyForm_initialHook;
+use OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\User\UserOptionsLookup;
-use OutputPage;
 use User;
 
 /**
