@@ -63,6 +63,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 		 * Default configuration, which we may conditionally add to later.
 		 * @see https://codemirror.net/docs/ref/#state.Extension
 		 */
+		console.log('test1');
 		const extensions = [
 			this.defaultExtensions,
 			this.langExtension,
@@ -70,6 +71,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 				blur: () => this.$textarea.triggerHandler( 'blur' ),
 				focus: () => this.$textarea.triggerHandler( 'focus' ),
 				keydown( event, view ) {
+					console.log('test2', event.key);
 					if ( event.key === 'Tab' ) {
 						event.preventDefault();
 						const $nextInput = $( '#wpSummary' );
@@ -77,9 +79,9 @@ class CodeMirrorWikiEditor extends CodeMirror {
 							$nextInput.focus();
 						}
 					}
-					console.log('test', event.key);
+					console.log('test3', event.key);
 					if ( event.key === 'Shift' ) {
-						console.log('test2');
+						console.log('test4');
 						event.preventDefault();
 						const cursorPos = view.state.selection.main.head;
 						const coords = view.coordsAtPos(cursorPos);
