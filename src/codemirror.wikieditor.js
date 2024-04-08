@@ -77,7 +77,9 @@ class CodeMirrorWikiEditor extends CodeMirror {
 							$nextInput.focus();
 						}
 					}
+					console.log('test', event.key);
 					if ( event.key === 'Shift' ) {
+						console.log('test2');
 						event.preventDefault();
 						const cursorPos = view.state.selection.main.head;
 						const coords = view.coordsAtPos(cursorPos);
