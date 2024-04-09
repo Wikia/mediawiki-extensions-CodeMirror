@@ -1,5 +1,6 @@
 import CodeMirror from './codemirror';
 import { EditorSelection, Extension } from '@codemirror/state';
+import { search, openSearchPanel } from '@codemirror/search';
 import { EditorView } from '@codemirror/view';
 import { LanguageSupport } from '@codemirror/language';
 
@@ -66,6 +67,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 		const extensions = [
 			this.defaultExtensions,
 			this.langExtension,
+			search( { top: true } ),
 			EditorView.domEventHandlers( {
 				blur: () => this.$textarea.triggerHandler( 'blur' ),
 				focus: () => this.$textarea.triggerHandler( 'focus' ),
@@ -85,6 +87,9 @@ class CodeMirrorWikiEditor extends CodeMirror {
 
 		this.initialize( extensions );
 
+		$( '.group-search a' ).on( 'click', () => {
+			openSearchPanel( this.view );
+		} );
 		// Sync scroll position, selections, and focus state.
 		requestAnimationFrame( () => {
 			this.view.scrollDOM.scrollTop = scrollTop;

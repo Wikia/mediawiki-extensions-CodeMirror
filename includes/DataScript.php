@@ -67,6 +67,7 @@ class DataScript {
 			'functionSynonyms' => $parser->getFunctionSynonyms(),
 			'urlProtocols' => $parser->getUrlProtocols(),
 			'linkTrailCharacters' => $lang->linkTrail(),
+			'search' => true,
 		];
 
 		$mw = $lang->getMagicWords();
