@@ -1,5 +1,7 @@
-import { StateEffect } from '@codemirror/state';
-import { EditorView } from '@codemirror/view';
+import { StateEffect, Compartment } from '@codemirror/state';
+import { EditorView, keymap } from '@codemirror/view';
+import { defaultKeymap, historyKeymap } from '@codemirror/commands';
+import { searchKeymap } from '@codemirror/search';
 import CodeMirrorWikiEditor from './codemirror.wikieditor';
 import mediaWikiLang from './codemirror.mode.mediawiki';
 
@@ -13,6 +15,20 @@ if ( mw.loader.getState( 'ext.wikiEditor' ) ) {
 	} );
 }
 
+function toggleKeymaps() {
+	const compartment = new Compartment();
+	const keymaps = keymap.of( [
+		defaultKeymap,
+		historyKeymap,
+		searchKeymap
+	] );
+
+	const on = compartment.get( window.WikiEditorCodeMirror.view.state ) == keymaps;
+	window.WikiEditorCodeMirror.view.dispatch( {
+		effects: compartment.reconfigure( on ? [] : keymaps )
+	} );
+}
+
 function registerKeyDownHandler( handler ) {
 	const keyHandler = EditorView.domEventHandlers( {
 		keydown: ( event, view ) => {
@@ -23,6 +39,7 @@ function registerKeyDownHandler( handler ) {
 	window.WikiEditorCodeMirror.view.dispatch( {
 		effects: StateEffect.appendConfig.of( keyHandler )
 	} );
+	toggleKeymaps();
 }
 
 function registerScrollHandler( handler ) {

@@ -1,7 +1,6 @@
 import { EditorState, Extension } from '@codemirror/state';
-import { EditorView, drawSelection, lineNumbers, highlightSpecialChars, keymap } from '@codemirror/view';
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
-import { searchKeymap } from '@codemirror/search';
+import { EditorView, drawSelection, lineNumbers, highlightSpecialChars } from '@codemirror/view';
+import { history } from '@codemirror/commands';
 import { bracketMatching } from '@codemirror/language';
 import CodeMirrorTextSelection from './codemirror.textSelection';
 
@@ -77,10 +76,6 @@ class CodeMirror {
 			this.heightExtension,
 			bracketMatching(),
 			EditorState.readOnly.of( this.readOnly ),
-			keymap.of( [
-				...defaultKeymap,
-				...searchKeymap
-			] ),
 			EditorState.allowMultipleSelections.of( true ),
 			drawSelection()
 		];
@@ -93,7 +88,6 @@ class CodeMirror {
 				}
 			} ) );
 			extensions.push( history() );
-			extensions.push( keymap.of( historyKeymap ) );
 		}
 
 		// Set to [] to disable everywhere, or null to enable everywhere
