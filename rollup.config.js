@@ -22,7 +22,9 @@ module.exports = [
 		input: [
 			'src/codemirror.js',
 			'src/codemirror.mode.mediawiki.js',
-			'src/codemirror.wikieditor.mediawiki.js'
+			'src/codemirror.wikieditor.mediawiki.js',
+			'src/modules/ve-cm/ve.ui.CodeMirrorAction.js',
+			'src/modules/ve-cm/ve.ui.CodeMirrorTool.js'
 		],
 
 		output: {

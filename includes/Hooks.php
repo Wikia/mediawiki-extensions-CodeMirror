@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Config;
 use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
+use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\EditPage__showEditForm_initialHook;
 use MediaWiki\Hook\EditPage__showReadOnlyForm_initialHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
@@ -20,6 +21,7 @@ use User;
 class Hooks implements
 	EditPage__showEditForm_initialHook,
 	EditPage__showReadOnlyForm_initialHook,
+	BeforePageDisplayHook,
 	GetPreferencesHook
 {
 
@@ -48,7 +50,6 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function shouldLoadCodeMirrorForWikiEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
-		$extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		// Disable CodeMirror when CodeEditor is active on this page
 		// Depends on ext.codeEditor being added by \MediaWiki\EditPage\EditPage::showEditForm:initial
 		if ( in_array( 'ext.codeEditor', $out->getModules(), true ) ) {
@@ -116,7 +117,7 @@ class Hooks implements
 	 * @param EditPage $editor
 	 * @param OutputPage $out
 	 */
-	public function onBeforePageDisplay( $out, $skin ): void {
+	public function onEditPage__showEditForm_initial( $editor, $out ): void {
 		if ( $this->shouldLoadCodeMirrorForWikiEditor( $out ) ) {
 			if ( $this->shouldUseV6( $out ) ) {
 				$out->addModules( 'ext.CodeMirror.v6.WikiEditor' );
@@ -125,17 +126,22 @@ class Hooks implements
 			}
 
 			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
+				// These modules are predelivered for performance when needed
+				// keep these modules in sync with ext.CodeMirror.js
 				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
 			}
 		}
+	}
 
-		if ( $this->shouldLoadCodeMirrorForVisualEditor( $out ) ) {
-			if ( $this->shouldUseV6( $out ) ) {
-				$out->addModules( 'ext.CodeMirror.v6.visualEditor.init' );
-			} else {
-				if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
-					$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
-				}
+	public function onBeforePageDisplay($out, $skin): void {
+		if ( !$this->shouldLoadCodeMirrorForVisualEditor( $out ) ) {
+			return;
+		}
+		if ( $this->shouldUseV6( $out ) ) {
+			$out->addModules( 'ext.CodeMirror.v6.visualEditor' );
+		} else {
+			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
+				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
 			}
 		}
 	}
