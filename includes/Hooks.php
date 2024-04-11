@@ -2,6 +2,8 @@
 
 namespace MediaWiki\Extension\CodeMirror;
 
+use ExtensionRegistry;
+use InvalidArgumentException;
 use Config;
 use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
