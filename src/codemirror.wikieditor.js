@@ -83,7 +83,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 						const coords = view.coordsAtPos(cursorPos); // Pobieramy współrzędne kursora
 						const editorView = view.dom.getBoundingClientRect();
 
-						if (coords.top < editorView.top || coords.top > editorView.top + editorView.height) {
+						if (coords.top < editorView.top || coords.top > editorView.bottom) {
 							$( view.dom ).textSelection( 'scrollToCaretPosition' );
 						}
 					}
