@@ -80,8 +80,12 @@ class CodeMirrorWikiEditor extends CodeMirror {
 					if ( event.key === 'Shift' ) {
 						event.preventDefault();
 						const cursorPos = view.state.selection.main.head;
-						const coords = view.coordsAtPos(cursorPos);
-						view.scrollDOM.scrollTo({ top: coords.top });
+						const coords = view.coordsAtPos(cursorPos); // Pobieramy współrzędne kursora
+						const editorView = view.dom.getBoundingClientRect();
+
+						if (coords.top < editorView.top || coords.top > editorView.top + editorView.height) {
+							$( view.dom ).textSelection( 'scrollToCaretPosition' );
+						}
 					}
 					return false;
 				}
