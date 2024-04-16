@@ -48,9 +48,11 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 		doc = surface.getModel().getDocument();
 
 	if ( !( surface.mirror && surface.mirror.view ) && enable !== false ) {
-
-		surface.mirror = window.test = new CodeMirrorVisualEditor( surface, mediaWikiLang() );
+		surface.mirror = window.VisualEditorCodeMirror = new CodeMirrorVisualEditor( surface, mediaWikiLang() );
 		surface.mirror.enableCodeMirror();
+
+		const guttersWidth = document.querySelector('.cm-gutters').offsetWidth;
+		surfaceView.$documentNode.css( 'margin-left', guttersWidth - 29 );
 
 		/* Events */
 
@@ -111,6 +113,11 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 		action = this,
 		store = this.surface.getModel().getDocument().getStore(),
 		codeMirrorView = this.surface.mirror.view;
+
+	const documentNode = document.querySelector('.ve-ce-documentNode');
+	const guttersWidth = document.querySelector('.cm-gutters').clientWidth;
+
+	documentNode.style.marginLeft = (guttersWidth - 29) + 'px';
 
 	tx.operations.forEach( function ( op ) {
 		if ( op.type === 'retain' ) {
