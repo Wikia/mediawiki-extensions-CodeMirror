@@ -79,6 +79,16 @@ class CodeMirrorWikiEditor extends CodeMirror {
 							$nextInput.focus();
 						}
 					}
+					if ( event.key === 'Shift' ) {
+						event.preventDefault();
+						const cursorPos = view.state.selection.main.head;
+						const coords = view.coordsAtPos(cursorPos);
+						const editorView = view.dom.getBoundingClientRect();
+
+						if ( coords.top < editorView.top || coords.top > editorView.bottom ) {
+							$( view.dom ).textSelection( 'scrollToCaretPosition' );
+						}
+					}
 					return false;
 				}
 			} ),
