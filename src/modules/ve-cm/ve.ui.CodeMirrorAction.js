@@ -51,8 +51,8 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 		surface.mirror = window.VisualEditorCodeMirror = new CodeMirrorVisualEditor( surface, mediaWikiLang() );
 		surface.mirror.enableCodeMirror();
 
-		const guttersWidth = document.querySelector('.cm-gutters').offsetWidth;
-		surfaceView.$documentNode.css( 'margin-left', guttersWidth - 29 );
+		const guttersWidth = parseInt(document.querySelector('.cm-gutters').offsetWidth);
+		surfaceView.$documentNode.css( 'margin-left', guttersWidth - 5 );
 
 		/* Events */
 
@@ -68,8 +68,7 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 			've-ce-documentNode-codeEditor-webkit-hide ve-ce-documentNode-codeEditor-hide'
 		);
 
-		surfaceView.$documentNode.css( 'padding-left', '' );
-		surfaceView.$documentNode.css( 'padding-right', '' );
+		surfaceView.$documentNode.css( 'margin-left', '' );
 		surface.mirror.view.destroy();
 		surface.mirror.view = null;
 	}
@@ -115,9 +114,9 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 		codeMirrorView = this.surface.mirror.view;
 
 	const documentNode = document.querySelector('.ve-ce-documentNode');
-	const guttersWidth = document.querySelector('.cm-gutters').clientWidth;
+	const guttersWidth = parseInt(document.querySelector('.cm-gutters').offsetWidth);
 
-	documentNode.style.marginLeft = (guttersWidth - 29) + 'px';
+	documentNode.style.marginLeft = (guttersWidth - 5) + 'px';
 
 	tx.operations.forEach( function ( op ) {
 		if ( op.type === 'retain' ) {

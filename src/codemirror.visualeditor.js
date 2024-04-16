@@ -161,9 +161,6 @@ export default class CodeMirrorVisualEditor {
 				've-ce-documentNode-codeEditor-hide'
 		);
 
-		this.surface.getView().$documentNode.css( 'padding-left', '1.8em' );
-		this.surface.getView().$documentNode.css( 'padding-right', '0.5em' );
-
 		this.initialize( extensions );
 
 		mw.hook( 'ext.CodeMirror.switch' ).fire( true, $( this.view.dom ) );
