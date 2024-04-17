@@ -1,6 +1,4 @@
-mw.loader = {
-	getState: jest.fn().mockReturnValue( '1' )
-};
+mw.loader = { getState: jest.fn() };
 
 const CodeMirrorWikiEditor = require( '../../src/codemirror.wikieditor.js' ).default,
 	$textarea = $( '<textarea>' )
@@ -39,6 +37,16 @@ describe( 'addCodeMirrorToWikiEditor', () => {
 				groups: { codemirror: expect.any( Object ) }
 			} )
 		);
+	} );
+
+	it( 'should be readonly when the textarea is also readonly', () => {
+		const textarea = document.createElement( 'textarea' );
+		textarea.readOnly = true;
+		const cmWe2 = new CodeMirrorWikiEditor( textarea );
+		cmWe2.initialize();
+		cmWe2.addCodeMirrorToWikiEditor();
+		expect( cmWe2.readOnly ).toEqual( true );
+		expect( cmWe2.state.readOnly ).toEqual( true );
 	} );
 } );
 

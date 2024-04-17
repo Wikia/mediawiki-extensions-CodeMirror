@@ -51,12 +51,15 @@ class DataScript {
 		$lang = MediaWikiServices::getInstance()->getContentLanguage();
 		$registry = ExtensionRegistry::getInstance();
 		$parser = MediaWikiServices::getInstance()->getParser();
+		$mwConfig = MediaWikiServices::getInstance()->getMainConfig();
 
 		$tagModes = $registry->getAttribute( 'CodeMirrorTagModes' );
 		$tagNames = array_merge( $parser->getTags(), array_keys( $tagModes ) );
 
 		// initialize configuration
 		$config = [
+			'lineNumberingNamespaces' => $mwConfig->get( 'CodeMirrorLineNumberingNamespaces' ),
+			'templateFoldingNamespaces' => $mwConfig->get( 'CodeMirrorTemplateFoldingNamespaces' ),
 			'pluginModules' => $registry->getAttribute( 'CodeMirrorPluginModules' ),
 			'tagModes' => $tagModes,
 			'tags' => array_fill_keys( $tagNames, true ),
@@ -64,6 +67,7 @@ class DataScript {
 			'functionSynonyms' => $parser->getFunctionSynonyms(),
 			'urlProtocols' => $parser->getUrlProtocols(),
 			'linkTrailCharacters' => $lang->linkTrail(),
+			'search' => true,
 		];
 
 		$mw = $lang->getMagicWords();

@@ -4,39 +4,64 @@ import { TagStyle, StreamParser } from '@codemirror/language';
 /**
  * Configuration for the MediaWiki highlighting mode for CodeMirror.
  * This is a separate class mainly to keep static configuration out of
- * the logic in CodeMirrorModeMediaWiki.
+ * the logic in {@link CodeMirrorModeMediaWiki}.
  *
- * @class CodeMirrorModeMediaWikiConfig
+ * @module CodeMirrorModeMediaWikiConfig
+ *
+ * @example
+ * // within MediaWiki:
+ * import { mwModeConfig } from 'ext.CodeMirror.v6.mode.mediawiki';
+ * // Reference tags by their constants in the tags property.
+ * if ( tag === mwModeConfig.tags.htmlTagBracket ) {
+ *   // …
+ * }
  */
 class CodeMirrorModeMediaWikiConfig {
 
+	/**
+	 * @internal
+	 */
 	constructor() {
 		this.extHighlightStyles = [];
 		this.tokenTable = this.defaultTokenTable;
 	}
 
 	/**
-	 * Register a tag in CodeMirror. The generated CSS class will be of the form 'cm-mw-ext-tagname'
-	 * This is for internal use to dynamically register tags from other MediaWiki extensions.
+	 * Register a token for the given tag in CodeMirror. The generated CSS class will be of
+	 * the form 'cm-mw-ext-tagname'. This is for internal use to dynamically register tags
+	 * from other MediaWiki extensions.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Extension:CodeMirror#Extension_integration
 	 * @param {string} tag
-	 * @param {Tag} parent
+	 * @param {Tag} [parent]
+	 * @private
 	 * @internal
 	 */
-	addTag( tag, parent ) {
+	addTag( tag, parent = null ) {
 		if ( this.tokenTable[ `mw-tag-${ tag }` ] ) {
 			return;
 		}
-		this.tokenTable[ `mw-tag-${ tag }` ] = Tag.define( parent );
-		this.tokenTable[ `mw-ext-${ tag }` ] = Tag.define( parent );
+		this.addToken( `mw-tag-${ tag }`, parent );
+		this.addToken( `mw-ext-${ tag }`, parent );
+	}
+
+	/**
+	 * Dynamically register a token in CodeMirror.
+	 * This is solely for use by this.addTag() and CodeMirrorModeMediaWiki.makeLocalStyle().
+	 *
+	 * @param {string} token
+	 * @param {Tag} [parent]
+	 * @private
+	 * @internal
+	 */
+	addToken( token, parent = null ) {
+		if ( this.tokenTable[ token ] ) {
+			return;
+		}
+		this.tokenTable[ token ] = Tag.define( parent );
 		this.extHighlightStyles.push( {
-			tag: this.tokenTable[ `mw-tag-${ tag }` ],
-			class: `cm-mw-tag-${ tag }`
-		} );
-		this.extHighlightStyles.push( {
-			tag: this.tokenTable[ `mw-ext-${ tag }` ],
-			class: `cm-mw-ext-${ tag }`
+			tag: this.tokenTable[ token ],
+			class: `cm-${ token }`
 		} );
 	}
 
@@ -76,7 +101,8 @@ class CodeMirrorModeMediaWikiConfig {
 	}
 
 	/**
-	 * Mapping of MediaWiki-esque token identifiers to a standardized lezer highlighting tag.
+	 * Mapping of MediaWiki-esque token identifiers to
+	 * [standardized lezer highlighting tags]{@link https://lezer.codemirror.net/docs/ref/#highlight.tags}.
 	 * Values are one of the default highlighting tags. The idea is to use as many default tags as
 	 * possible so that theming (such as dark mode) can be applied with minimal effort. The
 	 * semantic meaning of the tag may not really match how it is used, but as per CodeMirror docs,
@@ -87,8 +113,9 @@ class CodeMirrorModeMediaWikiConfig {
 	 * in highlightStyle().
 	 *
 	 * @see https://lezer.codemirror.net/docs/ref/#highlight.tags
+	 * @member CodeMirrorModeMediaWikiConfig
+	 * @type {Object<string>}
 	 * @return {Object<string>}
-	 * @internal
 	 */
 	get tags() {
 		return {
@@ -152,7 +179,6 @@ class CodeMirrorModeMediaWikiConfig {
 		return {
 			em: 'mw-em',
 			error: 'mw-error',
-			extGround: 'mw-ext-ground',
 			extNowiki: 'mw-ext-nowiki',
 			extPre: 'mw-ext-pre',
 			extTag: 'mw-exttag',
@@ -163,7 +189,6 @@ class CodeMirrorModeMediaWikiConfig {
 			freeExtLinkProtocol: 'mw-free-extlink-protocol',
 			htmlEntity: 'mw-html-entity',
 			link: 'mw-link',
-			linkGround: 'mw-link-ground',
 			linkPageName: 'mw-link-pagename',
 			nowiki: 'mw-tag-nowiki',
 			pageName: 'mw-pagename',
@@ -172,14 +197,7 @@ class CodeMirrorModeMediaWikiConfig {
 			skipFormatting: 'mw-skipformatting',
 			strong: 'mw-strong',
 			tableCaption: 'mw-table-caption',
-			templateGround: 'mw-template-ground',
-			templateExtGround: 'mw-template-ext-ground',
-			templateLinkGround: 'mw-template-link-ground',
-			templateVariableDelimiter: 'mw-templatevariable-delimiter',
-			template2ExtGround: 'mw-template2-ext-ground',
-			template2Ground: 'mw-template2-ground',
-			template3ExtGround: 'mw-template3-ext-ground',
-			template3Ground: 'mw-template3-ground'
+			templateVariableDelimiter: 'mw-templatevariable-delimiter'
 		};
 	}
 
@@ -192,12 +210,12 @@ class CodeMirrorModeMediaWikiConfig {
 	 * @see https://codemirror.net/docs/ref/#language.StreamParser.tokenTable
 	 * @see https://lezer.codemirror.net/docs/ref/#highlight.Tag%5Edefine
 	 * @return {Object<Tag>}
+	 * @internal
 	 */
 	get defaultTokenTable() {
 		return {
 			[ this.tags.em ]: Tag.define(),
 			[ this.tags.error ]: Tag.define(),
-			[ this.tags.extGround ]: Tag.define(),
 			[ this.tags.extNowiki ]: Tag.define(),
 			[ this.tags.extPre ]: Tag.define(),
 			[ this.tags.extTag ]: Tag.define(),
@@ -208,7 +226,6 @@ class CodeMirrorModeMediaWikiConfig {
 			[ this.tags.freeExtLinkProtocol ]: Tag.define(),
 			[ this.tags.htmlEntity ]: Tag.define(),
 			[ this.tags.link ]: Tag.define(),
-			[ this.tags.linkGround ]: Tag.define(),
 			[ this.tags.linkPageName ]: Tag.define(),
 			[ this.tags.nowiki ]: Tag.define(),
 			[ this.tags.pageName ]: Tag.define(),
@@ -217,14 +234,7 @@ class CodeMirrorModeMediaWikiConfig {
 			[ this.tags.skipFormatting ]: Tag.define(),
 			[ this.tags.strong ]: Tag.define(),
 			[ this.tags.tableCaption ]: Tag.define(),
-			[ this.tags.templateGround ]: Tag.define(),
-			[ this.tags.templateExtGround ]: Tag.define(),
-			[ this.tags.templateLinkGround ]: Tag.define(),
-			[ this.tags.templateVariableDelimiter ]: Tag.define(),
-			[ this.tags.template2ExtGround ]: Tag.define(),
-			[ this.tags.template2Ground ]: Tag.define(),
-			[ this.tags.template3ExtGround ]: Tag.define(),
-			[ this.tags.template3Ground ]: Tag.define()
+			[ this.tags.templateVariableDelimiter ]: Tag.define()
 		};
 	}
 
@@ -235,6 +245,7 @@ class CodeMirrorModeMediaWikiConfig {
 	 * @see https://codemirror.net/docs/ref/#language.TagStyle
 	 * @param {StreamParser} context
 	 * @return {TagStyle[]}
+	 * @internal
 	 */
 	getTagStyles( context ) {
 		return [
@@ -420,10 +431,6 @@ class CodeMirrorModeMediaWikiConfig {
 				class: 'cm-mw-error'
 			},
 			{
-				tag: context.tokenTable[ this.tags.extGround ],
-				class: 'cm-mw-ext-ground'
-			},
-			{
 				tag: context.tokenTable[ this.tags.extNowiki ],
 				class: 'cm-mw-ext-nowiki'
 			},
@@ -460,10 +467,6 @@ class CodeMirrorModeMediaWikiConfig {
 				class: 'cm-mw-html-entity'
 			},
 			{
-				tag: context.tokenTable[ this.tags.linkGround ],
-				class: 'cm-mw-link-ground'
-			},
-			{
 				tag: context.tokenTable[ this.tags.linkPageName ],
 				class: 'cm-mw-link-pagename'
 			},
@@ -496,36 +499,8 @@ class CodeMirrorModeMediaWikiConfig {
 				class: 'cm-mw-table-caption'
 			},
 			{
-				tag: context.tokenTable[ this.tags.templateGround ],
-				class: 'cm-mw-template-ground'
-			},
-			{
-				tag: context.tokenTable[ this.tags.templateExtGround ],
-				class: 'cm-mw-template-ext-ground'
-			},
-			{
-				tag: context.tokenTable[ this.tags.templateLinkGround ],
-				class: 'cm-mw-template-link-ground'
-			},
-			{
 				tag: context.tokenTable[ this.tags.templateVariableDelimiter ],
 				class: 'cm-mw-templatevariable-delimiter'
-			},
-			{
-				tag: context.tokenTable[ this.tags.template2ExtGround ],
-				class: 'cm-mw-template2-ext-ground'
-			},
-			{
-				tag: context.tokenTable[ this.tags.template2Ground ],
-				class: 'cm-mw-template2-ground'
-			},
-			{
-				tag: context.tokenTable[ this.tags.template3ExtGround ],
-				class: 'cm-mw-template3-ext-ground'
-			},
-			{
-				tag: context.tokenTable[ this.tags.template3Ground ],
-				class: 'cm-mw-template3-ground'
 			},
 
 			...this.extHighlightStyles
@@ -533,4 +508,8 @@ class CodeMirrorModeMediaWikiConfig {
 	}
 }
 
+/**
+ * @member CodeMirrorModeMediaWikiConfig
+ * @type {CodeMirrorModeMediaWikiConfig}
+ */
 export const mwModeConfig = new CodeMirrorModeMediaWikiConfig();
