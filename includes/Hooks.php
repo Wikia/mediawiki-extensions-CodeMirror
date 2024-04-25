@@ -28,6 +28,10 @@ class Hooks implements
 	private UserOptionsLookup $userOptionsLookup;
 	private array $conflictingGadgets;
 	private bool $useV6;
+	public const OPTION_EDITOR_VE_SOURCE = 1;
+	public const OPTION_EDITOR_VISUAL = 2;
+	public const OPTION_EDITOR_LEGACY_VISUAL = 3;
+	public const OPTION_EDITOR_WIKI_EDITOR_SOURCE = 4;
 
 	/**
 	 * @param UserOptionsLookup $userOptionsLookup
@@ -79,9 +83,14 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function shouldLoadCodeMirrorForVisualEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
-		$isVisualEditorPage = $out->getRequest()->getVal( 'veaction' ) === 'editsource';
+		$unifiedEditorPreference = $this->userOptionsLookup->getIntOption( $out->getUser(), 'editortype' );
+		$request = $out->getRequest();
+		$veAction = $request->getVal( 'veaction' );
+		$isVisualEditorPage = $veAction === 'editsource' || ( $veAction === null && $request->getVal( 'action' ) === 'edit' );
+		$isVisualEditorEnabled = $unifiedEditorPreference === self::OPTION_EDITOR_VE_SOURCE;
 		$isRTL = $out->getTitle()->getPageLanguage()->isRTL();
-		return $isVisualEditorPage && ( !$isRTL || $this->shouldUseV6( $out ) );
+
+		return $isVisualEditorPage && $isVisualEditorEnabled && ( !$isRTL || $this->shouldUseV6( $out ) );
 	}
 
 	/**
