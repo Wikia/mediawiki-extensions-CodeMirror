@@ -79,6 +79,16 @@ class CodeMirrorWikiEditor extends CodeMirror {
 							$nextInput.focus();
 						}
 					}
+					if ( event.key === 'Shift' ) {
+						event.preventDefault();
+						const cursorPos = view.state.selection.main.head;
+						const coords = view.coordsAtPos(cursorPos);
+						const editorView = view.dom.getBoundingClientRect();
+
+						if ( coords.top < editorView.top || coords.top > editorView.bottom ) {
+							$( view.dom ).textSelection( 'scrollToCaretPosition' );
+						}
+					}
 					return false;
 				}
 			} ),
@@ -91,10 +101,10 @@ class CodeMirrorWikiEditor extends CodeMirror {
 			openSearchPanel( this.view );
 		} );
 		// Sync scroll position, selections, and focus state.
-		requestAnimationFrame( () => {
+		setTimeout(() => {
 			this.view.scrollDOM.scrollTop = scrollTop;
-			this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
-		} );
+		});
+		this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
 		if ( selectionStart !== 0 || selectionEnd !== 0 ) {
 			const range = EditorSelection.range( selectionStart, selectionEnd ),
 				scrollEffect = EditorView.scrollIntoView( range );

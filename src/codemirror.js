@@ -1,5 +1,12 @@
 import { EditorState, Extension } from '@codemirror/state';
-import { EditorView, drawSelection, lineNumbers, highlightSpecialChars, keymap } from '@codemirror/view';
+import {
+	EditorView,
+	drawSelection,
+	lineNumbers,
+	highlightSpecialChars,
+	keymap,
+	rectangularSelection, crosshairCursor
+} from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { searchKeymap } from '@codemirror/search';
 import { bracketMatching } from '@codemirror/language';
@@ -82,7 +89,9 @@ class CodeMirror {
 				...searchKeymap
 			] ),
 			EditorState.allowMultipleSelections.of( true ),
-			drawSelection()
+			drawSelection(),
+			rectangularSelection(),
+			crosshairCursor()
 		];
 
 		// Add extensions relevant to editing (not read-only).
