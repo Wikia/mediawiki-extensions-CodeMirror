@@ -101,10 +101,10 @@ class CodeMirrorWikiEditor extends CodeMirror {
 			openSearchPanel( this.view );
 		} );
 		// Sync scroll position, selections, and focus state.
-		requestAnimationFrame( () => {
+		setTimeout(() => {
 			this.view.scrollDOM.scrollTop = scrollTop;
-			this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
-		} );
+		});
+		this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
 		if ( selectionStart !== 0 || selectionEnd !== 0 ) {
 			const range = EditorSelection.range( selectionStart, selectionEnd ),
 				scrollEffect = EditorView.scrollIntoView( range );
