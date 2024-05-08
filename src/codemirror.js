@@ -358,9 +358,8 @@ class CodeMirror {
 	 * @private
 	 */
 	get cmTextSelection() {
-		if ( !this.textSelection ) {
-			this.textSelection = new CodeMirrorTextSelection( this.view );
-		}
+		this.textSelection = new CodeMirrorTextSelection( this.view );
+
 		return {
 			getContents: () => this.textSelection.getContents(),
 			setContents: ( content ) => this.textSelection.setContents( content ),
