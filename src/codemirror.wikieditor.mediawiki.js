@@ -1,4 +1,4 @@
-import { StateEffect } from '@codemirror/state';
+import { Prec, StateEffect } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import CodeMirrorWikiEditor from './codemirror.wikieditor';
 import mediaWikiLang from './codemirror.mode.mediawiki';
@@ -21,7 +21,7 @@ function registerKeyDownHandler( handler ) {
 	} );
 
 	window.WikiEditorCodeMirror.view.dispatch( {
-		effects: StateEffect.appendConfig.of( keyHandler )
+		effects: StateEffect.appendConfig.of( Prec.high( keyHandler ) )
 	} );
 }
 

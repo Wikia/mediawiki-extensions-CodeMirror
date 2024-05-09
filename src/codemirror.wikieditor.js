@@ -76,13 +76,13 @@ class CodeMirrorWikiEditor extends CodeMirror {
 						event.preventDefault();
 						const $nextInput = $( '#wpSummary' );
 						if ( $nextInput.length ) {
-							$nextInput.focus();
+							$nextInput.trigger( 'focus' );
 						}
 					}
 					if ( event.key === 'Shift' ) {
 						event.preventDefault();
 						const cursorPos = view.state.selection.main.head;
-						const coords = view.coordsAtPos(cursorPos);
+						const coords = view.coordsAtPos( cursorPos );
 						const editorView = view.dom.getBoundingClientRect();
 
 						if ( coords.top < editorView.top || coords.top > editorView.bottom ) {
@@ -101,10 +101,9 @@ class CodeMirrorWikiEditor extends CodeMirror {
 			openSearchPanel( this.view );
 		} );
 		// Sync scroll position, selections, and focus state.
-		setTimeout(() => {
-			this.view.scrollDOM.scrollTop = scrollTop;
-		});
-		this.view.scrollDOM.style.height = `${this.$textarea.height()}px`;
+
+		this.view.scrollDOM.scrollTop = scrollTop;
+		this.view.scrollDOM.style.height = `${ this.$textarea.height() }px`;
 		if ( selectionStart !== 0 || selectionEnd !== 0 ) {
 			const range = EditorSelection.range( selectionStart, selectionEnd ),
 				scrollEffect = EditorView.scrollIntoView( range );
@@ -221,6 +220,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 			this.$textarea.val( this.view.state.doc.toString() );
 			this.view.destroy();
 			this.view = null;
+			this.textSelection = null;
 			this.$textarea.show();
 			if ( hasFocus ) {
 				this.$textarea.trigger( 'focus' );
