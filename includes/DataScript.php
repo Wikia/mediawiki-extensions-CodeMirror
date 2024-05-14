@@ -68,6 +68,7 @@ class DataScript {
 			'urlProtocols' => $parser->getUrlProtocols(),
 			'linkTrailCharacters' => $lang->linkTrail(),
 			'search' => true,
+			'cm6enabled' => $mwConfig->get( 'CodeMirrorV6' ),
 		];
 
 		$mw = $lang->getMagicWords();
