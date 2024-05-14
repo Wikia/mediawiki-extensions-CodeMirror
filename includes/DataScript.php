@@ -42,21 +42,34 @@ class DataScript {
 	}
 
 	/**
+	 * @param RL\Context $context
+	 * @return string
+	 */
+	public static function makeScriptv6( RL\Context $context ) {
+		return ResourceLoader::makeConfigSetScript(
+			[ 'extCodeMirrorConfig' => self::getFrontendConfiguraton( true ) ]
+		);
+	}
+
+	/**
 	 * Returns an array of variables for CodeMirror to work (tags and so on)
 	 *
 	 * @return array
 	 */
-	private static function getFrontendConfiguraton() {
+	private static function getFrontendConfiguraton( bool $v6 = false ) {
 		// Use the content language, not the user language. (See T170130.)
 		$lang = MediaWikiServices::getInstance()->getContentLanguage();
 		$registry = ExtensionRegistry::getInstance();
 		$parser = MediaWikiServices::getInstance()->getParser();
+		$mwConfig = MediaWikiServices::getInstance()->getMainConfig();
 
 		$tagModes = $registry->getAttribute( 'CodeMirrorTagModes' );
 		$tagNames = array_merge( $parser->getTags(), array_keys( $tagModes ) );
 
 		// initialize configuration
 		$config = [
+			'lineNumberingNamespaces' => $mwConfig->get( 'CodeMirrorLineNumberingNamespaces' ),
+			'templateFoldingNamespaces' => $mwConfig->get( 'CodeMirrorTemplateFoldingNamespaces' ),
 			'pluginModules' => $registry->getAttribute( 'CodeMirrorPluginModules' ),
 			'tagModes' => $tagModes,
 			'tags' => array_fill_keys( $tagNames, true ),
@@ -64,6 +77,8 @@ class DataScript {
 			'functionSynonyms' => $parser->getFunctionSynonyms(),
 			'urlProtocols' => $parser->getUrlProtocols(),
 			'linkTrailCharacters' => $lang->linkTrail(),
+			'search' => true,
+			'cm6enabled' => $v6,
 		];
 
 		$mw = $lang->getMagicWords();

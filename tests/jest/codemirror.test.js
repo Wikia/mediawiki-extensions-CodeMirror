@@ -1,5 +1,5 @@
-const { EditorView } = require( '@codemirror/view' );
-const CodeMirror = require( '../../src/codemirror.js' ).default;
+import { EditorView } from '@codemirror/view';
+import CodeMirror from '../../src/codemirror.js';
 const $textarea = $( '<textarea>' ),
 	cm = new CodeMirror( $textarea );
 
@@ -18,6 +18,13 @@ describe( 'initialize', () => {
 		expect( cm.view.state.doc.toString() ).toStrictEqual( 'foobar' );
 	} );
 
+	it( 'should set the height to the same as the textarea', () => {
+		$textarea.css( 'height', '100px' );
+		cm.initialize();
+		// 100 + 6 (padding/border) = 106
+		expect( $( cm.view.dom ).height() ).toStrictEqual( 106 );
+	} );
+
 	it( 'should instantiate an EditorView and add .cm-editor to the DOM', () => {
 		initializeWithForm();
 		expect( cm.view ).toBeInstanceOf( EditorView );
@@ -33,6 +40,20 @@ describe( 'initialize', () => {
 	it( 'should add a listener for form submission', () => {
 		initializeWithForm();
 		expect( cm.$textarea[ 0 ].form.addEventListener ).toHaveBeenCalledTimes( 1 );
+	} );
+
+	it( 'should retain the mw-editfont- class present on the textarea', () => {
+		cm.$textarea.addClass( 'mw-editfont-monospace' );
+		cm.initialize();
+		expect( cm.view.dom.querySelector( '.cm-content' ).classList ).toContain( 'mw-editfont-monospace' );
+	} );
+
+	it( "should copy the 'dir' and 'lang' attributes of the textarea to .cm-editor", () => {
+		cm.$textarea.prop( 'dir', 'rtl' )
+			.prop( 'lang', 'ar' );
+		cm.initialize();
+		expect( cm.view.dom.getAttribute( 'dir' ) ).toStrictEqual( 'rtl' );
+		expect( cm.view.dom.getAttribute( 'lang' ) ).toStrictEqual( 'ar' );
 	} );
 } );
 

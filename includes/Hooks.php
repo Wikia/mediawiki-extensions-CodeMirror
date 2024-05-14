@@ -4,19 +4,22 @@ namespace MediaWiki\Extension\CodeMirror;
 
 use ExtensionRegistry;
 use InvalidArgumentException;
-use MediaWiki\Config\Config;
+use Config;
+use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
-use MediaWiki\Hook\BeforePageDisplayHook;
-use MediaWiki\Output\OutputPage;
+use MediaWiki\Hook\EditPage__showEditForm_initialHook;
+use MediaWiki\Hook\EditPage__showReadOnlyForm_initialHook;
+use OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
-use MediaWiki\ResourceLoader\Hook\ResourceLoaderGetConfigVarsHook;
-use MediaWiki\User\Options\UserOptionsLookup;
-use MediaWiki\User\User;
-use Skin;
+use MediaWiki\User\UserOptionsLookup;
+use User;
 
+/**
+ * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+ */
 class Hooks implements
-	BeforePageDisplayHook,
-	ResourceLoaderGetConfigVarsHook,
+	EditPage__showEditForm_initialHook,
+	EditPage__showReadOnlyForm_initialHook,
 	GetPreferencesHook
 {
 
@@ -45,7 +48,6 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function shouldLoadCodeMirror( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
-		$extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		// Disable CodeMirror when CodeEditor is active on this page
 		// Depends on ext.codeEditor being added by \MediaWiki\EditPage\EditPage::showEditForm:initial
 		if ( in_array( 'ext.codeEditor', $out->getModules(), true ) ) {
@@ -55,12 +57,16 @@ class Hooks implements
 		if ( !$this->userOptionsLookup->getOption( $out->getUser(), 'usebetatoolbar' ) ) {
 			return false;
 		}
+		$extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
+		$contentModels = $extensionRegistry->getAttribute( 'CodeMirrorContentModels' );
 		$isRTL = $out->getTitle()->getPageLanguage()->isRTL();
-		return in_array( $out->getActionName(), [ 'edit', 'submit' ], true ) &&
-			// Disable CodeMirror if we're on an edit page with a conflicting gadget. See T178348.
-			!$this->conflictingGadgetsEnabled( $extensionRegistry, $out->getUser() ) &&
+		// Disable CodeMirror if we're on an edit page with a conflicting gadget. See T178348.
+		return !$this->conflictingGadgetsEnabled( $extensionRegistry, $out->getUser() ) &&
 			// CodeMirror 5 on textarea wikitext editors doesn't support RTL (T170001)
-			( !$isRTL || $this->shouldUseV6( $out ) );
+			( !$isRTL || $this->shouldUseV6( $out ) ) &&
+			// Limit to supported content models that use wikitext.
+			// See https://www.mediawiki.org/wiki/Content_handlers#Extension_content_handlers
+			in_array( $out->getTitle()->getContentModel(), $contentModels );
 	}
 
 	/**
@@ -89,15 +95,14 @@ class Hooks implements
 	}
 
 	/**
-	 * BeforePageDisplay hook handler
+	 * Load CodeMirror if necessary.
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/EditPage::showEditForm:initial
 	 *
+	 * @param EditPage $editor
 	 * @param OutputPage $out
-	 * @param Skin $skin
-	 * @return void This hook must not abort, it must return no value
 	 */
-	public function onBeforePageDisplay( $out, $skin ): void {
+	public function onEditPage__showEditForm_initial( $editor, $out ): void {
 		if ( !$this->shouldLoadCodeMirror( $out ) ) {
 			return;
 		}
@@ -116,26 +121,24 @@ class Hooks implements
 	}
 
 	/**
+	 * Load CodeMirror 6 on read-only pages.
+	 *
+	 * @param EditPage $editor
+	 * @param OutputPage $out
+	 */
+	public function onEditPage__showReadOnlyForm_initial( $editor, $out ): void {
+		if ( $this->shouldUseV6( $out ) && $this->shouldLoadCodeMirror( $out ) ) {
+			$out->addModules( 'ext.CodeMirror.v6.WikiEditor' );
+		}
+	}
+
+	/**
 	 * @param OutputPage $out
 	 * @return bool
 	 * @todo Remove check for cm6enable flag after migration is complete
 	 */
 	private function shouldUseV6( OutputPage $out ): bool {
 		return $this->useV6 || $out->getRequest()->getRawVal( 'cm6enable' );
-	}
-
-	/**
-	 * Hook handler for enabling bracket matching.
-	 *
-	 * TODO: restrict to pages where codemirror might be enabled.
-	 *
-	 * @param array &$vars Array of variables to be added into the output of the startup module
-	 * @param string $skin
-	 * @param Config $config
-	 * @return void This hook must not abort, it must return no value
-	 */
-	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
-		$vars['wgCodeMirrorLineNumberingNamespaces'] = $config->get( 'CodeMirrorLineNumberingNamespaces' );
 	}
 
 	/**
@@ -163,5 +166,4 @@ class Hooks implements
 			'section' => 'editing/accessibility',
 		];
 	}
-
 }

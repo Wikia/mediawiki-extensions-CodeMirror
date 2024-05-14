@@ -20,6 +20,7 @@ describe( 'CodeMirror textSelection for the wikitext 2010 editor', () => {
 		await EditPage.clickText();
 	} );
 
+	// Content is "[]{{template}}"
 	it( 'sets and gets the correct text when using setContents and getContents', async () => {
 		await browser.execute( () => $( '.cm-editor' ).textSelection( 'setContents', 'foobar' ) );
 		assert.strictEqual(
@@ -28,6 +29,7 @@ describe( 'CodeMirror textSelection for the wikitext 2010 editor', () => {
 		);
 	} );
 
+	// Content is now "foobar"
 	it( 'sets and gets the correct selection when using setSelection and getSelection', async () => {
 		await browser.execute( () => {
 			$( '.cm-editor' ).textSelection( 'setSelection', { start: 3, end: 6 } );
@@ -48,6 +50,7 @@ describe( 'CodeMirror textSelection for the wikitext 2010 editor', () => {
 		);
 	} );
 
+	// Content is now "foobaz"
 	it( 'returns the correct values for getCaretPosition', async () => {
 		await browser.execute( () => {
 			$( '.cm-editor' ).textSelection( 'setSelection', { start: 3, end: 6 } );
@@ -61,6 +64,40 @@ describe( 'CodeMirror textSelection for the wikitext 2010 editor', () => {
 				return $( '.cm-editor' ).textSelection( 'getCaretPosition', { startAndEnd: true } );
 			} ),
 			[ 3, 6 ]
+		);
+	} );
+
+	it( 'correctly wraps the selected text when using encapsulateSelection', async function () {
+		await browser.execute( () => {
+			$( '.cm-editor' ).textSelection( 'setContents', 'foobaz' )
+				.textSelection( 'encapsulateSelection', {
+					selectionStart: 0,
+					selectionEnd: 6,
+					pre: '<div>',
+					post: '</div>'
+				} );
+		} );
+		assert.strictEqual(
+			await browser.execute( () => $( '.cm-editor' ).textSelection( 'getContents' ) ),
+			'<div>foobaz</div>'
+		);
+	} );
+
+	it( "correctly inserts the 'peri' option when using encapsulateSelection", async function () {
+		await browser.execute( () => {
+			$( '.cm-editor' ).textSelection( 'setContents', 'foobaz' )
+				.textSelection( 'encapsulateSelection', {
+					selectionStart: 0,
+					selectionEnd: 6,
+					pre: '<div>',
+					post: '</div>',
+					peri: 'Soundgarden',
+					replace: true
+				} );
+		} );
+		assert.strictEqual(
+			await browser.execute( () => $( '.cm-editor' ).textSelection( 'getContents' ) ),
+			'<div>Soundgarden</div>'
 		);
 	} );
 
@@ -81,6 +118,7 @@ describe( 'CodeMirror textSelection for the wikitext 2010 editor', () => {
 		);
 	} );
 
+	// Content is now "foobar\n" repeated 50 times.
 	it( 'retains the contents after turning CodeMirror off', async () => {
 		await EditPage.legacyCodeMirrorButton.click();
 		await EditPage.legacyTextInput.waitForDisplayed();

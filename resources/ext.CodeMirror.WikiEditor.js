@@ -201,7 +201,7 @@ function init() {
 				maxHighlightLineLength: 10000
 			};
 
-			codeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
+			codeMirror = window.WikiEditorCodeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
 			$codeMirror = $( codeMirror.getWrapperElement() );
 
 			codeMirror.on( 'focus', function () {
