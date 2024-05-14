@@ -42,11 +42,21 @@ class DataScript {
 	}
 
 	/**
+	 * @param RL\Context $context
+	 * @return string
+	 */
+	public static function makeScriptv6( RL\Context $context ) {
+		return ResourceLoader::makeConfigSetScript(
+			[ 'extCodeMirrorConfig' => self::getFrontendConfiguraton( true ) ]
+		);
+	}
+
+	/**
 	 * Returns an array of variables for CodeMirror to work (tags and so on)
 	 *
 	 * @return array
 	 */
-	private static function getFrontendConfiguraton() {
+	private static function getFrontendConfiguraton( bool $v6 = false ) {
 		// Use the content language, not the user language. (See T170130.)
 		$lang = MediaWikiServices::getInstance()->getContentLanguage();
 		$registry = ExtensionRegistry::getInstance();
@@ -68,7 +78,7 @@ class DataScript {
 			'urlProtocols' => $parser->getUrlProtocols(),
 			'linkTrailCharacters' => $lang->linkTrail(),
 			'search' => true,
-			'cm6enabled' => $mwConfig->get( 'CodeMirrorV6' ),
+			'cm6enabled' => $v6,
 		];
 
 		$mw = $lang->getMagicWords();
