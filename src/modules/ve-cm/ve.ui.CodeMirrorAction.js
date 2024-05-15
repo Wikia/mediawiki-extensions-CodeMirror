@@ -30,7 +30,7 @@ ve.ui.CodeMirrorAction.static.isLineNumbering = function () {
 		return false;
 	}
 
-	var namespaces = mw.config.get( 'wgCodeMirrorLineNumberingNamespaces' );
+	const namespaces = mw.config.get( 'wgCodeMirrorLineNumberingNamespaces' );
 	// Set to [] to disable everywhere, or null to enable everywhere
 	return !namespaces ||
 		namespaces.indexOf( mw.config.get( 'wgNamespaceNumber' ) ) !== -1;
@@ -42,7 +42,7 @@ ve.ui.CodeMirrorAction.static.isLineNumbering = function () {
  * @return {boolean} Action was executed
  */
 ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
-	var action = this,
+	const action = this,
 		surface = this.surface,
 		surfaceView = surface.getView(),
 		doc = surface.getModel().getDocument();
@@ -51,7 +51,7 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 		surface.mirror = window.VisualEditorCodeMirror = new CodeMirrorVisualEditor( surface, mediaWikiLang() );
 		surface.mirror.enableCodeMirror();
 
-		const guttersWidth = parseInt(document.querySelector('.cm-gutters').offsetWidth);
+		const guttersWidth = parseInt( document.querySelector( '.cm-gutters' ).offsetWidth );
 		surfaceView.$documentNode.css( 'margin-left', guttersWidth - 5 );
 
 		/* Events */
@@ -62,6 +62,7 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 
 		doc.on( 'precommit', surface.mirror.veTransactionListener );
 	} else if ( surface.mirror && enable !== true ) {
+		doc.off( 'precommit', surface.mirror.veTransactionListener );
 		surfaceView.$element.removeClass( 'mw-editfont-monospace' ).addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 
 		surfaceView.$documentNode.removeClass(
@@ -82,7 +83,7 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
  * @param {ve.dm.Selection} selection
  */
 ve.ui.CodeMirrorAction.prototype.onSelect = function ( selection ) {
-	var range = selection.getCoveringRange();
+	const range = selection.getCoveringRange();
 
 	// Do not re-trigger bracket matching as long as something is selected
 	if ( !range || !range.isCollapsed() ) {
@@ -113,10 +114,10 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 		store = this.surface.getModel().getDocument().getStore(),
 		codeMirrorView = this.surface.mirror.view;
 
-	const documentNode = document.querySelector('.ve-ce-documentNode');
-	const guttersWidth = parseInt(document.querySelector('.cm-gutters').offsetWidth);
+	const documentNode = document.querySelector( '.ve-ce-documentNode' );
+	const guttersWidth = parseInt( document.querySelector( '.cm-gutters' ).offsetWidth );
 
-	documentNode.style.marginLeft = (guttersWidth - 5) + 'px';
+	documentNode.style.marginLeft = ( guttersWidth - 5 ) + 'px';
 
 	tx.operations.forEach( function ( op ) {
 		if ( op.type === 'retain' ) {
