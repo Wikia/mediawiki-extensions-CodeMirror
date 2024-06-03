@@ -82,12 +82,8 @@ export default class CodeMirrorVisualEditor {
 
 		// It's all wrong about this hack but it's the easiest way to force CodeMirror to
 		// get the correct height of the wrapped lines hidden outside of the viewport.
-		// TODO: It breaks the performance on initialization in very long articles.
-		//  Find a better way.
+		// TODO: It breaks the performance in very long articles. Find a better way.
 		this.view.viewState.printing = true;
-		setTimeout( () => {
-			this.view.viewState.printing = false;
-		} );
 
 		mw.hook( 'ext.CodeMirror.switch' ).fire( true, $( this.view.dom ) );
 	}
