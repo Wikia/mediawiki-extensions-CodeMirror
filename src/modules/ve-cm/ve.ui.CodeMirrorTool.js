@@ -11,7 +11,6 @@
 ve.ui.CodeMirrorTool = function VeUiCodeMirrorTool() {
 	// Parent constructor
 	ve.ui.CodeMirrorTool.super.apply( this, arguments );
-	this.extCodeMirror = this.toolbar.surface.mirror;
 
 	// Events
 	this.toolbar.connect( this, { surfaceChange: 'onSurfaceChange' } );
@@ -37,18 +36,14 @@ ve.ui.CodeMirrorTool.static.deactivateOnSelect = false;
 ve.ui.CodeMirrorTool.prototype.onSelect = function () {
 	// Parent method
 	ve.ui.CodeMirrorTool.super.prototype.onSelect.apply( this, arguments );
-	console.log('where');
+	const codeMirror = this.toolbar.surface.mirror;
 
-	if ( !this.extCodeMirror ) {
-		this.extCodeMirror = this.toolbar.surface.mirror;
-	}
-
-	var useCodeMirror = !!( this.extCodeMirror && this.extCodeMirror.view );
+	const useCodeMirror = !!( codeMirror && codeMirror.view );
 	this.setActive( useCodeMirror );
 
-	this.extCodeMirror.setCodeMirrorPreference( useCodeMirror );
+	codeMirror.setCodeMirrorPreference( useCodeMirror );
 
-	this.extCodeMirror.logUsage( {
+	codeMirror.logUsage( {
 		editor: 'wikitext-2017',
 		enabled: useCodeMirror,
 		toggled: true,
@@ -61,19 +56,18 @@ ve.ui.CodeMirrorTool.prototype.onSelect = function () {
  * @inheritdoc
  */
 ve.ui.CodeMirrorTool.prototype.onSurfaceChange = function ( oldSurface, newSurface ) {
-	console.log('haha');
-	var isDisabled = newSurface.getMode() !== 'source';
+	const isDisabled = newSurface.getMode() !== 'source';
 
 	this.setDisabled( isDisabled );
 	if ( !isDisabled ) {
-		var command = this.getCommand();
-		var surface = this.toolbar.getSurface();
-		var useCodeMirror = mw.user.options.get( 'usecodemirror' ) > 0;
+		const command = this.getCommand();
+		const surface = this.toolbar.getSurface();
+		const useCodeMirror = mw.user.options.get( 'usecodemirror' ) > 0;
 		command.execute( surface, [ useCodeMirror ] );
 		this.setActive( useCodeMirror );
 
 		if ( this.toolbar.target.startTimeStamp ) {
-			this.extCodeMirror.logUsage( {
+			this.toolbar.surface.mirror.logUsage( {
 				editor: 'wikitext-2017',
 				enabled: useCodeMirror,
 				toggled: false,
