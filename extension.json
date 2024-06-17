@@ -155,7 +155,7 @@
 				"user.options",
 				"ext.CodeMirror"
 			],
-			"packageFiles": [
+			"scripts": [
 				"modules/ve-cm/ve.ui.CodeMirrorAction.js",
 				"modules/ve-cm/ve.ui.CodeMirrorTool.js"
 			],
@@ -266,7 +266,7 @@
 				"ext.CodeMirror.v6.lib",
 				"ext.CodeMirror.v6.mode.mediawiki"
 			],
-			"packageFiles": [
+			"scripts": [
 				"dist/ve.ui.CodeMirrorAction.js",
 				"dist/ve.ui.CodeMirrorTool.js"
 			],
@@ -304,7 +304,8 @@
 		"EditPage::showEditForm:initial": "main",
 		"EditPage::showReadOnlyForm:initial": "main",
 		"BeforePageDisplay": "main",
-		"GetPreferences": "main"
+		"GetPreferences": "main",
+		"ResourceLoaderGetConfigVars": "main"
 	},
 	"HookHandlers": {
 		"main": {
