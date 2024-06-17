@@ -152,6 +152,7 @@ class Hooks implements
 			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
 				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
 			}
+			$out->addModules( 'ext.CodeMirror.visualEditor' );
 		}
 	}
 
@@ -200,5 +201,11 @@ class Hooks implements
 			'help-message' => 'codemirror-prefs-colorblind-help',
 			'section' => 'editing/accessibility',
 		];
+	}
+
+	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
+		$vars['wgVisualEditorConfig']['pluginModules'][] = $this->useV6 ?
+			'ext.CodeMirror.v6.visualEditor' : 'ext.CodeMirror.visualEditor';
+
 	}
 }
