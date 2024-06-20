@@ -12,6 +12,7 @@ import { history } from '@codemirror/commands';
 export default class CodeMirrorVisualEditor {
 	/**
 	 * @constructor
+	 * @param langExtension
 	 * @param {surface} surface VisualEditor Surface
 	 */
 	constructor( surface, langExtension ) {
@@ -78,6 +79,11 @@ export default class CodeMirrorVisualEditor {
 			state: this.state,
 			parent: this.surface.getView().$element[ 0 ]
 		} );
+
+		// It's all wrong about this hack but it's the easiest way to force CodeMirror to
+		// get the correct height of the wrapped lines hidden outside of the viewport.
+		// TODO: It breaks the performance in very long articles. Find a better way.
+		this.view.viewState.printing = true;
 
 		mw.hook( 'ext.CodeMirror.switch' ).fire( true, $( this.view.dom ) );
 	}
@@ -162,8 +168,6 @@ export default class CodeMirrorVisualEditor {
 		);
 
 		this.initialize( extensions );
-
-		mw.hook( 'ext.CodeMirror.switch' ).fire( true, $( this.view.dom ) );
 	}
 
 }

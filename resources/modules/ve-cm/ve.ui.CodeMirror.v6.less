@@ -6,7 +6,7 @@
 	}
 
 	.cm-editor {
-		height: auto;
+		height: 100%;
 		z-index: -1;
 		position: absolute !important;
 		top: 0;
@@ -47,7 +47,7 @@
 	.cm-scroller {
 		font-family: inherit !important; /* stylelint-disable-line declaration-no-important */
 		margin-right: 0;
-		overflow: auto !important; /* stylelint-disable-line declaration-no-important */
+		overflow-x: clip;
 	}
 
 	.cm-gutters {
@@ -85,7 +85,6 @@
 		// Support: Chrome<76, Firefox<69
 		// Fallback for browsers which don't support break-spaces
 		white-space: pre-wrap;
-		word-break: normal;
 		-webkit-hyphens: manual;
 		-moz-hyphens: manual;
 		-ms-hyphens: manual;
