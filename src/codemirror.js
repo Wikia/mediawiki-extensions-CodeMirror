@@ -7,7 +7,7 @@ import {
 	keymap,
 	rectangularSelection, crosshairCursor
 } from '@codemirror/view';
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
+import { defaultKeymap, history, historyKeymap, redo } from '@codemirror/commands';
 import { searchKeymap } from '@codemirror/search';
 import { bracketMatching } from '@codemirror/language';
 import CodeMirrorTextSelection from './codemirror.textSelection';
@@ -102,7 +102,18 @@ class CodeMirror {
 				}
 			} ) );
 			extensions.push( history() );
-			extensions.push( keymap.of( historyKeymap ) );
+
+			// By default 'ctrl-shift-z' keybinding is used for redo command only on Linux.
+			// Make it work also on Windows.
+			const modifiedHistoryKeymap = [
+				...historyKeymap,
+				{
+					win: 'Ctrl-Shift-z',
+					preventDefault: true,
+					run: redo
+				}
+			];
+			extensions.push( keymap.of( modifiedHistoryKeymap ) );
 		}
 
 		// Set to [] to disable everywhere, or null to enable everywhere
@@ -358,9 +369,8 @@ class CodeMirror {
 	 * @private
 	 */
 	get cmTextSelection() {
-		if ( !this.textSelection ) {
-			this.textSelection = new CodeMirrorTextSelection( this.view );
-		}
+		this.textSelection = new CodeMirrorTextSelection( this.view );
+
 		return {
 			getContents: () => this.textSelection.getContents(),
 			setContents: ( content ) => this.textSelection.setContents( content ),

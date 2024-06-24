@@ -178,7 +178,7 @@
 				"dist/codemirror.js",
 				{
 					"name": "ext.CodeMirror.data.js",
-					"callback": "MediaWiki\\Extension\\CodeMirror\\DataScript::makeScript"
+					"callback": "MediaWiki\\Extension\\CodeMirror\\DataScript::makeScriptv6"
 				}
 			],
 			"styles": [

@@ -102,10 +102,22 @@ function init() {
 	function setupSizing() {
 		var $codeMirror = $( codeMirror.getWrapperElement() );
 
-		// Only add resizing corner if realtime preview is enabled,
+		// Only add jQuery UI's resizing corner if realtime preview is not enabled,
 		// because that feature provides height resizing (even when preview isn't used).
 		if ( mw.loader.getState( 'ext.wikiEditor.realtimepreview' ) === 'ready' ) {
 			codeMirror.setSize( '100%', $textbox1.parent().height() );
+		} else {
+			// RL module jquery.ui
+			// eslint-disable-next-line es-x/no-resizable-and-growable-arraybuffers
+			$codeMirror.resizable( {
+				handles: 'se',
+				resize: function () {
+					// Keep at 100% parent width, don't modify height here
+					codeMirror.setSize( '100%', null );
+				}
+			} );
+			// Match the height of the textarea.
+			codeMirror.setSize( null, $textbox1.height() );
 		}
 		var $resizableHandle = $codeMirror.find( '.ui-resizable-handle' );
 		mw.hook( 'ext.WikiEditor.realtimepreview.enable' ).add( function ( realtimePreview ) {
@@ -189,7 +201,7 @@ function init() {
 				maxHighlightLineLength: 10000
 			};
 
-			codeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
+			codeMirror = window.WikiEditorCodeMirror = CodeMirror.fromTextArea( $textbox1[ 0 ], cmOptions );
 			$codeMirror = $( codeMirror.getWrapperElement() );
 
 			codeMirror.on( 'focus', function () {
