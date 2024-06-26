@@ -7,11 +7,12 @@ use InvalidArgumentException;
 use Config;
 use EditPage;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
+use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\EditPage__showEditForm_initialHook;
 use MediaWiki\Hook\EditPage__showReadOnlyForm_initialHook;
-use OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\User\UserOptionsLookup;
+use OutputPage;
 use User;
 
 /**
@@ -20,12 +21,17 @@ use User;
 class Hooks implements
 	EditPage__showEditForm_initialHook,
 	EditPage__showReadOnlyForm_initialHook,
+	BeforePageDisplayHook,
 	GetPreferencesHook
 {
 
 	private UserOptionsLookup $userOptionsLookup;
 	private array $conflictingGadgets;
 	private bool $useV6;
+	public const OPTION_EDITOR_VE_SOURCE = 1;
+	public const OPTION_EDITOR_VISUAL = 2;
+	public const OPTION_EDITOR_LEGACY_VISUAL = 3;
+	public const OPTION_EDITOR_WIKI_EDITOR_SOURCE = 4;
 
 	/**
 	 * @param UserOptionsLookup $userOptionsLookup
@@ -47,7 +53,7 @@ class Hooks implements
 	 * @param ExtensionRegistry|null $extensionRegistry Overridden in tests.
 	 * @return bool
 	 */
-	public function shouldLoadCodeMirror( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
+	public function shouldLoadCodeMirrorForWikiEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
 		// Disable CodeMirror when CodeEditor is active on this page
 		// Depends on ext.codeEditor being added by \MediaWiki\EditPage\EditPage::showEditForm:initial
 		if ( in_array( 'ext.codeEditor', $out->getModules(), true ) ) {
@@ -67,6 +73,24 @@ class Hooks implements
 			// Limit to supported content models that use wikitext.
 			// See https://www.mediawiki.org/wiki/Content_handlers#Extension_content_handlers
 			in_array( $out->getTitle()->getContentModel(), $contentModels );
+	}
+
+	/**
+	 * Checks if CodeMirror for VisualEditor should be loaded on this page or not.
+	 *
+	 * @param OutputPage $out
+	 * @param ExtensionRegistry|null $extensionRegistry Overridden in tests.
+	 * @return bool
+	 */
+	public function shouldLoadCodeMirrorForVisualEditor( OutputPage $out, ?ExtensionRegistry $extensionRegistry = null ): bool {
+		$unifiedEditorPreference = $this->userOptionsLookup->getIntOption( $out->getUser(), 'editortype' );
+		$request = $out->getRequest();
+		$veAction = $request->getVal( 'veaction' );
+		$isVisualEditorPage = $veAction === 'edit' || $veAction === 'editsource' || ( $veAction === null && $request->getVal( 'action' ) === 'edit' );
+		$isVisualEditorEnabled = $unifiedEditorPreference === self::OPTION_EDITOR_VE_SOURCE || $unifiedEditorPreference === self::OPTION_EDITOR_VISUAL;
+		$isRTL = $out->getTitle()->getPageLanguage()->isRTL();
+
+		return $isVisualEditorPage && $isVisualEditorEnabled && ( !$isRTL || $this->shouldUseV6( $out ) );
 	}
 
 	/**
@@ -103,20 +127,32 @@ class Hooks implements
 	 * @param OutputPage $out
 	 */
 	public function onEditPage__showEditForm_initial( $editor, $out ): void {
-		if ( !$this->shouldLoadCodeMirror( $out ) ) {
-			return;
-		}
-
-		if ( $this->shouldUseV6( $out ) ) {
-			$out->addModules( 'ext.CodeMirror.v6.WikiEditor' );
-		} else {
-			$out->addModules( 'ext.CodeMirror.WikiEditor' );
+		if ( $this->shouldLoadCodeMirrorForWikiEditor( $out ) ) {
+			if ( $this->shouldUseV6( $out ) ) {
+				$out->addModules( 'ext.CodeMirror.v6.WikiEditor' );
+			} else {
+				$out->addModules( 'ext.CodeMirror.WikiEditor' );
+			}
 
 			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
 				// These modules are predelivered for performance when needed
 				// keep these modules in sync with ext.CodeMirror.js
 				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
 			}
+		}
+	}
+
+	public function onBeforePageDisplay($out, $skin): void {
+		if ( !$this->shouldLoadCodeMirrorForVisualEditor( $out ) ) {
+			return;
+		}
+		if ( $this->shouldUseV6( $out ) ) {
+			$out->addModules( 'ext.CodeMirror.v6.visualEditor' );
+		} else {
+			if ( $this->userOptionsLookup->getOption( $out->getUser(), 'usecodemirror' ) ) {
+				$out->addModules( [ 'ext.CodeMirror.lib', 'ext.CodeMirror.mode.mediawiki' ] );
+			}
+			$out->addModules( 'ext.CodeMirror.visualEditor' );
 		}
 	}
 
@@ -165,5 +201,11 @@ class Hooks implements
 			'help-message' => 'codemirror-prefs-colorblind-help',
 			'section' => 'editing/accessibility',
 		];
+	}
+
+	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
+		$vars['wgVisualEditorConfig']['pluginModules'][] = $this->useV6 ?
+			'ext.CodeMirror.v6.visualEditor' : 'ext.CodeMirror.visualEditor';
+
 	}
 }

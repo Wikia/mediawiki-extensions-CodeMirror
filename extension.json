@@ -255,6 +255,29 @@
 			"messages": [
 				"codemirror-toggle-label"
 			]
+		},
+		"ext.CodeMirror.v6.visualEditor": {
+			"dependencies": [
+				"ext.visualEditor.mwcore",
+				"ext.visualEditor.mwmeta",
+				"web2017-polyfills",
+				"mediawiki.api",
+				"user.options",
+				"ext.CodeMirror.v6.lib",
+				"ext.CodeMirror.v6.mode.mediawiki"
+			],
+			"scripts": [
+				"dist/ve.ui.CodeMirrorAction.js",
+				"dist/ve.ui.CodeMirrorTool.js"
+			],
+			"styles": [
+				"modules/ve-cm/ve.ui.CodeMirror.v6.less",
+				"mode/mediawiki/mediawiki.less",
+				"mode/mediawiki/colorblind-colors.less"
+			],
+			"messages": [
+				"codemirror-toggle-label"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -280,7 +303,9 @@
 	"Hooks": {
 		"EditPage::showEditForm:initial": "main",
 		"EditPage::showReadOnlyForm:initial": "main",
-		"GetPreferences": "main"
+		"BeforePageDisplay": "main",
+		"GetPreferences": "main",
+		"ResourceLoaderGetConfigVars": "main"
 	},
 	"HookHandlers": {
 		"main": {
@@ -303,11 +328,6 @@
 				"pre": "mw-tag-pre",
 				"nowiki": "mw-tag-nowiki"
 			}
-		},
-		"VisualEditor": {
-			"PluginModules": [
-				"ext.CodeMirror.visualEditor"
-			]
 		},
 		"EventLogging": {
 			"Schemas": {
