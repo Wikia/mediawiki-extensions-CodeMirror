@@ -163,7 +163,7 @@ class Hooks implements
 	 * @param OutputPage $out
 	 */
 	public function onEditPage__showReadOnlyForm_initial( $editor, $out ): void {
-		if ( $this->shouldUseV6( $out ) && $this->shouldLoadCodeMirror( $out ) ) {
+		if ( $this->shouldUseV6( $out ) && $this->shouldLoadCodeMirrorForWikiEditor( $out ) ) {
 			$out->addModules( 'ext.CodeMirror.v6.WikiEditor' );
 		}
 	}
