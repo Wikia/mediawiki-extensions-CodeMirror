@@ -1,10 +1,20 @@
 {
-	"@metadata": {
-		"authors": [
-			"Artsiom91",
-			"Maksim L."
-		]
-	},
-	"codemirror-desc": "Забяспечвае вылучэнне колерам сінтаксісу ў рэдактары вікіразметкі",
-	"codemirror-toggle-label": "Выдзяленне сінтаксісу"
+    "@metadata": {
+        "authors": [
+            "Artsiom91",
+            "Maksim L."
+        ]
+    },
+    "codemirror-desc": "Забяспечвае вылучэнне колерам сінтаксісу ў рэдактары вікіразметкі",
+    "codemirror-toggle-label": "Выдзяленне сінтаксісу",
+    "codemirror-find": "Знайсці",
+    "codemirror-next": "Знайсці наступнае",
+    "codemirror-previous": "Знайсці папярэдняе",
+    "codemirror-match-case": "Улічваць рэгістр літар",
+    "codemirror-regexp": "Рэгулярны выраз",
+    "codemirror-by-word": "Слова цалкам",
+    "codemirror-replace": "Замяніць",
+    "codemirror-replace-placeholder": "Замяніць",
+    "codemirror-replace-all": "Замяніць усе",
+    "codemirror-search-done": "Гатова"
 }

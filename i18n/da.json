@@ -1,10 +1,20 @@
 {
-	"@metadata": {
-		"authors": [
-			"Saederup92",
-			"Weblars"
-		]
-	},
-	"codemirror-desc": "Giver syntaksfremhævelse i wikitekst editoren",
-	"codemirror-toggle-label": "Syntaksfremhævelse"
+    "@metadata": {
+        "authors": [
+            "Saederup92",
+            "Weblars"
+        ]
+    },
+    "codemirror-desc": "Giver syntaksfremhævelse i wikitekst editoren",
+    "codemirror-toggle-label": "Syntaksfremhævelse",
+    "codemirror-find": "Søg",
+    "codemirror-next": "Find næste",
+    "codemirror-previous": "Find forrige",
+    "codemirror-match-case": "Skeln mellem store og små bogstaver",
+    "codemirror-regexp": "Regulært udtryk",
+    "codemirror-by-word": "Hele ord",
+    "codemirror-replace": "Erstat",
+    "codemirror-replace-placeholder": "Erstat",
+    "codemirror-replace-all": "Erstat alle",
+    "codemirror-search-done": "Udført"
 }

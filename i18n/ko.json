@@ -1,14 +1,24 @@
 {
-	"@metadata": {
-		"authors": [
-			"Ellif",
-			"Kwj2772",
-			"Ykhwong"
-		]
-	},
-	"codemirror-desc": "위키텍스트 편집기에서 구문 강조 기능을 제공합니다",
-	"codemirror-toggle-label": "문법 강조",
-	"codemirror-prefs-colorblind": "위키텍스트 편집 시 색각 이상자에게 친숙한 문법 강조용 스킴 활성화하기",
-	"codemirror-prefs-colorblind-help": "문법 강조용 소도구를 사용하는 경우 이 환경 설정은 동작하지 않습니다.",
-	"prefs-accessibility": "접근성"
+    "@metadata": {
+        "authors": [
+            "Ellif",
+            "Kwj2772",
+            "Ykhwong"
+        ]
+    },
+    "codemirror-desc": "위키텍스트 편집기에서 구문 강조 기능을 제공합니다",
+    "codemirror-toggle-label": "문법 강조",
+    "codemirror-prefs-colorblind": "위키텍스트 편집 시 색각 이상자에게 친숙한 문법 강조용 스킴 활성화하기",
+    "codemirror-prefs-colorblind-help": "문법 강조용 소도구를 사용하는 경우 이 환경 설정은 동작하지 않습니다.",
+    "prefs-accessibility": "접근성",
+    "codemirror-find": "찾기",
+    "codemirror-next": "다음 찾기",
+    "codemirror-previous": "이전 찾기",
+    "codemirror-match-case": "대소문자 구분",
+    "codemirror-regexp": "정규 표현식",
+    "codemirror-by-word": "전체 단어",
+    "codemirror-replace": "바꾸기",
+    "codemirror-replace-placeholder": "바꾸기",
+    "codemirror-replace-all": "모두 바꾸기",
+    "codemirror-search-done": "완료"
 }

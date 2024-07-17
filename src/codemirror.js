@@ -209,7 +209,8 @@ class CodeMirror {
 			replace: mw.msg( 'codemirror-replace' ),
 			Replace: mw.msg( 'codemirror-replace-placeholder' ),
 			'replace all': mw.msg( 'codemirror-replace-all' ),
-			'Control character': mw.msg( 'codemirror-control-character' )
+			'Control character': mw.msg( 'codemirror-control-character' ),
+			'close': mw.msg( 'codemirror-search-done' )
 		} );
 	}
 

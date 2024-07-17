@@ -1,9 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"Ooswesthoesbes"
-		]
-	},
-	"codemirror-desc": "Bèd accentuering van teks inne wikiteksbewirker",
-	"codemirror-toggle-label": "Syntaxisoetleechting"
+    "@metadata": {
+        "authors": [
+            "Ooswesthoesbes"
+        ]
+    },
+    "codemirror-desc": "Bèd accentuering van teks inne wikiteksbewirker",
+    "codemirror-toggle-label": "Syntaxisoetleechting",
+    "codemirror-find": "Zeuke",
+    "codemirror-next": "Zeuk de volgende",
+    "codemirror-previous": "Veurige zeuken",
+    "codemirror-match-case": "Identieke hooflétters",
+    "codemirror-regexp": "Reguliere expressie",
+    "codemirror-by-word": "Gans waord",
+    "codemirror-replace": "Vervang",
+    "codemirror-replace-placeholder": "Vervang",
+    "codemirror-replace-all": "Vervang alles",
+    "codemirror-search-done": "Gedaon"
 }

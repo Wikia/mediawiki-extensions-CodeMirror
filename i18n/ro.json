@@ -1,13 +1,23 @@
 {
-	"@metadata": {
-		"authors": [
-			"NGC 54",
-			"Strainu"
-		]
-	},
-	"codemirror-desc": "Oferă evidențierea sintaxei în editorul wikitext",
-	"codemirror-toggle-label": "Evidențierea sintaxei",
-	"codemirror-prefs-colorblind": "Activează schema favorabilă daltoniștilor pentru evidențierea sintaxei atunci când se editează wikitext",
-	"codemirror-prefs-colorblind-help": "Dacă utilizați un gadget pentru evidențierea sintaxei, această preferință nu va funcționa.",
-	"prefs-accessibility": "Accesibilitate"
+    "@metadata": {
+        "authors": [
+            "NGC 54",
+            "Strainu"
+        ]
+    },
+    "codemirror-desc": "Oferă evidențierea sintaxei în editorul wikitext",
+    "codemirror-toggle-label": "Evidențierea sintaxei",
+    "codemirror-prefs-colorblind": "Activează schema favorabilă daltoniștilor pentru evidențierea sintaxei atunci când se editează wikitext",
+    "codemirror-prefs-colorblind-help": "Dacă utilizați un gadget pentru evidențierea sintaxei, această preferință nu va funcționa.",
+    "prefs-accessibility": "Accesibilitate",
+    "codemirror-find": "Găsește",
+    "codemirror-next": "Găsește următorul",
+    "codemirror-previous": "Găsește precedentul",
+    "codemirror-match-case": "Potrivește literele",
+    "codemirror-regexp": "Expresie regulată",
+    "codemirror-by-word": "Cuvânt întreg",
+    "codemirror-replace": "Înlocuiește",
+    "codemirror-replace-placeholder": "Înlocuiește",
+    "codemirror-replace-all": "Înlocuiește peste tot",
+    "codemirror-search-done": "Realizat"
 }

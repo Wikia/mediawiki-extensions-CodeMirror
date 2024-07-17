@@ -1,12 +1,22 @@
 {
-	"@metadata": {
-		"authors": [
-			"Papuass"
-		]
-	},
-	"codemirror-desc": "Nodrošina sintakses iezīmēšanu vikiteksta redaktorā",
-	"codemirror-toggle-label": "Sintakses izcelšana",
-	"codemirror-prefs-colorblind": "Iespējot krāsu aklumam draudzīgu sintakses izcelšanas režīmu, rediģējot vikitekstu",
-	"codemirror-prefs-colorblind-help": "Ja sintakses iezīmēšanai tiek izmantots sīkrīks, šī preference nedarbosies.",
-	"prefs-accessibility": "Pieejamība"
+    "@metadata": {
+        "authors": [
+            "Papuass"
+        ]
+    },
+    "codemirror-desc": "Nodrošina sintakses iezīmēšanu vikiteksta redaktorā",
+    "codemirror-toggle-label": "Sintakses izcelšana",
+    "codemirror-prefs-colorblind": "Iespējot krāsu aklumam draudzīgu sintakses izcelšanas režīmu, rediģējot vikitekstu",
+    "codemirror-prefs-colorblind-help": "Ja sintakses iezīmēšanai tiek izmantots sīkrīks, šī preference nedarbosies.",
+    "prefs-accessibility": "Pieejamība",
+    "codemirror-find": "Atrast",
+    "codemirror-next": "Atrast nākamo",
+    "codemirror-previous": "Atrast iepriekšējo",
+    "codemirror-match-case": "Ņemt vērā lielos un mazos burtus",
+    "codemirror-regexp": "Regulārā izteiksme",
+    "codemirror-by-word": "Viss vārds",
+    "codemirror-replace": "Aizvietot",
+    "codemirror-replace-placeholder": "Aizvietot",
+    "codemirror-replace-all": "Aizvietot visu",
+    "codemirror-search-done": "Gatavs"
 }

@@ -1,8 +1,10 @@
 {
-	"@metadata": {
-		"authors": [
-			"Fierodelveneto"
-		]
-	},
-	"codemirror-toggle-label": "Rexalta ła sintasi"
+    "@metadata": {
+        "authors": [
+            "Fierodelveneto"
+        ]
+    },
+    "codemirror-toggle-label": "Rexalta ła sintasi",
+    "codemirror-find": "Cata",
+    "codemirror-search-done": "Fato"
 }

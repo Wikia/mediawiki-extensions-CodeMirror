@@ -1,14 +1,24 @@
 {
-	"@metadata": {
-		"authors": [
-			"Minh Nguyen",
-			"NguoiDungKhongDinhDanh",
-			"Vinhtantran"
-		]
-	},
-	"codemirror-desc": "Tô màu cú pháp trong trình sửa đổi mã wiki",
-	"codemirror-toggle-label": "Tô màu cú pháp",
-	"codemirror-prefs-colorblind": "Bật bộ màu thân thiện với người mù màu để làm nổi bật cú pháp khi soạn thảo mã wiki",
-	"codemirror-prefs-colorblind-help": "Nếu bạn dùng tiện ích để làm nổi bật cú pháp, tùy chọn này sẽ không có tác dụng.",
-	"prefs-accessibility": "Tăng cường khả năng tiếp cận"
+    "@metadata": {
+        "authors": [
+            "Minh Nguyen",
+            "NguoiDungKhongDinhDanh",
+            "Vinhtantran"
+        ]
+    },
+    "codemirror-desc": "Tô màu cú pháp trong trình sửa đổi mã wiki",
+    "codemirror-toggle-label": "Tô màu cú pháp",
+    "codemirror-prefs-colorblind": "Bật bộ màu thân thiện với người mù màu để làm nổi bật cú pháp khi soạn thảo mã wiki",
+    "codemirror-prefs-colorblind-help": "Nếu bạn dùng tiện ích để làm nổi bật cú pháp, tùy chọn này sẽ không có tác dụng.",
+    "prefs-accessibility": "Tăng cường khả năng tiếp cận",
+    "codemirror-find": "Tìm kiếm",
+    "codemirror-next": "Tìm tiếp",
+    "codemirror-previous": "Tìm trước",
+    "codemirror-match-case": "Phân biệt hoa thường",
+    "codemirror-regexp": "Biểu thức chính quy",
+    "codemirror-by-word": "Toàn bộ từ",
+    "codemirror-replace": "Thay",
+    "codemirror-replace-placeholder": "Thay thế",
+    "codemirror-replace-all": "Thay tất cả",
+    "codemirror-search-done": "Xong"
 }

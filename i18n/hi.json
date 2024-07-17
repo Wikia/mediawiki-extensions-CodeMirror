@@ -1,12 +1,18 @@
 {
-	"@metadata": {
-		"authors": [
-			"Abijeet Patro"
-		]
-	},
-	"codemirror-find": "खोजें",
-	"codemirror-next": "अगला",
-	"codemirror-previous": "पिछला",
-	"codemirror-all": "सभी",
-	"codemirror-replace-placeholder": "बदलें"
+    "@metadata": {
+        "authors": [
+            "Abijeet Patro"
+        ]
+    },
+    "codemirror-find": "खोजें",
+    "codemirror-next": "अगला ढूँढें",
+    "codemirror-previous": "पिछला ढूँढें",
+    "codemirror-all": "सभी",
+    "codemirror-replace-placeholder": "बदलें",
+    "codemirror-match-case": "केस मिलाएँ",
+    "codemirror-regexp": "रेगुलर एक्सप्रेशन",
+    "codemirror-by-word": "पूरा शब्द",
+    "codemirror-replace": "बदलें",
+    "codemirror-replace-all": "सभी को बदलें",
+    "codemirror-search-done": "पूर्ण हुआ"
 }
