@@ -1,9 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"Xuacu"
-		]
-	},
-	"codemirror-desc": "Ufre sintaxis resaltada nel editor de testu wiki",
-	"codemirror-toggle-label": "Resaltador de sintaxis"
+    "@metadata": {
+        "authors": [
+            "Xuacu"
+        ]
+    },
+    "codemirror-desc": "Ufre sintaxis resaltada nel editor de testu wiki",
+    "codemirror-toggle-label": "Resaltador de sintaxis",
+    "codemirror-find": "Alcontrar",
+    "codemirror-next": "Alcontrar siguiente",
+    "codemirror-previous": "Alcontrar anterior",
+    "codemirror-match-case": "Distinguir mayúscules",
+    "codemirror-regexp": "Espresión regular",
+    "codemirror-by-word": "Palabra entera",
+    "codemirror-replace": "Sustituir",
+    "codemirror-replace-placeholder": "Sustituir",
+    "codemirror-replace-all": "Sustituir toos",
+    "codemirror-search-done": "Fecho"
 }

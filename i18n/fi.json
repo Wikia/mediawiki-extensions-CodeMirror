@@ -1,13 +1,23 @@
 {
-	"@metadata": {
-		"authors": [
-			"01miki10",
-			"Nike",
-			"Pyscowicz",
-			"Yupik"
-		]
-	},
-	"codemirror-desc": "Lisää syntaksin korostuksen wikitekstin muokkaimeen",
-	"codemirror-toggle-label": "Syntaksin korostus",
-	"prefs-accessibility": "Saavutettavuus"
+    "@metadata": {
+        "authors": [
+            "01miki10",
+            "Nike",
+            "Pyscowicz",
+            "Yupik"
+        ]
+    },
+    "codemirror-desc": "Lisää syntaksin korostuksen wikitekstin muokkaimeen",
+    "codemirror-toggle-label": "Syntaksin korostus",
+    "prefs-accessibility": "Saavutettavuus",
+    "codemirror-find": "Etsi",
+    "codemirror-next": "Etsi seuraava",
+    "codemirror-previous": "Etsi edellinen",
+    "codemirror-match-case": "Huomioi kirjainkoko",
+    "codemirror-regexp": "Säännöllinen lauseke",
+    "codemirror-by-word": "Koko sana",
+    "codemirror-replace": "Korvaa",
+    "codemirror-replace-placeholder": "Korvaa",
+    "codemirror-replace-all": "Korvaa kaikki",
+    "codemirror-search-done": "Valmis"
 }

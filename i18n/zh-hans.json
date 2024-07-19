@@ -1,19 +1,29 @@
 {
-	"@metadata": {
-		"authors": [
-			"Diskdance",
-			"Liuxinyu970226",
-			"Sean0115",
-			"Stang",
-			"Tranve"
-		]
-	},
-	"codemirror-desc": "在wikitext编辑器中提供语法高亮显示",
-	"codemirror-toggle-label": "语法高亮",
-	"codemirror-prefs-colorblind": "编辑wikitext时，启用对色盲用户友好的语法高亮配色方案",
-	"codemirror-prefs-colorblind-help": "如果您的语法高亮功能由小工具提供，本设置将不起作用。",
-	"codemirror-fold-template": "折叠模板参数",
-	"codemirror-unfold": "展开",
-	"codemirror-folded-code": "被折叠的代码",
-	"prefs-accessibility": "无障碍"
+    "@metadata": {
+        "authors": [
+            "Diskdance",
+            "Liuxinyu970226",
+            "Sean0115",
+            "Stang",
+            "Tranve"
+        ]
+    },
+    "codemirror-desc": "在wikitext编辑器中提供语法高亮显示",
+    "codemirror-toggle-label": "语法高亮",
+    "codemirror-prefs-colorblind": "编辑wikitext时，启用对色盲用户友好的语法高亮配色方案",
+    "codemirror-prefs-colorblind-help": "如果您的语法高亮功能由小工具提供，本设置将不起作用。",
+    "codemirror-fold-template": "折叠模板参数",
+    "codemirror-unfold": "展开",
+    "codemirror-folded-code": "被折叠的代码",
+    "prefs-accessibility": "无障碍",
+    "codemirror-find": "查找",
+    "codemirror-next": "查找下一个",
+    "codemirror-previous": "查找上一个",
+    "codemirror-match-case": "区分大小写",
+    "codemirror-regexp": "正则表达式",
+    "codemirror-by-word": "完整文字",
+    "codemirror-replace": "替换",
+    "codemirror-replace-placeholder": "替换",
+    "codemirror-replace-all": "替换所有",
+    "codemirror-search-done": "完成"
 }

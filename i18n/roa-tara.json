@@ -1,9 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"Joetaras"
-		]
-	},
-	"codemirror-desc": "Dèje l'evidenziazzione d'a sindasse jndr'à 'u cangiatore de uicchiteste",
-	"codemirror-toggle-label": "Evidenziatore de sindasse"
+    "@metadata": {
+        "authors": [
+            "Joetaras"
+        ]
+    },
+    "codemirror-desc": "Dèje l'evidenziazzione d'a sindasse jndr'à 'u cangiatore de uicchiteste",
+    "codemirror-toggle-label": "Evidenziatore de sindasse",
+    "codemirror-find": "Iacchie",
+    "codemirror-next": "Cirche 'u prosseme",
+    "codemirror-previous": "Careche 'u precedende",
+    "codemirror-match-case": "Combronde maiuscole e minuscole",
+    "codemirror-regexp": "Espresione regolare",
+    "codemirror-by-word": "Parole 'ndere",
+    "codemirror-replace": "Sostituisce",
+    "codemirror-replace-placeholder": "Sostituisce",
+    "codemirror-replace-all": "Sostituisce tutte",
+    "codemirror-search-done": "Fatte"
 }

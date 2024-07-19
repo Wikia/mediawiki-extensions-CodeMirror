@@ -1,9 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"Chaduvari"
-		]
-	},
-	"codemirror-prefs-colorblind": "వికీటెక్స్టును సరిదిద్దే సమయంలో సింటాక్సును హైలైటు చేసేలా వర్ణాంధ సహాయకారి వ్యవస్థను చేతనం చెయ్యి",
-	"codemirror-prefs-colorblind-help": "సింటాక్సును హైలైటు చేసేందుకు మీరు ఏదైనా గాడ్జెటును వాడుతూంటే, ఈ అభిరుచి పనిచెయ్యదు."
+    "@metadata": {
+        "authors": [
+            "Chaduvari"
+        ]
+    },
+    "codemirror-prefs-colorblind": "వికీటెక్స్టును సరిదిద్దే సమయంలో సింటాక్సును హైలైటు చేసేలా వర్ణాంధ సహాయకారి వ్యవస్థను చేతనం చెయ్యి",
+    "codemirror-prefs-colorblind-help": "సింటాక్సును హైలైటు చేసేందుకు మీరు ఏదైనా గాడ్జెటును వాడుతూంటే, ఈ అభిరుచి పనిచెయ్యదు.",
+    "codemirror-find": "వెతుకు",
+    "codemirror-next": "తరువాతది వెతుకు",
+    "codemirror-previous": "మునుపటిది వెతుకు",
+    "codemirror-match-case": "పెద్దబడి, చిన్నబడి వ్యత్యాసముంచు",
+    "codemirror-regexp": "రెగ్యులర్ ఎక్స్‍ప్రెషన్",
+    "codemirror-by-word": "పూర్తి పదం",
+    "codemirror-replace": "మార్చు",
+    "codemirror-replace-placeholder": "మార్చు",
+    "codemirror-replace-all": "అన్నింటినీ మార్చు",
+    "codemirror-search-done": "పూర్తయ్యింది"
 }

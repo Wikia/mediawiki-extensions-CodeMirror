@@ -1,18 +1,24 @@
 {
-	"@metadata": {
-		"authors": [
-			"Beta16",
-			"Sakretsu",
-			"Statix64"
-		]
-	},
-	"codemirror-desc": "Fornisce l'evidenziazione della sintassi nell'editor wikitesto",
-	"codemirror-toggle-label": "Evidenziazione della sintassi",
-	"codemirror-prefs-colorblind": "Attiva una combinazione di colori per daltonici per l'evidenziazione della sintassi del wikitesto",
-	"codemirror-prefs-colorblind-help": "Questa preferenza non funziona se usi un accessorio per l'evidenziazione della sintassi.",
-	"codemirror-find": "Trova",
-	"codemirror-regexp": "espressione regolare",
-	"codemirror-replace": "sostituisci",
-	"codemirror-replace-all": "sostituisci tutto",
-	"prefs-accessibility": "Accessibilità"
+    "@metadata": {
+        "authors": [
+            "Beta16",
+            "Sakretsu",
+            "Statix64"
+        ]
+    },
+    "codemirror-desc": "Fornisce l'evidenziazione della sintassi nell'editor wikitesto",
+    "codemirror-toggle-label": "Evidenziazione della sintassi",
+    "codemirror-prefs-colorblind": "Attiva una combinazione di colori per daltonici per l'evidenziazione della sintassi del wikitesto",
+    "codemirror-prefs-colorblind-help": "Questa preferenza non funziona se usi un accessorio per l'evidenziazione della sintassi.",
+    "codemirror-find": "Trova",
+    "codemirror-regexp": "Espressione regolare",
+    "codemirror-replace": "Sostituisci",
+    "codemirror-replace-all": "Sostituisci tutto",
+    "prefs-accessibility": "Accessibilità",
+    "codemirror-next": "Trova successivo",
+    "codemirror-previous": "Trova precedente",
+    "codemirror-match-case": "Maiuscole/minuscole",
+    "codemirror-by-word": "Parola intera",
+    "codemirror-replace-placeholder": "Sostituisci",
+    "codemirror-search-done": "Fatto"
 }

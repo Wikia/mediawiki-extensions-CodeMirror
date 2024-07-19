@@ -1,14 +1,24 @@
 {
-	"@metadata": {
-		"authors": [
-			"Lokal Profil",
-			"Sabelöga",
-			"WikiPhoenix"
-		]
-	},
-	"codemirror-desc": "Ger syntaxmarkerad redigering för redigering av wikitext",
-	"codemirror-toggle-label": "Syntaxmarkering",
-	"codemirror-prefs-colorblind": "Aktivera färgblindvänligt färgschema för syntaxmarkering när du redigerar wikitext",
-	"codemirror-prefs-colorblind-help": "Om du använder en finess för syntaxmarkering kommer inställningen inte fungera.",
-	"prefs-accessibility": "Tillgänglighet"
+    "@metadata": {
+        "authors": [
+            "Lokal Profil",
+            "Sabelöga",
+            "WikiPhoenix"
+        ]
+    },
+    "codemirror-desc": "Ger syntaxmarkerad redigering för redigering av wikitext",
+    "codemirror-toggle-label": "Syntaxmarkering",
+    "codemirror-prefs-colorblind": "Aktivera färgblindvänligt färgschema för syntaxmarkering när du redigerar wikitext",
+    "codemirror-prefs-colorblind-help": "Om du använder en finess för syntaxmarkering kommer inställningen inte fungera.",
+    "prefs-accessibility": "Tillgänglighet",
+    "codemirror-find": "Sök",
+    "codemirror-next": "Hitta nästa",
+    "codemirror-previous": "Sök föregående",
+    "codemirror-match-case": "Matcha skiftläge",
+    "codemirror-regexp": "Reguljärt uttryck",
+    "codemirror-by-word": "Hela ordet",
+    "codemirror-replace": "Ersätt",
+    "codemirror-replace-placeholder": "Ersätt",
+    "codemirror-replace-all": "Ersätt alla",
+    "codemirror-search-done": "Klart"
 }

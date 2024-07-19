@@ -1,15 +1,25 @@
 {
-	"@metadata": {
-		"authors": [
-			"Chrumps",
-			"Rail",
-			"Railfail536",
-			"Woytecr"
-		]
-	},
-	"codemirror-desc": "Dostarcza podświetlanie składni w edytorze wikitekstu",
-	"codemirror-toggle-label": "Podświetlanie składni",
-	"codemirror-prefs-colorblind": "Podczas edytowania wikitekstu włącz schemat kolorystyczny podświetlania składni przyjazny osobom ze ślepotą barw",
-	"codemirror-prefs-colorblind-help": "Jeśli używasz gadżetu do podświetlania składni, ta preferencja nie zadziała.",
-	"prefs-accessibility": "Dostępność"
+    "@metadata": {
+        "authors": [
+            "Chrumps",
+            "Rail",
+            "Railfail536",
+            "Woytecr"
+        ]
+    },
+    "codemirror-desc": "Dostarcza podświetlanie składni w edytorze wikitekstu",
+    "codemirror-toggle-label": "Podświetlanie składni",
+    "codemirror-prefs-colorblind": "Podczas edytowania wikitekstu włącz schemat kolorystyczny podświetlania składni przyjazny osobom ze ślepotą barw",
+    "codemirror-prefs-colorblind-help": "Jeśli używasz gadżetu do podświetlania składni, ta preferencja nie zadziała.",
+    "prefs-accessibility": "Dostępność",
+    "codemirror-find": "Znajdź",
+    "codemirror-next": "Znajdź następny",
+    "codemirror-previous": "Znajdź poprzedni",
+    "codemirror-match-case": "Uwzględnij wielkość liter",
+    "codemirror-regexp": "Wyrażenie regularne",
+    "codemirror-by-word": "Całe słowo",
+    "codemirror-replace": "Zamień",
+    "codemirror-replace-placeholder": "Zamień",
+    "codemirror-replace-all": "Zamień wszystkie",
+    "codemirror-search-done": "Gotowe"
 }

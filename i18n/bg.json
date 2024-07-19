@@ -1,13 +1,23 @@
 {
-	"@metadata": {
-		"authors": [
-			"ShockD",
-			"StanProg"
-		]
-	},
-	"codemirror-desc": "Осигурява оцветяване на синтаксиса в редактора на уикитекст",
-	"codemirror-toggle-label": "Оцветяване на синтаксиса",
-	"codemirror-prefs-colorblind": "Активиране на удобна за далтонисти схема за оцветяване на синтаксиса при редактиране на уикитекст",
-	"codemirror-prefs-colorblind-help": "Ако използвате джаджа за оцветяване на синтаксиса, тази настройка няма да работи.",
-	"prefs-accessibility": "Достъпност"
+    "@metadata": {
+        "authors": [
+            "ShockD",
+            "StanProg"
+        ]
+    },
+    "codemirror-desc": "Осигурява оцветяване на синтаксиса в редактора на уикитекст",
+    "codemirror-toggle-label": "Оцветяване на синтаксиса",
+    "codemirror-prefs-colorblind": "Активиране на удобна за далтонисти схема за оцветяване на синтаксиса при редактиране на уикитекст",
+    "codemirror-prefs-colorblind-help": "Ако използвате джаджа за оцветяване на синтаксиса, тази настройка няма да работи.",
+    "prefs-accessibility": "Достъпност",
+    "codemirror-find": "Търсене",
+    "codemirror-next": "Търсене",
+    "codemirror-previous": "Намиране на предходното",
+    "codemirror-match-case": "Чувствителност към регистъра",
+    "codemirror-regexp": "Регулярен израз",
+    "codemirror-by-word": "Цяла дума",
+    "codemirror-replace": "Замяна",
+    "codemirror-replace-placeholder": "Замяна",
+    "codemirror-replace-all": "Замяна на всички",
+    "codemirror-search-done": "Готово"
 }

@@ -1,11 +1,21 @@
 {
-	"@metadata": {
-		"authors": [
-			"Aefgh39622",
-			"Ans",
-			"Patsagorn Y."
-		]
-	},
-	"codemirror-desc": "จัดเตรียมการเน้นไวยากรณ์ในตัวแก้ไขข้อความวิกิ",
-	"codemirror-toggle-label": "การเน้นไวยากรณ์ด้วยสี"
+    "@metadata": {
+        "authors": [
+            "Aefgh39622",
+            "Ans",
+            "Patsagorn Y."
+        ]
+    },
+    "codemirror-desc": "จัดเตรียมการเน้นไวยากรณ์ในตัวแก้ไขข้อความวิกิ",
+    "codemirror-toggle-label": "การเน้นไวยากรณ์ด้วยสี",
+    "codemirror-find": "ค้นหา",
+    "codemirror-next": "ค้นหาถัดไป",
+    "codemirror-previous": "ค้นหาก่อนหน้า",
+    "codemirror-match-case": "ตรงอักษรใหญ่เล็ก",
+    "codemirror-regexp": "นิพจน์ปรกติ",
+    "codemirror-by-word": "ทั้งคำ",
+    "codemirror-replace": "แทนที่",
+    "codemirror-replace-placeholder": "แทนที่",
+    "codemirror-replace-all": "แทนที่ทั้งหมด",
+    "codemirror-search-done": "สำเร็จ"
 }

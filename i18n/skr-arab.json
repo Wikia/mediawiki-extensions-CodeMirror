@@ -1,8 +1,12 @@
 {
-	"@metadata": {
-		"authors": [
-			"Saraiki"
-		]
-	},
-	"prefs-accessibility": "رسائیت"
+    "@metadata": {
+        "authors": [
+            "Saraiki"
+        ]
+    },
+    "prefs-accessibility": "رسائیت",
+    "codemirror-find": "لبھو",
+    "codemirror-replace": "بدل گھنو",
+    "codemirror-replace-placeholder": "بدل گھنو",
+    "codemirror-search-done": "مکمل"
 }

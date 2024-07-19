@@ -1,13 +1,23 @@
 {
-	"@metadata": {
-		"authors": [
-			"NMW03",
-			"Toghrul Rahimli"
-		]
-	},
-	"codemirror-desc": "Vikimətn redaktorunda kodun rəngli olmasını təmin edir",
-	"codemirror-toggle-label": "Kodun rənglənməsi",
-	"codemirror-prefs-colorblind": "Vikimətn redaktə edərkən rəng korluğuna uyğun sintaksis sxemini aktivləşdir",
-	"codemirror-prefs-colorblind-help": "Sintaksis üçün hansısa qadcetdən istifadə etsəniz, bu seçim işləməyəcək.",
-	"prefs-accessibility": "Əlçatanlıq"
+    "@metadata": {
+        "authors": [
+            "NMW03",
+            "Toghrul Rahimli"
+        ]
+    },
+    "codemirror-desc": "Vikimətn redaktorunda kodun rəngli olmasını təmin edir",
+    "codemirror-toggle-label": "Kodun rənglənməsi",
+    "codemirror-prefs-colorblind": "Vikimətn redaktə edərkən rəng korluğuna uyğun sintaksis sxemini aktivləşdir",
+    "codemirror-prefs-colorblind-help": "Sintaksis üçün hansısa qadcetdən istifadə etsəniz, bu seçim işləməyəcək.",
+    "prefs-accessibility": "Əlçatanlıq",
+    "codemirror-find": "Tap",
+    "codemirror-next": "Növbətini tap",
+    "codemirror-previous": "Əvvəlkini tap",
+    "codemirror-match-case": "Böyük/kiçik hərf həssaslığı",
+    "codemirror-regexp": "Regular expression",
+    "codemirror-by-word": "Bütün söz",
+    "codemirror-replace": "Dəyiş",
+    "codemirror-replace-placeholder": "Dəyiş",
+    "codemirror-replace-all": "Hamısını dəyiş",
+    "codemirror-search-done": "Oldu"
 }

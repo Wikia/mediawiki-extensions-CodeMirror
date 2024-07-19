@@ -195,6 +195,7 @@
 				"codemirror-replace",
 				"codemirror-replace-placeholder",
 				"codemirror-replace-all",
+				"codemirror-search-done",
 				"codemirror-control-character",
 				"codemirror-special-char-null",
 				"codemirror-special-char-bell",

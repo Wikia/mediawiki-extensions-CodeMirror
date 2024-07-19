@@ -1,17 +1,27 @@
 {
-	"@metadata": {
-		"authors": [
-			"Delim",
-			"Kokage si",
-			"Marine-Blue",
-			"Shirayuki",
-			"SkyDaisy9",
-			"Suzukaze-c"
-		]
-	},
-	"codemirror-desc": "ウィキテキストエディターに構文強調の機能を追加する",
-	"codemirror-toggle-label": "構文の強調",
-	"codemirror-prefs-colorblind": "ウィキテキストでの編集時にカラーブラインドに応じた配色を使用する",
-	"codemirror-prefs-colorblind-help": "構文強調表示のガジェットを使用している場合、この設定は機能しません。",
-	"prefs-accessibility": "アクセシビリティ"
+    "@metadata": {
+        "authors": [
+            "Delim",
+            "Kokage si",
+            "Marine-Blue",
+            "Shirayuki",
+            "SkyDaisy9",
+            "Suzukaze-c"
+        ]
+    },
+    "codemirror-desc": "ウィキテキストエディターに構文強調の機能を追加する",
+    "codemirror-toggle-label": "構文の強調",
+    "codemirror-prefs-colorblind": "ウィキテキストでの編集時にカラーブラインドに応じた配色を使用する",
+    "codemirror-prefs-colorblind-help": "構文強調表示のガジェットを使用している場合、この設定は機能しません。",
+    "prefs-accessibility": "アクセシビリティ",
+    "codemirror-find": "検索",
+    "codemirror-next": "次を検索",
+    "codemirror-previous": "前を検索",
+    "codemirror-match-case": "大文字・小文字を区別する",
+    "codemirror-regexp": "正規表現",
+    "codemirror-by-word": "単語全体",
+    "codemirror-replace": "置換",
+    "codemirror-replace-placeholder": "置換",
+    "codemirror-replace-all": "すべて置換",
+    "codemirror-search-done": "完了"
 }

@@ -1,19 +1,24 @@
 {
-	"@metadata": {
-		"authors": [
-			"Acamicamacaraca",
-			"BadDog",
-			"Milicevic01",
-			"Obsuser"
-		]
-	},
-	"codemirror-desc": "Омогућава истицање синтаксе у уређивачу викитекста",
-	"codemirror-toggle-label": "Истицање синтаксе",
-	"codemirror-find": "Пронађи",
-	"codemirror-next": "следеће",
-	"codemirror-all": "све",
-	"codemirror-regexp": "регекс",
-	"codemirror-replace": "замени",
-	"codemirror-replace-placeholder": "Замени",
-	"prefs-accessibility": "Приступачност"
+    "@metadata": {
+        "authors": [
+            "Acamicamacaraca",
+            "BadDog",
+            "Milicevic01",
+            "Obsuser"
+        ]
+    },
+    "codemirror-desc": "Омогућава истицање синтаксе у уређивачу викитекста",
+    "codemirror-toggle-label": "Истицање синтаксе",
+    "codemirror-find": "Пронађите",
+    "codemirror-next": "Пронађите следеће",
+    "codemirror-all": "све",
+    "codemirror-regexp": "Регуларни израз",
+    "codemirror-replace": "Замени",
+    "codemirror-replace-placeholder": "Замените",
+    "prefs-accessibility": "Приступачност",
+    "codemirror-previous": "Пронађите претходно",
+    "codemirror-match-case": "Пази на величину слова",
+    "codemirror-by-word": "Цела реч",
+    "codemirror-replace-all": "Замени све",
+    "codemirror-search-done": "Готово"
 }

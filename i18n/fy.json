@@ -1,12 +1,22 @@
 {
-	"@metadata": {
-		"authors": [
-			"PiefPafPier"
-		]
-	},
-	"codemirror-desc": "Jout syntaks-aksintuearring yn 'e wikitekstbewurker",
-	"codemirror-toggle-label": "Syntaks-aksintuearring",
-	"codemirror-prefs-colorblind": "Kleureblinefreonlik skema foar syntaks-aksintuearring ynskeakelje by it bewurkjen fan wikitekst",
-	"codemirror-prefs-colorblind-help": "At jo 'lytsark' foar syntaks-aksintuearring brûke, sil dizze foarkar net wurkje.",
-	"prefs-accessibility": "Tagonklikens"
+    "@metadata": {
+        "authors": [
+            "PiefPafPier"
+        ]
+    },
+    "codemirror-desc": "Jout syntaks-aksintuearring yn 'e wikitekstbewurker",
+    "codemirror-toggle-label": "Syntaks-aksintuearring",
+    "codemirror-prefs-colorblind": "Kleureblinefreonlik skema foar syntaks-aksintuearring ynskeakelje by it bewurkjen fan wikitekst",
+    "codemirror-prefs-colorblind-help": "At jo 'lytsark' foar syntaks-aksintuearring brûke, sil dizze foarkar net wurkje.",
+    "prefs-accessibility": "Tagonklikens",
+    "codemirror-find": "Sykje",
+    "codemirror-next": "Neikommende sykje",
+    "codemirror-previous": "Foargeande sykje",
+    "codemirror-match-case": "Haadlettergefoelich",
+    "codemirror-regexp": "Reguliere ekspresje",
+    "codemirror-by-word": "Hiele wurd",
+    "codemirror-replace": "Ferfange",
+    "codemirror-replace-placeholder": "Ferfange",
+    "codemirror-replace-all": "Alles ferfange",
+    "codemirror-search-done": "Klear"
 }

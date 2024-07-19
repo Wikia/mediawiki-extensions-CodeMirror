@@ -1,9 +1,19 @@
 {
-	"@metadata": {
-		"authors": [
-			"Daud I.F. Argana"
-		]
-	},
-	"codemirror-desc": "Menyediakan penyorotan sintaksis di penyunting teks wiki",
-	"codemirror-toggle-label": "Penyorotan sintaksis"
+    "@metadata": {
+        "authors": [
+            "Daud I.F. Argana"
+        ]
+    },
+    "codemirror-desc": "Menyediakan penyorotan sintaksis di penyunting teks wiki",
+    "codemirror-toggle-label": "Penyorotan sintaksis",
+    "codemirror-find": "Temukan",
+    "codemirror-next": "Cari berikutnya",
+    "codemirror-previous": "Cari sebelumnya",
+    "codemirror-match-case": "Cocokkan kapitalisasi",
+    "codemirror-regexp": "Regular expression",
+    "codemirror-by-word": "Seluruh kata",
+    "codemirror-replace": "Ganti",
+    "codemirror-replace-placeholder": "Ganti",
+    "codemirror-replace-all": "Ganti semua",
+    "codemirror-search-done": "Selesai"
 }

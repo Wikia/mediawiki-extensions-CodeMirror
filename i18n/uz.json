@@ -1,8 +1,16 @@
 {
-	"@metadata": {
-		"authors": [
-			"Sociologist"
-		]
-	},
-	"codemirror-toggle-label": "Sintaksis rangli tarzda ajratib koʻrsatilsin"
+    "@metadata": {
+        "authors": [
+            "Sociologist"
+        ]
+    },
+    "codemirror-toggle-label": "Sintaksis rangli tarzda ajratib koʻrsatilsin",
+    "codemirror-find": "Topish",
+    "codemirror-match-case": "Registrni hisobga olish",
+    "codemirror-regexp": "Odatiy ifoda",
+    "codemirror-by-word": "Toʻliq soʻz",
+    "codemirror-replace": "Almashtirish",
+    "codemirror-replace-placeholder": "Almashtirish",
+    "codemirror-replace-all": "Hammasini almashtirish",
+    "codemirror-search-done": "Bajarildi"
 }

@@ -1,8 +1,8 @@
 {
-	"@metadata": {
-		"authors": [
-			"Mafcadio"
-		]
-	},
-	"codemirror-toggle-label": "Marcante de sintatica"
+    "@metadata": {
+        "authors": [
+            "Mafcadio"
+        ]
+    },
+    "codemirror-toggle-label": "Marcante de sintatica"
 }
