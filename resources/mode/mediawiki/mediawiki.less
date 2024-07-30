@@ -47,32 +47,34 @@ stylistic/selector-list-comma-newline-after
 .cm-mw-strong { font-weight: bold; }
 
 // FIXME: Remove .CodeMirror-line rules after CM6 upgrade
-pre.CodeMirror-line.cm-mw-section-1,
-pre.CodeMirror-line-like.cm-mw-section-1,
-.cm-mw-section-1, .cm-mw-section-1 ~ * {
-	font-size: 1.8em;
-	line-height: 1.2em;
-}
-pre.CodeMirror-line.cm-mw-section-2,
-pre.CodeMirror-line-like.cm-mw-section-2,
-.cm-mw-section-2, .cm-mw-section-2 ~ * {
-	font-size: 1.5em;
-	line-height: 1.2em;
-}
-pre.CodeMirror-line.cm-mw-section-3,
-pre.CodeMirror-line-like.cm-mw-section-3,
-pre.CodeMirror-line.cm-mw-section-4,
-pre.CodeMirror-line-like.cm-mw-section-4,
-pre.CodeMirror-line.cm-mw-section-5,
-pre.CodeMirror-line-like.cm-mw-section-5,
-pre.CodeMirror-line.cm-mw-section-6,
-pre.CodeMirror-line-like.cm-mw-section-6,
-/* TODO: remove overqualified `span` after CM6 upgrade */
-span.cm-mw-section-3 ~ *,
-span.cm-mw-section-4 ~ *,
-span.cm-mw-section-5 ~ *,
-span.cm-mw-section-6 ~ * {
-	font-weight: bold;
+.wikiEditor-ui-text {
+	pre.CodeMirror-line.cm-mw-section-1,
+	pre.CodeMirror-line-like.cm-mw-section-1,
+	.cm-mw-section-1, .cm-mw-section-1 ~ * {
+		font-size: 1.8em;
+		line-height: 1.2em;
+	}
+	pre.CodeMirror-line.cm-mw-section-2,
+	pre.CodeMirror-line-like.cm-mw-section-2,
+	.cm-mw-section-2, .cm-mw-section-2 ~ * {
+		font-size: 1.5em;
+		line-height: 1.2em;
+	}
+	pre.CodeMirror-line.cm-mw-section-3,
+	pre.CodeMirror-line-like.cm-mw-section-3,
+	pre.CodeMirror-line.cm-mw-section-4,
+	pre.CodeMirror-line-like.cm-mw-section-4,
+	pre.CodeMirror-line.cm-mw-section-5,
+	pre.CodeMirror-line-like.cm-mw-section-5,
+	pre.CodeMirror-line.cm-mw-section-6,
+	pre.CodeMirror-line-like.cm-mw-section-6,
+		/* TODO: remove overqualified `span` after CM6 upgrade */
+	span.cm-mw-section-3 ~ *,
+	span.cm-mw-section-4 ~ *,
+	span.cm-mw-section-5 ~ *,
+	span.cm-mw-section-6 ~ * {
+		font-weight: bold;
+	}
 }
 
 .cm-mw-template { color: @template-color; font-weight: normal; }
