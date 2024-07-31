@@ -210,7 +210,7 @@ class CodeMirror {
 			Replace: mw.msg( 'codemirror-replace-placeholder' ),
 			'replace all': mw.msg( 'codemirror-replace-all' ),
 			'Control character': mw.msg( 'codemirror-control-character' ),
-			'close': mw.msg( 'codemirror-search-done' )
+			close: mw.msg( 'codemirror-search-done' )
 		} );
 	}
 
@@ -307,6 +307,9 @@ class CodeMirror {
 			state: this.state,
 			parent: this.$textarea.parent()[ 0 ]
 		} );
+
+		// UGC-5539 Hack to fix unconsistent behavior of template folding
+		this.view.viewState.printing = true;
 
 		// Hide native textarea and sync CodeMirror contents upon submission.
 		this.$textarea.hide();
