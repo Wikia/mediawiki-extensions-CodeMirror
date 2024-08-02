@@ -1262,9 +1262,12 @@ export default ( config = { bidiIsolation: false }, mwConfig = null ) => {
 	) ];
 
 	// Add template folding if in supported namespace.
-	const templateFoldingNs = mwConfig.templateFoldingNamespaces;
 	// Set to [] to disable everywhere, or null to enable everywhere.
-	if ( !templateFoldingNs || templateFoldingNs.includes( mw.config.get( 'wgNamespaceNumber' ) ) ) {
+	const templateFoldingNs = mwConfig.templateFoldingNamespaces;
+	if (
+		mw.config.get( 'wgCodeMirrorV6TemplateFolding' ) &&
+		( !templateFoldingNs || templateFoldingNs.includes( mw.config.get( 'wgNamespaceNumber' ) ) )
+	) {
 		langExtension.push( templateFoldingExtension );
 	}
 
