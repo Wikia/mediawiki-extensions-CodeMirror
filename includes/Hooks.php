@@ -206,6 +206,6 @@ class Hooks implements
 	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
 		$vars['wgVisualEditorConfig']['pluginModules'][] = $this->useV6 ?
 			'ext.CodeMirror.v6.visualEditor' : 'ext.CodeMirror.visualEditor';
-
+		$vars['wgCodeMirrorV6TemplateFolding'] = $config->get( 'CodeMirrorV6TemplateFolding' );
 	}
 }
