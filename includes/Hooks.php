@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\CodeMirror;
 
-use ExtensionRegistry;
-use InvalidArgumentException;
 use Config;
 use EditPage;
+use ExtensionRegistry;
+use InvalidArgumentException;
 use MediaWiki\Extension\Gadgets\GadgetRepo;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\EditPage__showEditForm_initialHook;
@@ -142,7 +142,7 @@ class Hooks implements
 		}
 	}
 
-	public function onBeforePageDisplay($out, $skin): void {
+	public function onBeforePageDisplay( $out, $skin ): void {
 		if ( !$this->shouldLoadCodeMirrorForVisualEditor( $out ) ) {
 			return;
 		}
@@ -204,8 +204,9 @@ class Hooks implements
 	}
 
 	public function onResourceLoaderGetConfigVars( array &$vars, $skin, Config $config ): void {
-		$vars['wgVisualEditorConfig']['pluginModules'][] = $this->useV6 ?
-			'ext.CodeMirror.v6.visualEditor' : 'ext.CodeMirror.visualEditor';
+		array_unshift( $vars['wgVisualEditorConfig']['pluginModules'], $this->useV6 ?
+			'ext.CodeMirror.v6.visualEditor' : 'ext.CodeMirror.visualEditor'
+		);
 		$vars['wgCodeMirrorV6TemplateFolding'] = $config->get( 'CodeMirrorV6TemplateFolding' );
 	}
 }
