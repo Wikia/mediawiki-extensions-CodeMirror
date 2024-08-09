@@ -2,6 +2,7 @@ import mediaWikiLang from '../../codemirror.mode.mediawiki';
 import CodeMirrorVisualEditor from '../../codemirror.visualeditor';
 
 ve.ui.CodeMirrorAction = function VeUiCodeMirrorAction() {
+	console.log( 've.ui.CodeMirrorAction here' );
 	// Parent constructor
 	ve.ui.CodeMirrorAction.super.apply( this, arguments );
 };

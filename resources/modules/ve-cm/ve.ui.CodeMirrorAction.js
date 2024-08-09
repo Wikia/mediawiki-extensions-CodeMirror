@@ -11,7 +11,6 @@
  * @param {ve.ui.Surface} surface Surface to act on
  */
 ve.ui.CodeMirrorAction = function VeUiCodeMirrorAction() {
-	console.log( 've.ui.CodeMirrorAction here' );
 	// Parent constructor
 	ve.ui.CodeMirrorAction.super.apply( this, arguments );
 };
