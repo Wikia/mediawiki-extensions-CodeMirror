@@ -143,10 +143,10 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 	}
 };
 
-ve.ui.CodeMirrorAction.prototype.onTransact = () => {
-	const documentNode = document.querySelector( '.ve-ce-documentNode' );
-	const guttersWidth = parseInt( document.querySelector( '.cm-gutters' ).offsetWidth );
-	documentNode.style.marginLeft = ( guttersWidth - 5 ) + 'px';
+ve.ui.CodeMirrorAction.prototype.onTransact = function () {
+	const surfaceView = this.surface.getView();
+	const guttersTrueWidth = surfaceView.$element.find( '.cm-gutters' ).outerWidth( true );
+	surfaceView.$documentNode.css( 'margin-left', `${ guttersTrueWidth }px` );
 };
 
 /**
