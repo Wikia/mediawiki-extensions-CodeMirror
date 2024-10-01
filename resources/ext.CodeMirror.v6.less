@@ -25,17 +25,18 @@
 	unicode-bidi: isolate;
 }
 
-.cm-scroller .cm-content {
-	padding: 0;
+.cm-scroller {
+	line-height: inherit !important;
+
+	.cm-content {
+		padding: 0;
+	}
 }
 
 .cm-content .cm-line {
+	line-height: inherit;
 	white-space-collapse: preserve;
 	padding: 0;
-}
-
-.cm-gutters .cm-lineNumbers .cm-gutterElement {
-	padding: 1.5px 3px 0 5px;
 }
 
 // Hide all buttons except CodeMirror on read only pages (T301615)
