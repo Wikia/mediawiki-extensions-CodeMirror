@@ -934,7 +934,7 @@ class CodeMirrorModeMediaWiki {
 					break;
 				case '<':
 					isCloseTag = !!stream.eat( '/' );
-					tagname = stream.match( /^[^>/\s\u00a0.*,[\]{}$^+?|/\\'`~<=!@#%&()-]+/ );
+					tagname = stream.match( /^[^>/\s\u00a0.*,[\]{}$^+?|/\\'`~<=!@#%&()-]+[^>/\s\u00a0.*,[\]{}$^+?|/\\'`~<=!@#%&()]*/ );
 					if ( stream.match( '!--' ) ) { // comment
 						return chain( this.eatBlock( modeConfig.tags.comment, '-->' ) );
 					}
