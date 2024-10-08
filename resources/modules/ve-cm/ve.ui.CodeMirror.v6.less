@@ -7,7 +7,7 @@
 
 	.cm-editor {
 		height: 100%;
-		z-index: -1;
+		z-index: 1;
 		position: absolute !important;
 		top: 0;
 		left: 0;
@@ -52,11 +52,6 @@
 
 	.cm-gutters {
 		border-right: 0;
-		padding-right: 8px;
-
-		.skin-fandomdesktop & {
-			padding-right: 7px;
-		}
 
 		.cm-gutter {
 			.cm-gutterElement {
@@ -97,10 +92,6 @@
 		font-weight: normal !important;
 		// T252965
 		line-break: initial;
-	}
-
-	.ve-ce-paragraphNode {
-		margin-left: 6px !important; /* stylelint-disable-line declaration-no-important */
 	}
 
 	.cm-activeLineGutter {

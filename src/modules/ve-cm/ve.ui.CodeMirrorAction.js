@@ -51,18 +51,21 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
 		surface.mirror = window.VisualEditorCodeMirror = new CodeMirrorVisualEditor( surface, mediaWikiLang() );
 		surface.mirror.enableCodeMirror();
 
-		const guttersWidth = parseInt( document.querySelector( '.cm-gutters' ).offsetWidth );
-		surfaceView.$documentNode.css( 'margin-left', guttersWidth - 5 );
+		// Set correct margin on documentNode after initialization
+		action.onTransact();
 
 		/* Events */
 
 		// As the action is regenerated each time, we need to store bound listeners
 		// in the mirror for later disconnection.
 		surface.mirror.veTransactionListener = action.onDocumentPrecommit.bind( action );
+		surface.mirror.vePostTransactionListener = action.onTransact.bind( action );
 
 		doc.on( 'precommit', surface.mirror.veTransactionListener );
+		doc.on( 'transact', surface.mirror.vePostTransactionListener );
 	} else if ( surface.mirror && enable !== true ) {
 		doc.off( 'precommit', surface.mirror.veTransactionListener );
+		doc.off( 'transact', surface.mirror.vePostTransactionListener );
 		surfaceView.$element.removeClass( 'mw-editfont-monospace' ).addClass( 'mw-editfont-' + mw.user.options.get( 'editfont' ) );
 
 		surfaceView.$documentNode.removeClass(
@@ -114,11 +117,6 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 		store = this.surface.getModel().getDocument().getStore(),
 		codeMirrorView = this.surface.mirror.view;
 
-	const documentNode = document.querySelector( '.ve-ce-documentNode' );
-	const guttersWidth = parseInt( document.querySelector( '.cm-gutters' ).offsetWidth );
-
-	documentNode.style.marginLeft = ( guttersWidth - 5 ) + 'px';
-
 	tx.operations.forEach( function ( op ) {
 		if ( op.type === 'retain' ) {
 			offset += op.length;
@@ -143,6 +141,12 @@ ve.ui.CodeMirrorAction.prototype.onDocumentPrecommit = function ( tx ) {
 			}
 		} );
 	}
+};
+
+ve.ui.CodeMirrorAction.prototype.onTransact = function () {
+	const surfaceView = this.surface.getView();
+	const guttersTrueWidth = surfaceView.$element.find( '.cm-gutters' ).outerWidth( true );
+	surfaceView.$documentNode.css( 'margin-left', `${ guttersTrueWidth }px` );
 };
 
 /**
