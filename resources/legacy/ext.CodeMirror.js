@@ -34,7 +34,7 @@ function logUsage( data ) {
  * @param {boolean} prefValue True, if CodeMirror should be enabled by default, otherwise false.
  */
 function setCodeEditorPreference( prefValue ) {
-	if ( !mw.user.isNamed() ) { // Skip it for unnamed users
+	if ( mw.user.isAnon() ) { // Skip it for unnamed users
 		return;
 	}
 	new mw.Api().saveOption( 'usecodemirror', prefValue ? 1 : 0 );

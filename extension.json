@@ -245,6 +245,7 @@
 				"codemirror-regexp-invalid",
 				"codemirror-replace",
 				"codemirror-replace-all",
+				"codemirror-search-done",
 				"codemirror-replace-placeholder",
 				"codemirror-special-char-backspace",
 				"codemirror-special-char-bell",
