@@ -154,14 +154,14 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
  */
 ve.ui.CodeMirrorAction.prototype.updateGutterWidth = function ( dir ) {
 	// Fandom change - we need to calculate width including padding and margins
-	const gutter = this.surface.getView().$element.find( '.cm-gutters' );
+	const $gutter = this.surface.getView().$element.find( '.cm-gutters' );
 	// End Fandom change
-	if ( !gutter ) {
+	if ( !$gutter ) {
 		// Line numbering is disabled.
 		return;
 	}
 	// Fandom change
-	const guttersWidth = gutter.outerWidth( true );
+	const guttersWidth = $gutter.outerWidth( true );
 	// End Fandom change
 	this.surface.getView().$documentNode.css( {
 		'margin-left': dir === 'rtl' ? 0 : guttersWidth,
