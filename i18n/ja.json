@@ -28,6 +28,7 @@
 	"codemirror-replace": "置換",
 	"codemirror-replace-placeholder": "置換",
 	"codemirror-replace-all": "すべて置換",
+	"codemirror-search-done": "完了",
 	"codemirror-control-character": "制御文字 $1",
 	"codemirror-special-char-null": "ヌル文字",
 	"codemirror-special-char-bell": "ベル文字",

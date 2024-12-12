@@ -14,5 +14,15 @@
 	"codemirror-toggle-label": "Підсвічування синтаксису",
 	"codemirror-prefs-colorblind": "Увімкнути зручну для дальтоніків схему підсвічування синтаксису під час редагування вікітексту",
 	"codemirror-prefs-colorblind-help": "Якщо Ви використовуєте додаток для підсвітки синтаксу, це налаштування не буде працювати.",
-	"prefs-accessibility": "Доступність"
+	"prefs-accessibility": "Доступність",
+	"codemirror-find": "Пошук",
+    "codemirror-next": "Наступне",
+    "codemirror-previous": "Попереднє",
+    "codemirror-match-case": "Враховувати регістр",
+    "codemirror-regexp": "Регулярний вираз",
+    "codemirror-by-word": "Ціле слово",
+    "codemirror-replace": "Заміна",
+    "codemirror-replace-placeholder": "Заміна",
+    "codemirror-replace-all": "Замінити все",
+    "codemirror-search-done": "Готово"
 }

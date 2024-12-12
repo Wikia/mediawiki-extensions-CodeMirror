@@ -8,5 +8,15 @@
 	"codemirror-toggle-label": "Süntaksi esiletõst",
 	"codemirror-prefs-colorblind": "Kasuta vikiteksti redigeerimisel värvipimedale sobiva värviskeemiga süntaksi esiletõstu",
 	"codemirror-prefs-colorblind-help": "Kui kasutad süntaksi esiletõstu tööriista, siis see eelistus ei tööta.",
-	"prefs-accessibility": "Hõlbustus"
+	"prefs-accessibility": "Hõlbustus",
+	"codemirror-find": "Otsitav",
+    "codemirror-next": "Leia järgmine",
+    "codemirror-previous": "Leia eelmine",
+    "codemirror-match-case": "Erista suuri ja väikseid tähti",
+    "codemirror-regexp": "Regulaaravaldis",
+    "codemirror-by-word": "Terve sõna",
+    "codemirror-replace": "Asenda",
+    "codemirror-replace-placeholder": "Asendaja",
+    "codemirror-replace-all": "Asenda kõik",
+    "codemirror-search-done": "Valmis"
 }

@@ -6,5 +6,15 @@
 		]
 	},
 	"codemirror-toggle-label": "Málskipanarljómun",
-	"codemirror-prefs-colorblind": "Virkja litblinduvænt litaskema við málskipanarljómun við breytingu á wiki-texta"
+	"codemirror-prefs-colorblind": "Virkja litblinduvænt litaskema við málskipanarljómun við breytingu á wiki-texta",
+	"codemirror-find": "Finna",
+    "codemirror-next": "Finna næsta",
+    "codemirror-previous": "Finna fyrra",
+    "codemirror-match-case": "Skilja á milli stórra/litla bókstafa",
+    "codemirror-regexp": "Regluleg segð",
+    "codemirror-by-word": "Allt orðið",
+    "codemirror-replace": "Skipta út",
+    "codemirror-replace-placeholder": "Skipta út",
+    "codemirror-replace-all": "Skipta út öllu",
+    "codemirror-search-done": "Búið"
 }

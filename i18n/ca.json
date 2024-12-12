@@ -6,5 +6,15 @@
 		]
 	},
 	"codemirror-desc": "Proporciona ressaltat de la sintaxi a l'editor de text al wiki",
-	"codemirror-toggle-label": "Ressaltat de la sintaxi"
+	"codemirror-toggle-label": "Ressaltat de la sintaxi",
+	"codemirror-find": "Cerca",
+    "codemirror-next": "Cerca el següent",
+    "codemirror-previous": "Cerca l'anterior",
+    "codemirror-match-case": "Distingeix majúscules/minúscules",
+    "codemirror-regexp": "Expressió regular",
+    "codemirror-by-word": "Paraula sencera",
+    "codemirror-replace": "Reemplaça",
+    "codemirror-replace-placeholder": "Reemplaça",
+    "codemirror-replace-all": "Substitueix-ho tot",
+    "codemirror-search-done": "Fet"
 }

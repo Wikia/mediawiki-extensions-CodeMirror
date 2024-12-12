@@ -23,5 +23,10 @@
 	"codemirror-special-char-escape": "Escape-Zeechen",
 	"codemirror-special-char-line-separator": "Zeilen-Trennzeechen",
 	"prefs-accessibility": "Accessibilitéit",
-	"prefs-syntax-highlighting": "Ervirhiewe vun der Syntax"
+	"prefs-syntax-highlighting": "Ervirhiewe vun der Syntax",
+	"codemirror-find": "Sichen",
+    "codemirror-match-case": "Op grouss a kleng Schreiwen oppassen",
+    "codemirror-regexp": "Regulären Ausdrock",
+    "codemirror-by-word": "Ganzt Wuert",
+    "codemirror-search-done": "Fäerdeg"
 }

@@ -21,5 +21,14 @@
 	"codemirror-unfold": "desplegar",
 	"codemirror-folded-code": "código plegado",
 	"prefs-accessibility": "Accesibilidad",
-	"prefs-syntax-highlighting": "Resaltado de sintaxis"
+	"prefs-syntax-highlighting": "Resaltado de sintaxis",
+	"codemirror-next": "Buscar siguiente",
+    "codemirror-previous": "Buscar anterior",
+    "codemirror-match-case": "Distinguir mayúsculas y minúsculas",
+    "codemirror-regexp": "Expresión regular",
+    "codemirror-by-word": "Toda la palabra",
+    "codemirror-replace": "Reemplazar",
+    "codemirror-replace-placeholder": "Reemplazar",
+    "codemirror-replace-all": "Reemplazar todo",
+    "codemirror-search-done": "Hecho"
 }

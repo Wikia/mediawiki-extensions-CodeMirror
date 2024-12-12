@@ -8,5 +8,15 @@
 	"codemirror-toggle-label": "سنٽيڪس نمايان ڪرڻ",
 	"codemirror-prefs-colorblind": "وڪي ٽيڪسٽ سنوارڻ وقت سنٽيڪس کي نمايان ڪرڻ لاءِ رنگ انڌي سازگار اسڪيم کي فعال ڪريو",
 	"codemirror-prefs-colorblind-help": "جيڪڏهن توهان سنٽيڪس کي نمايان ڪرڻ لاءِ گيجٽ استعمال ڪندا آهيو، تہ ھي ترجيح ڪم نہ ڪندي.",
-	"prefs-accessibility": "ايڪسيسبلٽي"
+	"prefs-accessibility": "ايڪسيسبلٽي",
+	"codemirror-find": "لهو",
+    "codemirror-next": "اڳيون لهو",
+    "codemirror-previous": "پويون لهو",
+    "codemirror-match-case": "وڏن ننڍن اکرن جو خيال رکو",
+    "codemirror-regexp": "عام اظھار",
+    "codemirror-by-word": "سڄو لفظ",
+    "codemirror-replace": "مٽايو",
+    "codemirror-replace-placeholder": "مٽايو",
+    "codemirror-replace-all": "سڀ مٽايو",
+    "codemirror-search-done": "ٿي ويو"
 }

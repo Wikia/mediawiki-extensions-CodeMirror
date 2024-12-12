@@ -4,5 +4,15 @@
 			"គីមស៊្រុន"
 		]
 	},
-	"codemirror-toggle-label": "ផាត់ពណ៌អក្សរកូដ"
+	"codemirror-toggle-label": "ផាត់ពណ៌អក្សរកូដ",
+	"codemirror-find": "រក",
+    "codemirror-next": "ស្វែងរក​បន្ទាប់",
+    "codemirror-previous": "ស្វែងរក​មុន",
+    "codemirror-match-case": "គិតអក្សរធំអក្សរតូច",
+    "codemirror-regexp": "កន្សោមសនិទាន",
+    "codemirror-by-word": "ពាក្យទាំងមូល",
+    "codemirror-replace": "ជំនួស",
+    "codemirror-replace-placeholder": "ជំនួស",
+    "codemirror-replace-all": "ជំនួសទាំងអស់",
+    "codemirror-search-done": "រួចរាល់"
 }

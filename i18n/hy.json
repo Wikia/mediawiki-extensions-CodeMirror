@@ -6,9 +6,15 @@
 		]
 	},
 	"codemirror-toggle-label": "Շարահյուսության ընդգծում",
-	"codemirror-previous": "Գտնել նախորդը",
-	"codemirror-replace": "Փոխարինել",
-	"codemirror-replace-all": "Փոխարինել բոլորը",
-	"codemirror-done": "Արված է",
+    "codemirror-find": "Գտնել",
+    "codemirror-next": "Գտնել հաջորդը",
+    "codemirror-previous": "Գտնել նախորդը",
+    "codemirror-match-case": "Համընկում ըստ տառաշարի (մեծատառ/փոքրատառ)",
+    "codemirror-regexp": "Կանոնավոր արտահայտություն",
+    "codemirror-by-word": "Բառն ամբողջությամբ",
+    "codemirror-replace": "Փոխարինել",
+    "codemirror-replace-placeholder": "Փոխարինել",
+    "codemirror-replace-all": "Փոխարինել բոլորը",
+    "codemirror-search-done": "Արված է",
 	"codemirror-goto-line-go": "Անցնել"
 }

@@ -8,5 +8,15 @@
 	"codemirror-toggle-label": "سنٹیکس روشن گر",
 	"codemirror-prefs-colorblind": "ویکی مندرجات میں ترمیم کے دوران سنٹیکس کو نمایاں کرنے لیے رنگوندا دوست سہولت کو فعال کریں",
 	"codemirror-prefs-colorblind-help": "اگر آپ سنٹیکس کو نمایاں کرنے لیے کسی آلہ کو استعمال کر رہے ہیں تو یہ سہولت کام نہیں کرے گی۔",
-	"prefs-accessibility": "رسائی"
+	"prefs-accessibility": "رسائی",
+	"codemirror-find": "تلاش کریں",
+    "codemirror-next": "اگلا ڈھونڈیں",
+    "codemirror-previous": "پچھلا ڈھونڈیں",
+    "codemirror-match-case": "بڑے چھوٹے حروف کا خیال رکھیں",
+    "codemirror-regexp": "ریگولر ایکسپریشن",
+    "codemirror-by-word": "تمام الفاظ",
+    "codemirror-replace": "بدل دیں",
+    "codemirror-replace-placeholder": "بدل دیں",
+    "codemirror-replace-all": "سب بدل دیں",
+    "codemirror-search-done": "تکمیل"
 }

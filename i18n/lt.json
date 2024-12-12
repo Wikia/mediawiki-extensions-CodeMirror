@@ -4,5 +4,15 @@
 			"Nokeoo"
 		]
 	},
-	"prefs-accessibility": "Prieinamumas"
+	"prefs-accessibility": "Prieinamumas",
+	"codemirror-find": "Ieškoti",
+    "codemirror-next": "Rodyti kitą",
+    "codemirror-previous": "Rodyti ankstesnį",
+    "codemirror-match-case": "Skirti didžiąsias ir mažąsias raides",
+    "codemirror-regexp": "Reguliarioji išraiška",
+    "codemirror-by-word": "Visas pasaulis",
+    "codemirror-replace": "Pakeisti",
+    "codemirror-replace-placeholder": "Pakeisti",
+    "codemirror-replace-all": "Pakeisti visus",
+    "codemirror-search-done": "Atlikta"
 }

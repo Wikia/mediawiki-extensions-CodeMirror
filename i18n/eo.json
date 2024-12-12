@@ -6,5 +6,15 @@
 		]
 	},
 	"codemirror-desc": "Provizas markadon de sintakso en vikiteksta redaktilo",
-	"codemirror-toggle-label": "Sintaksa reliefigado"
+	"codemirror-toggle-label": "Sintaksa reliefigado",
+	"codemirror-find": "Trovi",
+    "codemirror-next": "Trovi la sekvan",
+    "codemirror-previous": "Trovi la antaŭan",
+    "codemirror-match-case": "Uskleca kongruo",
+    "codemirror-regexp": "Regula esprimo",
+    "codemirror-by-word": "Plenvorta",
+    "codemirror-replace": "Anstataŭigi",
+    "codemirror-replace-placeholder": "Anstataŭigi",
+    "codemirror-replace-all": "Anstataŭigi ĉiujn",
+    "codemirror-search-done": "Apliki"
 }

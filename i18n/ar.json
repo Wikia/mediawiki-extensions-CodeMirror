@@ -12,5 +12,15 @@
 	"codemirror-prefs-colorblind": "فعّل مخططًا متوافقًا مع عمى الألوان لتعليم الصيغة عند تعديل نص ويكي.",
 	"codemirror-prefs-colorblind-help": "لن يعمل هذا التفضيل إذا كنت تستخدم إضافةً لتعليم الصيغة.",
 	"prefs-accessibility": "إمكانية الوصول",
-	"codemirror-beta-feature-title": "إبراز نحو محسن"
+	"codemirror-beta-feature-title": "إبراز نحو محسن",
+	"codemirror-find": "ابحث",
+    "codemirror-next": "ابحث عن التالي",
+    "codemirror-previous": "ابحث عن السابق",
+    "codemirror-match-case": "مطابقة حالة الأحرف",
+    "codemirror-regexp": "تعبير منتظم",
+    "codemirror-by-word": "الكلمة كلها",
+    "codemirror-replace": "استبدال",
+    "codemirror-replace-placeholder": "استبدل",
+    "codemirror-replace-all": "استبدل الكل",
+    "codemirror-done": "تم"
 }

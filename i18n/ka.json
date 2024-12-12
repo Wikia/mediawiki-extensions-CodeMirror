@@ -8,5 +8,15 @@
 	"codemirror-toggle-label": "სინტაქსის განათება",
 	"codemirror-prefs-colorblind": "ვიკიტექსტის რედაქტირებისას დალტონიზმზე ადაპტირებული სინტაქსის განათების ჩართვა",
 	"codemirror-prefs-colorblind-help": "თუკი სინტაქსის გასანათებლად გაჯეტს იყენებთ, ეს ფუნქცია არ იმუშავებს.",
-	"prefs-accessibility": "ხელმისაწვდომობა"
+	"prefs-accessibility": "ხელმისაწვდომობა",
+	"codemirror-find": "ძიება",
+    "codemirror-next": "შემდეგის მოძიება",
+    "codemirror-previous": "წინას მოძიება",
+    "codemirror-match-case": "რეგისტრის გათვალისწინება",
+    "codemirror-regexp": "რეგულარული გამოხატულება",
+    "codemirror-by-word": "მთელი სიტყვა",
+    "codemirror-replace": "ჩანაცვლება",
+    "codemirror-replace-placeholder": "ჩანაცვლება",
+    "codemirror-replace-all": "ყველას ჩანაცვლება",
+    "codemirror-search-done": "შესრულებულია"
 }
