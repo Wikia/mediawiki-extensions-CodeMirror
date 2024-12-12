@@ -153,12 +153,16 @@ ve.ui.CodeMirrorAction.prototype.toggle = function ( enable ) {
  * @param {string} dir Document direction
  */
 ve.ui.CodeMirrorAction.prototype.updateGutterWidth = function ( dir ) {
-	const gutter = this.surface.mirror.view.dom.querySelector( '.cm-gutters' );
+	// Fandom change - we need to calculate width including padding and margins
+	const gutter = this.surface.getView().$element.find( '.cm-gutters' );
+	// End Fandom change
 	if ( !gutter ) {
 		// Line numbering is disabled.
 		return;
 	}
-	const guttersWidth = gutter.getBoundingClientRect().width;
+	// Fandom change
+	const guttersWidth = gutter.outerWidth( true );
+	// End Fandom change
 	this.surface.getView().$documentNode.css( {
 		'margin-left': dir === 'rtl' ? 0 : guttersWidth,
 		'margin-right': dir === 'rtl' ? guttersWidth : 0
