@@ -25,7 +25,7 @@
 	"codemirror-replace": "erstatt",
 	"codemirror-replace-placeholder": "Erstatt",
 	"codemirror-replace-all": "erstatt alle",
-	"codemirror-search-done": "Ferdig",
+	"codemirror-done ": "Ferdig",
 	"codemirror-control-character": "Kontrolltegn $1",
 	"codemirror-special-char-null": "Nulltegn",
 	"codemirror-special-char-bell": "BEL-tegn",
