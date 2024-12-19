@@ -223,18 +223,14 @@ class CodeMirrorWikiEditor extends CodeMirror {
 					codemirror: {
 						tools: {
 							CodeMirror: {
-								type: 'element',
-								element: () => {
-									// OOUI has already been loaded by WikiEditor.
-									const button = new OO.ui.ToggleButtonWidget( {
-										label: mw.msg( 'codemirror-toggle-label-short' ),
-										icon: 'syntax-highlight',
-										value: this.useCodeMirror,
-										framed: false,
-										classes: [ 'tool', 'cm-mw-toggle-wikieditor' ]
-									} );
-									button.on( 'change', this.switchCodeMirror.bind( this ) );
-									return button.$element;
+								label: mw.msg( 'codemirror-toggle-label-short' ),
+								type: 'toggle',
+								oouiIcon: 'highlight',
+								action: {
+									type: 'callback',
+									execute: () => {
+										this.switchCodeMirror();
+									}
 								}
 							}
 						}

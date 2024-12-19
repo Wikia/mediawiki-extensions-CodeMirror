@@ -47,7 +47,7 @@ class CodeMirror {
 	 * @constructor
 	 */
 	constructor( textarea ) {
-		if ( textarea.constructor.name === 'VeUiMWWikitextSurface' ) {
+		if ( textarea.constructor.name === 'VeUiMWWikitextSurface' || textarea.constructor.name === 'SourceEditorSurface' ) {
 			/**
 			 * The VisualEditor surface CodeMirror is bound to.
 			 *
@@ -278,6 +278,8 @@ class CodeMirror {
 		const classList = [];
 		// T245568: Sync text editor font preferences with CodeMirror,
 		// but don't do this for the 2017 wikitext editor.
+		console.log( 'contentAttributes' );
+		console.log( this );
 		if ( !this.surface ) {
 			const fontClass = Array.from( this.$textarea[ 0 ].classList )
 				.find( ( style ) => style.startsWith( 'mw-editfont-' ) );
@@ -293,6 +295,7 @@ class CodeMirror {
 				classList.push( 'cm-mw-colorblind-colors' );
 			}
 		}
+		console.log( 'contentAttributes 2' );
 
 		return [
 			// .cm-content element (the contenteditable area)
@@ -442,11 +445,12 @@ class CodeMirror {
 		 * @param {jQuery} $textarea The textarea that CodeMirror is bound to.
 		 * @stable to use
 		 */
+		console.log( 'initalize 1' );
 		mw.hook( 'ext.CodeMirror.initialize' ).fire( this.$textarea );
 		mw.hook( 'editRecovery.loadEnd' ).add( ( data ) => {
 			this.editRecoveryHandler = data.fieldChangeHandler;
 		} );
-
+		console.log( 'initalize 2' );
 		// Set up the initial EditorState of CodeMirror with contents of the native textarea.
 		this.state = EditorState.create( {
 			doc: this.surface ?
@@ -454,10 +458,10 @@ class CodeMirror {
 				this.$textarea.textSelection( 'getContents' ),
 			extensions
 		} );
-
+		console.log( 'initalize 3' );
 		// Add CodeMirror view to the DOM.
 		this.addCodeMirrorToDom();
-
+		console.log( 'initalize 4' );
 		// Hide native textarea and sync CodeMirror contents upon submission.
 		if ( !this.surface ) {
 			this.$textarea.hide();
@@ -471,12 +475,14 @@ class CodeMirror {
 				} );
 			}
 		}
-
+		console.log( 'initalize 5' );
 		// Register $.textSelection() on the .cm-editor element.
 		$( this.view.dom ).textSelection( 'register', this.cmTextSelection );
+		console.log( 'initalize 6' );
 		// Also override textSelection() functions for the "real" hidden textarea to route to
 		// CodeMirror. We unregister this when switching to normal textarea mode.
 		this.$textarea.textSelection( 'register', this.cmTextSelection );
+		console.log( 'initalize 7' );
 
 		/**
 		 * Called just after CodeMirror is initialized.
