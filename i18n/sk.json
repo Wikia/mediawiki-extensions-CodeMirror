@@ -8,5 +8,15 @@
 	"codemirror-desc": "Poskytuje zvýraznenie syntaxe v textovom editore",
 	"codemirror-toggle-label": "Zvýraznenie syntaxe",
 	"codemirror-prefs-colorblind": "Povoliť schému pre farboslepých na zvýraznenie syntaxe pri úprave wikitextu",
-	"prefs-accessibility": "Dostupnosť"
+	"prefs-accessibility": "Dostupnosť",
+	"codemirror-find": "Hľadať",
+    "codemirror-next": "Nájsť ďalší",
+    "codemirror-previous": "Nájsť predošlý",
+    "codemirror-match-case": "Rozlišovať veľké/malé písmená",
+    "codemirror-regexp": "Regulárny výraz",
+    "codemirror-by-word": "Celé slovo",
+    "codemirror-replace": "Nahradiť",
+    "codemirror-replace-placeholder": "Nahradiť",
+    "codemirror-replace-all": "Nahradiť všetky",
+    "codemirror-done ": "Hotovo"
 }

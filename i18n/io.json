@@ -5,5 +5,15 @@
 		]
 	},
 	"codemirror-toggle-label": "Emfazar sintaxo",
-	"codemirror-prefs-colorblind": "Kande redaktanta wikitexti, kapabligez ajusti por personi kun daltonismo, por emfazar sintaxo"
+	"codemirror-prefs-colorblind": "Kande redaktanta wikitexti, kapabligez ajusti por personi kun daltonismo, por emfazar sintaxo",
+	"codemirror-find": "Trovar",
+    "codemirror-next": "Trovar sequanta",
+    "codemirror-previous": "Trovar preiranta",
+    "codemirror-match-case": "Importas ka mayuskulo/minuskulo",
+    "codemirror-regexp": "Reguloza expreso",
+    "codemirror-by-word": "Integra vorto",
+    "codemirror-replace": "Remplasigar",
+    "codemirror-replace-placeholder": "Remplasigar",
+    "codemirror-replace-all": "Remplasigar omno",
+    "codemirror-done ": "Facita"
 }

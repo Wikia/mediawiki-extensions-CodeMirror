@@ -23,6 +23,7 @@
 	"codemirror-replace": "substituír",
 	"codemirror-replace-placeholder": "Substituír",
 	"codemirror-replace-all": "substituír todos",
+	"codemirror-done ": "Feito",
 	"codemirror-control-character": "Carácter de control $1",
 	"codemirror-special-char-null": "Carácter nulo",
 	"codemirror-special-char-bell": "Carácter de timbre",

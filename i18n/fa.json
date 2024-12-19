@@ -23,6 +23,7 @@
 	"codemirror-replace": "جایگزینی",
 	"codemirror-replace-placeholder": "جایگزینی",
 	"codemirror-replace-all": "جایگزینی همه",
+	"codemirror-done ": "انجام شد",
 	"codemirror-control-character": "نویسهٔ کنترل $1",
 	"codemirror-special-char-null": "نویسهٔ پوچ",
 	"codemirror-special-char-bell": "نویسهٔ بل",

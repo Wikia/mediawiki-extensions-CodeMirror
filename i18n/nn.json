@@ -4,5 +4,9 @@
 			"Njardarlogar"
 		]
 	},
-	"codemirror-toggle-label": "Syntaksframheving"
+	"codemirror-toggle-label": "Syntaksframheving",
+	"codemirror-match-case": "Skil mellom store og små bokstavar",
+    "codemirror-by-word": "Heile ordet",
+    "codemirror-replace-placeholder": "Byt ut",
+    "codemirror-replace-all": "Byt ut alle"
 }

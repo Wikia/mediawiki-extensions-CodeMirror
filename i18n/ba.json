@@ -11,5 +11,15 @@
 	"codemirror-toggle-label": "Синтаксисты айырып күрһәтергә",
 	"codemirror-prefs-colorblind": "Викитексты мөхәррирләгәндә синтаксисты айырып күрһәтеү өсөн төҫ айырмаусылар схемаһын асырға",
 	"codemirror-prefs-colorblind-help": "Әгәр синтаксисты айырып күрһәтеү өсөн гаджет ҡулланһағыҙ, был үҙенсәлек эшләмәйәсәк.",
-	"prefs-accessibility": "Ҡулайлылыҡ"
+	"prefs-accessibility": "Ҡулайлылыҡ",
+	"codemirror-find": "Эҙләү",
+    "codemirror-next": "Сираттағыны табырға",
+    "codemirror-previous": "Тәүгеләрҙе эҙләү",
+    "codemirror-match-case": "Регистрҙы иҫәпкә алырға",
+    "codemirror-regexp": "Ваҡытлы аңлатма",
+    "codemirror-by-word": "Һүҙ тулыһынса",
+    "codemirror-replace": "Алмаштырырға",
+    "codemirror-replace-placeholder": "Алмаштырырға",
+    "codemirror-replace-all": "Барыһын да алмаштырырға",
+    "codemirror-done": "Әҙер"
 }
