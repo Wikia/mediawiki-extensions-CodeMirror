@@ -70,6 +70,18 @@ class CodeMirrorWikiEditor extends CodeMirror {
 		this.$oldSearchBtn = null;
 	}
 
+	get heightExtension() {
+		return EditorView.theme( {
+			'&': {
+				height: '100%'
+			},
+			'.cm-scroller': {
+				overflow: 'auto',
+				height: this.surface ? '100%' : `${ this.$textarea.outerHeight() }px`
+			}
+		} );
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -153,18 +165,14 @@ class CodeMirrorWikiEditor extends CodeMirror {
 					codemirror: {
 						tools: {
 							CodeMirrorPreferences: {
-								type: 'element',
-								element: () => {
-									const button = new OO.ui.ButtonWidget( {
-										title: mw.msg( 'codemirror-prefs-title' ),
-										icon: 'settings',
-										framed: false,
-										classes: [ 'tool' ]
-									} );
-									button.on( 'click',
-										() => this.preferences.toggle( this.view, true )
-									);
-									return button.$element;
+								type: 'toggle',
+								label: mw.msg( 'codemirror-prefs-title' ),
+								oouiIcon: 'settings',
+								action: {
+									type: 'callback',
+									execute: () => {
+										this.preferences.toggle( this.view, true );
+									}
 								}
 							}
 						}
