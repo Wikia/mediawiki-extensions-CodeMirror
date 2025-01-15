@@ -5,5 +5,15 @@
 			"Ceirios"
 		]
 	},
-	"prefs-accessibility": "Hygyrchedd"
+	"prefs-accessibility": "Hygyrchedd",
+	"codemirror-find": "Canfod",
+    "codemirror-next": "Canfod nesaf",
+    "codemirror-previous": "Canfod blaenorol",
+    "codemirror-match-case": "Ystyried y priflythrennu",
+    "codemirror-regexp": "Mynegiad rheolaidd",
+    "codemirror-by-word": "Gair cyfan",
+    "codemirror-replace": "Disodli",
+    "codemirror-replace-placeholder": "Disodli",
+    "codemirror-replace-all": "Disodli'r cyfan",
+    "codemirror-done": "Wedi cwblhau"
 }

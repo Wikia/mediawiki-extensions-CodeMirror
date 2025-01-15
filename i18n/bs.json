@@ -8,5 +8,15 @@
 	"codemirror-desc": "Omogućava isticanje sintakse u uređivaču wikiteksta",
 	"codemirror-toggle-label": "Isticanje sintakse",
 	"codemirror-prefs-colorblind": "Uključi temu za isticanje sintakse prilagođenu osobama koje imaju poteškoće s prepoznavanjem boja",
-	"prefs-accessibility": "Pristupačnost"
+	"prefs-accessibility": "Pristupačnost",
+	"codemirror-find": "Traži",
+    "codemirror-next": "Pronađi sljedeće",
+    "codemirror-previous": "Pronađi prethodno",
+    "codemirror-match-case": "Razlikuj veličinu slova",
+    "codemirror-regexp": "Regularni izraz",
+    "codemirror-by-word": "Cijela riječ",
+    "codemirror-replace": "Zamijeni",
+    "codemirror-replace-placeholder": "Zamijeni",
+    "codemirror-replace-all": "Zamijeni sve",
+    "codemirror-done": "Gotovo"
 }

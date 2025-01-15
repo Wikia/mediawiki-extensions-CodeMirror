@@ -9,5 +9,15 @@
 	"codemirror-toggle-label": "Zvýraznění syntaxe",
 	"codemirror-prefs-colorblind": "Zapnout schéma pro barvoslepé u zvýrazňování syntaxe při editaci wikitextu",
 	"codemirror-prefs-colorblind-help": "Pokud používáte pro zvýrazňování syntaxe udělátko, nebude toto nastavení fungovat.",
-	"prefs-accessibility": "Přístupnost"
+	"prefs-accessibility": "Přístupnost",
+	"codemirror-find": "Najít",
+    "codemirror-next": "Najít další",
+    "codemirror-previous": "Najít předchozí",
+    "codemirror-match-case": "Rozlišovat velikost písmen",
+    "codemirror-regexp": "Regulární výraz",
+    "codemirror-by-word": "Celé slovo",
+    "codemirror-replace": "Nahradit",
+    "codemirror-replace-placeholder": "Nahradit",
+    "codemirror-replace-all": "Nahradit vše",
+    "codemirror-done": "Hotovo"
 }

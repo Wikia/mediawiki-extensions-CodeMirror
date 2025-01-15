@@ -4,5 +4,15 @@
 			"Giromin Cangiaxo"
 		]
 	},
-	"codemirror-desc": "O permette d'evidençiâ a scintasci inte l'editor de wiki-testo"
+	"codemirror-desc": "O permette d'evidençiâ a scintasci inte l'editor de wiki-testo",
+	"codemirror-find": "Trœuva",
+    "codemirror-next": "Trœuva sucescivo",
+    "codemirror-previous": "Trœuva precedente",
+    "codemirror-match-case": "Maiuscole/minuscole",
+    "codemirror-regexp": "Esprescion regolâ",
+    "codemirror-by-word": "Paola intrega",
+    "codemirror-replace": "Sostituisci",
+    "codemirror-replace-placeholder": "Sostituisci",
+    "codemirror-replace-all": "Sostituisci tutto",
+    "codemirror-done ": "Fæto"
 }

@@ -9,5 +9,15 @@
 	"codemirror-toggle-label": "Вылучэньне сынтаксысу",
 	"codemirror-prefs-colorblind": "Уключыць прыдатную для дальтонікаў схему падсьвятленьня сынтаксу пры рэдагаваньні вікітэксту",
 	"codemirror-prefs-colorblind-help": "Калі вы карыстаецеся інструмэнтам падсьветкі сынтаксу, гэтая налада не працавацьме.",
-	"prefs-accessibility": "Даступнасьць"
+	"prefs-accessibility": "Даступнасьць",
+	"codemirror-find": "Знайсьці",
+    "codemirror-next": "Працягваць пошук",
+    "codemirror-previous": "Знайсьці папярэдняе",
+    "codemirror-match-case": "Улічваць рэгістар",
+    "codemirror-regexp": "Рэгулярны выраз",
+    "codemirror-by-word": "Слова цалкам",
+    "codemirror-replace": "Замяніць",
+    "codemirror-replace-placeholder": "Замяніць",
+    "codemirror-replace-all": "Замяніць усё",
+    "codemirror-done": "Зроблена"
 }

@@ -5,5 +5,15 @@
 		]
 	},
 	"codemirror-desc": "Вики-текст мөхәррирендә синтаксны аеруп күрсәтә",
-	"codemirror-toggle-label": "Синтакс-аеру"
+	"codemirror-toggle-label": "Синтакс-аеру",
+	"codemirror-find": "Табу",
+    "codemirror-next": "Бирелгәнне эзләү",
+    "codemirror-previous": "Алдагыны эзләү",
+    "codemirror-match-case": "Регистрны исәпкә алу",
+    "codemirror-regexp": "Вакытлы бирелмә",
+    "codemirror-by-word": "Сүз тулысынча",
+    "codemirror-replace": "Алмаштыру",
+    "codemirror-replace-placeholder": "Алмаштыру",
+    "codemirror-replace-all": "Барысын да алмаштыру",
+    "codemirror-done ": "Тәмам"
 }

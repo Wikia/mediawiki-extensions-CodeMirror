@@ -10,5 +10,15 @@
 	"codemirror-toggle-label": "Szintaxiskiemelés",
 	"codemirror-prefs-colorblind": "Színvakbarát színséma használata a wikiszöveges szintaxiskiemeléshez",
 	"codemirror-prefs-colorblind-help": "Ha egy segédeszközt használsz a szintaxiskiemelésre, arra nincs hatással ez a beállítás.",
-	"prefs-accessibility": "Akadálymentesség"
+	"prefs-accessibility": "Akadálymentesség",
+	"codemirror-find": "Keresés",
+    "codemirror-next": "Következő keresése",
+    "codemirror-previous": "Előző keresése",
+    "codemirror-match-case": "Kis- és nagybetű-érzékeny",
+    "codemirror-regexp": "Reguláris kifejezés",
+    "codemirror-by-word": "Teljes szó",
+    "codemirror-replace": "Csere",
+    "codemirror-replace-placeholder": "Csere",
+    "codemirror-replace-all": "Összes cseréje",
+    "codemirror-done ": "Kész"
 }
