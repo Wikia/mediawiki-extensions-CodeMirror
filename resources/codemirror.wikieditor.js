@@ -70,6 +70,18 @@ class CodeMirrorWikiEditor extends CodeMirror {
 		this.$oldSearchBtn = null;
 	}
 
+	get heightExtension() {
+		return EditorView.theme( {
+			'&': {
+				height: '100%'
+			},
+			'.cm-scroller': {
+				overflow: 'auto',
+				height: this.surface ? '100%' : `${ this.$textarea.outerHeight() }px`
+			}
+		} );
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -153,18 +165,14 @@ class CodeMirrorWikiEditor extends CodeMirror {
 					codemirror: {
 						tools: {
 							CodeMirrorPreferences: {
-								type: 'element',
-								element: () => {
-									const button = new OO.ui.ButtonWidget( {
-										title: mw.msg( 'codemirror-prefs-title' ),
-										icon: 'settings',
-										framed: false,
-										classes: [ 'tool' ]
-									} );
-									button.on( 'click',
-										() => this.preferences.toggle( this.view, true )
-									);
-									return button.$element;
+								type: 'toggle',
+								label: mw.msg( 'codemirror-prefs-title' ),
+								oouiIcon: 'highlight',
+								action: {
+									type: 'callback',
+									execute: () => {
+										this.preferences.toggle( this.view, true );
+									}
 								}
 							}
 						}
@@ -223,18 +231,14 @@ class CodeMirrorWikiEditor extends CodeMirror {
 					codemirror: {
 						tools: {
 							CodeMirror: {
-								type: 'element',
-								element: () => {
-									// OOUI has already been loaded by WikiEditor.
-									const button = new OO.ui.ToggleButtonWidget( {
-										label: mw.msg( 'codemirror-toggle-label-short' ),
-										icon: 'syntax-highlight',
-										value: this.useCodeMirror,
-										framed: false,
-										classes: [ 'tool', 'cm-mw-toggle-wikieditor' ]
-									} );
-									button.on( 'change', this.switchCodeMirror.bind( this ) );
-									return button.$element;
+								label: mw.msg( 'codemirror-toggle-label-short' ),
+								type: 'toggle',
+								oouiIcon: 'highlight',
+								action: {
+									type: 'callback',
+									execute: () => {
+										this.switchCodeMirror();
+									}
 								}
 							}
 						}

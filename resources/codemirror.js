@@ -47,7 +47,7 @@ class CodeMirror {
 	 * @constructor
 	 */
 	constructor( textarea ) {
-		if ( textarea.constructor.name === 'VeUiMWWikitextSurface' ) {
+		if ( textarea.constructor.name === 'VeUiMWWikitextSurface' || textarea.constructor.name === 'SourceEditorSurface' ) {
 			/**
 			 * The VisualEditor surface CodeMirror is bound to.
 			 *

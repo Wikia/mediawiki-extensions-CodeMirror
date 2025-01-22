@@ -11,5 +11,15 @@
 	"codemirror-toggle-label": "Sözdizim vurgulama",
 	"codemirror-prefs-colorblind": "Vikimetni düzenlerken sözdizimi vurgulaması için renk körü dostu düzeni etkinleştir",
 	"codemirror-prefs-colorblind-help": "Sözdizimi vurgulaması için bir küçük aracı kullanıyorsanız, bu tercih çalışmayacaktır.",
-	"prefs-accessibility": "Erişilebilirlik"
+	"prefs-accessibility": "Erişilebilirlik",
+	"codemirror-find": "Bul",
+    "codemirror-next": "Sonrakini bul",
+    "codemirror-previous": "Öncekini bul",
+    "codemirror-match-case": "Büyük/küçük harf duyarlı",
+    "codemirror-regexp": "Düzenli ifade",
+    "codemirror-by-word": "Tüm sözcük",
+    "codemirror-replace": "Değiştir",
+    "codemirror-replace-placeholder": "Değiştir",
+    "codemirror-replace-all": "Hepsini değiştir",
+    "codemirror-done ": "Yapıldı"
 }
