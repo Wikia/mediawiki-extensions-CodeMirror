@@ -50,6 +50,12 @@ ve.ui.CodeMirrorTool.prototype.onSelect = function () {
 		// eslint-disable-next-line camelcase
 		edit_start_ts_ms: ( this.toolbar.target.startTimeStamp * 1000 ) || 0
 	} );
+
+	ve.track( 'wikia', {
+		category: 'editor-ve-source',
+		action: 'click',
+		label: `codemirror-${ useCodeMirror ? 'on' : 'off' }`
+	} );
 };
 
 /**
