@@ -167,7 +167,7 @@ class CodeMirrorWikiEditor extends CodeMirror {
 							CodeMirrorPreferences: {
 								type: 'toggle',
 								label: mw.msg( 'codemirror-prefs-title' ),
-								oouiIcon: 'highlight',
+								oouiIcon: 'highlightPreferences',
 								action: {
 									type: 'callback',
 									execute: () => {
